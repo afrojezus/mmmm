@@ -1,3 +1,4 @@
+/** This is the worst page ever made */
 import MmmCube from '@/components/Mmmcube';
 import classes from "@/styles/3d.module.css";
 import { motion } from 'framer-motion';
@@ -40,7 +41,13 @@ const Page = () => {
                 clearTimeout(waitone);
                 clearTimeout(waittwo);
             }
-    }, [isHovered, sound, play, playbackRate])
+    }, [isHovered, sound, play, playbackRate, stop])
+
+    useEffect(() => {
+        return () => {
+            stop();
+        }
+    }, [stop])
 
     return <motion.main initial={{ opacity: 0 }} animate={{ opacity: Boolean(sound) ? 1 : 0 }}>
         <motion.div
