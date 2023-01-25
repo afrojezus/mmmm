@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -21,6 +22,15 @@ export default function Home() {
         <meta name="theme-color" content="#ff7be9" />
       </Head>
       <Image className="mmmmm" src="/mmmm.webp" alt="mmmmm" fill />
+      <Link style={{
+        position: "fixed",
+        bottom: 0,
+        right: 0,
+        margin: 0,
+        padding: 16,
+        textShadow: "1px 2px 3px rgba(0,0,0,1)",
+        fontSize: 48
+      }} href="/3d">3d mmmmmmmmmmmmmmm</Link>
     </>
   )
 }
