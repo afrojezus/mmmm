@@ -1,21 +1,30 @@
 import { motion } from 'framer-motion';
 import Marquee from 'react-fast-marquee';
+import TripleText from './TripleText';
 
 const StupidMarquees = ({
     visible,
     alternative,
+    myon,
+    direction = 'left',
+    opacity = 1,
 }: {
     visible?: boolean;
     alternative?: boolean;
+    myon?: boolean;
+    direction?: 'left' | 'right';
+    opacity?: number;
 }) => {
     return (
         <>
             <motion.div
                 initial={{ opacity: 0 }}
-                animate={visible ? { opacity: 1 } : { opacity: 0 }}
+                animate={visible ? { opacity } : { opacity: 0 }}
             >
                 <Marquee
+                    speed={myon ? 900 : 50}
                     gradient={false}
+                    direction={direction}
                     style={{
                         position: 'fixed',
                         zIndex: 2,
@@ -25,15 +34,25 @@ const StupidMarquees = ({
                         userSelect: 'none',
                     }}
                 >
-                    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+                    {myon ? (
+                        <h1>
+                            myon myon myon myon myon myon myon myon myon myon
+                        </h1>
+                    ) : (
+                        <h1>
+                            mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+                        </h1>
+                    )}
                 </Marquee>
             </motion.div>
             <motion.div
                 initial={{ opacity: 0 }}
-                animate={visible ? { opacity: 1 } : { opacity: 0 }}
+                animate={visible ? { opacity } : { opacity: 0 }}
             >
                 <Marquee
+                    speed={myon ? 300 : 50}
                     gradient={false}
+                    direction={direction}
                     style={{
                         position: 'absolute',
                         zIndex: 2,
@@ -43,15 +62,26 @@ const StupidMarquees = ({
                         userSelect: 'none',
                     }}
                 >
-                    mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+                    {myon ? (
+                        <h3>
+                            myon myon myon myon myon myon myon myon myon myon
+                            myon myon myon myon myon myon myon myon myon myon
+                        </h3>
+                    ) : (
+                        <h3>
+                            mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+                        </h3>
+                    )}
                 </Marquee>
             </motion.div>
             <motion.div
                 initial={{ opacity: 0 }}
-                animate={visible ? { opacity: 1 } : { opacity: 0 }}
+                animate={visible ? { opacity } : { opacity: 0 }}
             >
                 <Marquee
+                    speed={myon ? 100 : 50}
                     gradient={false}
+                    direction={direction}
                     style={{
                         position: 'absolute',
                         zIndex: 2,
@@ -62,17 +92,25 @@ const StupidMarquees = ({
                         userSelect: 'none',
                     }}
                 >
-                    <h1>
-                        mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-                    </h1>
+                    {myon ? (
+                        <h1>
+                            myon myon myon myon myon myon myon myon myon myon
+                        </h1>
+                    ) : (
+                        <h1>
+                            mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+                        </h1>
+                    )}
                 </Marquee>
             </motion.div>
             <motion.div
                 initial={{ opacity: 0 }}
-                animate={visible ? { opacity: 1 } : { opacity: 0 }}
+                animate={visible ? { opacity } : { opacity: 0 }}
             >
                 <Marquee
+                    speed={myon ? 600 : 50}
                     gradient={false}
+                    direction={direction}
                     style={{
                         position: 'absolute',
                         zIndex: 2,
@@ -83,17 +121,25 @@ const StupidMarquees = ({
                         userSelect: 'none',
                     }}
                 >
-                    <h1>
-                        mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-                    </h1>
+                    {myon ? (
+                        <h1>
+                            myon myon myon myon myon myon myon myon myon myon
+                        </h1>
+                    ) : (
+                        <h1>
+                            mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+                        </h1>
+                    )}
                 </Marquee>
             </motion.div>
             {!alternative && (
                 <motion.div
                     initial={{ opacity: 0 }}
-                    animate={visible ? { opacity: 1 } : { opacity: 0 }}
+                    animate={visible ? { opacity } : { opacity: 0 }}
                 >
                     <Marquee
+                        direction={direction}
+                        speed={myon ? 800 : 50}
                         gradient={false}
                         style={{
                             position: 'absolute',
@@ -105,9 +151,40 @@ const StupidMarquees = ({
                             userSelect: 'none',
                         }}
                     >
-                        <h1 style={{ fontSize: '9em' }}>
-                            mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmdanger/u/mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-                        </h1>
+                        {myon ? (
+                            <div>
+                                <TripleText
+                                    textProps={{ style: { fontSize: '9em' } }}
+                                    string="myon"
+                                />
+                                <TripleText
+                                    style={{
+                                        margin: '9em',
+                                    }}
+                                    textProps={{
+                                        style: {
+                                            fontSize: '9em',
+                                        },
+                                    }}
+                                    string="myon"
+                                />
+                                <TripleText
+                                    string="myon"
+                                    style={{
+                                        marginLeft: '2em',
+                                    }}
+                                    textProps={{
+                                        style: {
+                                            fontSize: '9em',
+                                        },
+                                    }}
+                                />
+                            </div>
+                        ) : (
+                            <h1 style={{ fontSize: '9em' }}>
+                                mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmdanger/u/mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+                            </h1>
+                        )}
                     </Marquee>
                 </motion.div>
             )}
@@ -117,6 +194,7 @@ const StupidMarquees = ({
                     animate={visible ? { opacity: 1 } : { opacity: 0 }}
                 >
                     <Marquee
+                        speed={myon ? 100 : 50}
                         gradient={false}
                         style={{
                             position: 'absolute',
