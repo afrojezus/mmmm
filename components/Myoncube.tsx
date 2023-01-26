@@ -173,7 +173,7 @@ const Scene = ({ isHovered, onHoverStart, onHoverEnd, playbackRate }: any) => {
                 <Suspense>
                     <motion.group>
                         <MyonCube
-                            playbackRate={playbackRate}
+                            playbackRate={frame > 3 ? 8 : playbackRate}
                             still={!isHovered}
                             onHoverStart={onHoverStart}
                             onHoverEnd={onHoverEnd}
@@ -294,7 +294,7 @@ const Scene = ({ isHovered, onHoverStart, onHoverEnd, playbackRate }: any) => {
                         />
                         <MyonCube
                             noXRotate
-                            playbackRate={1.3}
+                            playbackRate={5}
                             colorInitial={{
                                 color: 'black',
                             }}
