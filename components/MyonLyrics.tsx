@@ -37,8 +37,10 @@ const MyonLyrics = ({
             );
         } else {
             clearInterval(lyricsInterval);
+            setLyricsIndex(0);
         }
         return () => {
+            setLyricsIndex(0);
             clearInterval(lyricsInterval);
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -56,6 +58,9 @@ const MyonLyrics = ({
                     fontSize: '2em',
                     color: '#ff0',
                 }}
+                initial={{ opacity: 1 }}
+                animate={{ opacity: 0 }}
+                transition={{ duration: 1, delay: 3.5 }}
             >
                 {lyrics[lyricsIndex]}
             </motion.h1>
