@@ -4,6 +4,7 @@ import styles from '@/styles/index.module.scss';
 import dynamic from 'next/dynamic';
 import { motion } from 'framer-motion';
 import StupidMarquees from '@/components/StupidMarquees';
+import { useEffect, useState } from 'react';
 
 const StarWarp = dynamic(() => import('@/components/StarWarp'), {
     ssr: false,
