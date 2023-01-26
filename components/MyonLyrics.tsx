@@ -35,6 +35,8 @@ const MyonLyrics = ({
                     setLyricsIndex((prev) => prev + 1);
                 }, 4000)
             );
+        } else {
+            clearInterval(lyricsInterval);
         }
         return () => {
             clearInterval(lyricsInterval);
