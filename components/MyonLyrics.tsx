@@ -27,15 +27,12 @@ const MyonLyrics = ({
     const [lyrics] = useState<string[]>(a);
     const [lyricsIndex, setLyricsIndex] = useState(0);
     const [lyricsInterval, setLyricsInterval] = useState<NodeJS.Timeout>();
-    const [lyricsChanged, setLyricsChanged] = useState(false);
 
     useEffect(() => {
         if (visible) {
             setLyricsInterval(
                 setInterval(() => {
-                    setLyricsChanged(false);
                     setLyricsIndex((prev) => prev + 1);
-                    setLyricsChanged(true);
                 }, 4000)
             );
         } else {
@@ -61,9 +58,6 @@ const MyonLyrics = ({
                     fontSize: '2em',
                     color: '#ff0',
                 }}
-                initial={{ opacity: 1 }}
-                animate={lyricsChanged ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 3.5 }}
             >
                 {lyrics[lyricsIndex]}
             </motion.h1>

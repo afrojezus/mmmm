@@ -327,7 +327,7 @@ const Scene = ({ isHovered, onHoverStart, onHoverEnd, playbackRate }: any) => {
                         />
                         <MyonCube
                             noXRotate
-                            playbackRate={1.3}
+                            playbackRate={5}
                             colorInitial={{
                                 color: 'black',
                             }}
@@ -360,7 +360,7 @@ const Scene = ({ isHovered, onHoverStart, onHoverEnd, playbackRate }: any) => {
                         />
                         <MyonCube
                             noXRotate
-                            playbackRate={1.3}
+                            playbackRate={5}
                             colorInitial={{
                                 color: 'black',
                             }}
@@ -393,7 +393,7 @@ const Scene = ({ isHovered, onHoverStart, onHoverEnd, playbackRate }: any) => {
                         />
                         <MyonCube
                             noXRotate
-                            playbackRate={1.3}
+                            playbackRate={5}
                             colorInitial={{
                                 color: 'black',
                             }}
