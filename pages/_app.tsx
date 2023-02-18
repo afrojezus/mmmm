@@ -105,9 +105,6 @@ export default function App({ Component, pageProps }: AppProps) {
                             >
                                 3D
                             </Link>
-                            <Link target="_blank" href="https://mmmmmm.moe/">
-                                mmmmmm.moe
-                            </Link>
                         </Group>
                     </>
                 )}

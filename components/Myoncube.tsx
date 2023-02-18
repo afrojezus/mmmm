@@ -98,14 +98,13 @@ export const MyonCube = ({
     );
 };
 
-let t1: NodeJS.Timeout;
-let t2: NodeJS.Timeout;
-let t3: NodeJS.Timeout;
-let t4: NodeJS.Timeout;
-
 const Scene = ({ isHovered, onHoverStart, onHoverEnd, playbackRate }: any) => {
     const [frame, setFrame] = useState(0);
     useEffect(() => {
+        let t1: NodeJS.Timeout;
+        let t2: NodeJS.Timeout;
+        let t3: NodeJS.Timeout;
+        let t4: NodeJS.Timeout;
         if (isHovered) {
             t1 = setTimeout(() => {
                 setFrame(1);
@@ -121,10 +120,6 @@ const Scene = ({ isHovered, onHoverStart, onHoverEnd, playbackRate }: any) => {
             }, 60500);
         } else {
             setFrame(0);
-            clearTimeout(t1);
-            clearTimeout(t2);
-            clearTimeout(t3);
-            clearTimeout(t4);
         }
 
         return () => {
