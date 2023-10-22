@@ -2,12 +2,20 @@
     margin: auto;
     height: calc(100vh - var(--header-height));
     width: 100vw;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
 }
 
 @media (max-width: 768px) {
     .canvas {
-            margin: auto;
-            height: 50vh;
-            width: 100%;
+        margin: auto;
+        height: 50vh;
+        width: 100%;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: -webkit-crisp-edges;
+        image-rendering: pixelated;
+        image-rendering: crisp-edges;
     }
 }

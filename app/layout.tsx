@@ -1,12 +1,40 @@
-import Group from '@/components/Group';
-import Header from '@/components/Header';
 import '@/styles/globals.css';
-import type { AppProps } from 'next/app';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import ConsoleEffect from '@/components/ConsoleEffect';
+import RootHeader from '@/components/RootHeader';
 
-const mmmm = `XXXXXXXXXXKO0XXXXXXKxOXXXXKKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXOk0XXXXXXX0k0
+type RootLayoutProps = {
+    children: React.ReactNode;
+};
+
+const RootLayout = (props: RootLayoutProps) => {
+    const { children } = props;
+
+    return (
+        <html lang="en">
+            <head>
+                <title>mmmmmmmmmmmmmm</title>
+                <meta name="description" content="mmmmmmmmmm" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1"
+                />
+                <link rel="icon" href="/favicon.ico" />
+                <meta property="og:title" content="mmmmmmmmmmmmmm" />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="mmmm.moe" />
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="og:description" content="mmmmmmmmmmm" />
+                <meta property="og:image" content="/mmmmHD.png" />
+                <meta property="og:image:type" content="image/png" />
+                <meta property="og:image:width" content="250" />
+                <meta property="og:image:height" content="250" />
+                <meta name="theme-color" content="#ff7be9" />
+            </head>
+            <body>
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `<!---
+XXXXXXXXXXKO0XXXXXXKxOXXXXKKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXOk0XXXXXXX0k0
 XXXXXXXXXX0O0XXXXXXKkOXXXX0OKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXKkkKXXXXXXXOk
 XXXXXXXXXX0OKXXXXXXKkkXXXX0O0XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX0k0XXXXXXXKk
 XXXXXXXXXXOOXXXXXXXXOkKXXXKOOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXOOKXXXXXXXO
@@ -55,62 +83,16 @@ ldk0kocokkdxO00xook0KXNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNXNNNWNNNNNWWNWNX0kdollllcc
 l:cokOdclxkddO0Odclloxk0KXNNNNNNNNNNNNNNNNNNNNNNNNNNWNNWWNNWWNWWNXKOxolllllc;;:lllc:;;cccok00OxxkO0O
 dl:,,lxdlcoxddk0kolollllodxkO0KXNNNNNNNNNNNNWWNNNWWWWWWWWWWWWNX0kdollllc::;,;clc::;,:::cxO0OxxkOOxoc
 l::;,';colccoooxOxlcllllllllllokO000KKXXNNNNWWWWWWWWWWWWWWNKOxollllcc:;;;;;;::;;;;;;;:okOkxdxxdoc;;;
-xl;;;,,,:ccc::lldOo;;cllcccccclkOOOOkkkOOO000KXNNWWWWWWWNKkolllllc:;;;;;;,;;;;;;;,;,;dOOdldxoc;;;;;;`;
-
-export default function App({ Component, pageProps }: AppProps) {
-    const [out, setOut] = useState(0);
-    useEffect(() => {
-        setOut(1);
-        if (out === 1) {
-            console.info(mmmm);
-        }
-    }, [out]);
-    return (
-        <>
-            <Header>
-                {(activeRoute) => (
-                    <>
-                        <Group gap={activeRoute === '/' ? 0 : 10}>
-                            <Image
-                                src="/mmmm.webp"
-                                alt="mmmm"
-                                width={28}
-                                height={28}
-                            />
-                            <Link
-                                className={
-                                    activeRoute === '/' ? 'active' : undefined
-                                }
-                                href="/"
-                            >
-                                mmmm.moe
-                            </Link>
-                        </Group>
-                        <Group>
-                            <Link
-                                className={
-                                    activeRoute === '/myon'
-                                        ? 'active'
-                                        : undefined
-                                }
-                                href="/myon"
-                            >
-                                myon
-                            </Link>
-                            <Link
-                                className={
-                                    activeRoute === '/3d' ? 'active' : undefined
-                                }
-                                href="/3d"
-                            >
-                                3D
-                            </Link>
-                        </Group>
-                    </>
-                )}
-            </Header>
-            <Component {...pageProps} />
-            <div className="scanlines" />
-        </>
+xl;;;,,,:ccc::lldOo;;cllcccccclkOOOOkkkOOO000KXNNWWWWWWWNKkolllllc:;;;;;;,;;;;;;;,;,;dOOdldxoc;;;;;; --->`,
+                    }}
+                />
+                <RootHeader />
+                {children}
+                <div className="scanlines" />
+                <ConsoleEffect />
+            </body>
+        </html>
     );
-}
+};
+
+export default RootLayout;

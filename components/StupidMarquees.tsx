@@ -1,20 +1,27 @@
+'use client';
 import { motion } from 'framer-motion';
 import Marquee from 'react-fast-marquee';
 import TripleText from './TripleText';
 
-const StupidMarquees = ({
-    visible,
-    alternative,
-    myon,
-    direction = 'left',
-    opacity = 1,
-}: {
+type StupidMarqueesProps = {
     visible?: boolean;
     alternative?: boolean;
+    speed?: number;
     myon?: boolean;
+    uuuu?: boolean;
     direction?: 'left' | 'right';
     opacity?: number;
-}) => {
+};
+
+const StupidMarquees = (props: StupidMarqueesProps) => {
+    const {
+        visible,
+        alternative,
+        myon,
+        uuuu,
+        direction = 'left',
+        opacity = 1,
+    } = props;
     return (
         <>
             <motion.div
@@ -22,7 +29,7 @@ const StupidMarquees = ({
                 animate={visible ? { opacity } : { opacity: 0 }}
             >
                 <Marquee
-                    speed={myon ? 900 : 50}
+                    speed={myon || uuuu ? 900 : 50}
                     gradient={false}
                     direction={direction}
                     style={{
@@ -32,11 +39,16 @@ const StupidMarquees = ({
                         left: 0,
                         pointerEvents: 'none',
                         userSelect: 'none',
+                        height: 40,
                     }}
                 >
                     {myon ? (
                         <h1>
                             myon myon myon myon myon myon myon myon myon myon
+                        </h1>
+                    ) : uuuu ? (
+                        <h1>
+                            uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
                         </h1>
                     ) : (
                         <h1>
@@ -50,7 +62,7 @@ const StupidMarquees = ({
                 animate={visible ? { opacity } : { opacity: 0 }}
             >
                 <Marquee
-                    speed={myon ? 300 : 50}
+                    speed={myon || uuuu ? 300 : 50}
                     gradient={false}
                     direction={direction}
                     style={{
@@ -60,12 +72,17 @@ const StupidMarquees = ({
                         left: 0,
                         pointerEvents: 'none',
                         userSelect: 'none',
+                        height: 20,
                     }}
                 >
                     {myon ? (
                         <h3>
                             myon myon myon myon myon myon myon myon myon myon
                             myon myon myon myon myon myon myon myon myon myon
+                        </h3>
+                    ) : uuuu ? (
+                        <h3>
+                            uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
                         </h3>
                     ) : (
                         <h3>
@@ -79,7 +96,7 @@ const StupidMarquees = ({
                 animate={visible ? { opacity } : { opacity: 0 }}
             >
                 <Marquee
-                    speed={myon ? 100 : 50}
+                    speed={myon || uuuu ? 100 : 50}
                     gradient={false}
                     direction={direction}
                     style={{
@@ -96,6 +113,10 @@ const StupidMarquees = ({
                         <h1>
                             myon myon myon myon myon myon myon myon myon myon
                         </h1>
+                    ) : uuuu ? (
+                        <h1>
+                            uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+                        </h1>
                     ) : (
                         <h1>
                             mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
@@ -108,7 +129,7 @@ const StupidMarquees = ({
                 animate={visible ? { opacity } : { opacity: 0 }}
             >
                 <Marquee
-                    speed={myon ? 600 : 50}
+                    speed={myon || uuuu ? 600 : 50}
                     gradient={false}
                     direction={direction}
                     style={{
@@ -125,6 +146,10 @@ const StupidMarquees = ({
                         <h1>
                             myon myon myon myon myon myon myon myon myon myon
                         </h1>
+                    ) : uuuu ? (
+                        <h1>
+                            uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+                        </h1>
                     ) : (
                         <h1>
                             mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
@@ -139,7 +164,7 @@ const StupidMarquees = ({
                 >
                     <Marquee
                         direction={direction}
-                        speed={myon ? 800 : 50}
+                        speed={myon || uuuu ? 800 : 50}
                         gradient={false}
                         style={{
                             position: 'absolute',
@@ -180,6 +205,10 @@ const StupidMarquees = ({
                                     }}
                                 />
                             </div>
+                        ) : uuuu ? (
+                            <h1 style={{ fontSize: '9em' }}>
+                                uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+                            </h1>
                         ) : (
                             <h1 style={{ fontSize: '9em' }}>
                                 mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
@@ -206,9 +235,15 @@ const StupidMarquees = ({
                             height: 300,
                         }}
                     >
-                        <h1 style={{ fontSize: '9em' }}>
-                            mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-                        </h1>
+                        {uuuu ? (
+                            <h1 style={{ fontSize: '9em' }}>
+                                uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+                            </h1>
+                        ) : (
+                            <h1 style={{ fontSize: '9em' }}>
+                                mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+                            </h1>
+                        )}
                     </Marquee>
                 </motion.div>
             )}
@@ -230,9 +265,15 @@ const StupidMarquees = ({
                             height: 300,
                         }}
                     >
-                        <h1 style={{ fontSize: '9em' }}>
-                            mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-                        </h1>
+                        {uuuu ? (
+                            <h1 style={{ fontSize: '9em' }}>
+                                uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+                            </h1>
+                        ) : (
+                            <h1 style={{ fontSize: '9em' }}>
+                                mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+                            </h1>
+                        )}
                     </Marquee>
                 </motion.div>
             )}

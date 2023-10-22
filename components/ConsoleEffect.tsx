@@ -1,12 +1,10 @@
-import { Html, Head, Main, NextScript } from 'next/document';
+'use client';
 
-export default function Document() {
-    return (
-        <Html lang="en">
-            <head
-                dangerouslySetInnerHTML={{
-                    __html: `<!---
-XXXXXXXXXXKO0XXXXXXKxOXXXXKKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXOk0XXXXXXX0k0
+import { useEffect, useRef } from 'react';
+
+type ConsoleEffectProps = {};
+
+const mmmm = `XXXXXXXXXXKO0XXXXXXKxOXXXXKKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXOk0XXXXXXX0k0
 XXXXXXXXXX0O0XXXXXXKkOXXXX0OKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXKkkKXXXXXXXOk
 XXXXXXXXXX0OKXXXXXXKkkXXXX0O0XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX0k0XXXXXXXKk
 XXXXXXXXXXOOXXXXXXXXOkKXXXKOOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXOOKXXXXXXXO
@@ -55,14 +53,18 @@ ldk0kocokkdxO00xook0KXNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNXNNNWNNNNNWWNWNX0kdollllcc
 l:cokOdclxkddO0Odclloxk0KXNNNNNNNNNNNNNNNNNNNNNNNNNNWNNWWNNWWNWWNXKOxolllllc;;:lllc:;;cccok00OxxkO0O
 dl:,,lxdlcoxddk0kolollllodxkO0KXNNNNNNNNNNNNWWNNNWWWWWWWWWWWWNX0kdollllc::;,;clc::;,:::cxO0OxxkOOxoc
 l::;,';colccoooxOxlcllllllllllokO000KKXXNNNNWWWWWWWWWWWWWWNKOxollllcc:;;;;;;::;;;;;;;:okOkxdxxdoc;;;
-xl;;;,,,:ccc::lldOo;;cllcccccclkOOOOkkkOOO000KXNNWWWWWWWNKkolllllc:;;;;;;,;;;;;;;,;,;dOOdldxoc;;;;;; --->`,
-                }}
-            ></head>
-            <Head />
-            <body>
-                <Main />
-                <NextScript />
-            </body>
-        </Html>
-    );
-}
+xl;;;,,,:ccc::lldOo;;cllcccccclkOOOOkkkOOO000KXNNWWWWWWWNKkolllllc:;;;;;;,;;;;;;;,;,;dOOdldxoc;;;;;;`;
+
+const ConsoleEffect = (props: ConsoleEffectProps) => {
+    const ready = useRef(false);
+
+    useEffect(() => {
+        if (ready.current) return;
+        ready.current = true;
+        console.log(mmmm);
+    }, []);
+
+    return null;
+};
+
+export default ConsoleEffect;

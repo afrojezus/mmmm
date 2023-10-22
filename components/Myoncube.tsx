@@ -1,3 +1,4 @@
+'use client';
 import { Canvas, MeshProps, useFrame, useLoader } from '@react-three/fiber';
 import {
     Bloom,
@@ -5,7 +6,7 @@ import {
     EffectComposer,
     Noise,
 } from '@react-three/postprocessing';
-import { motion, MotionCanvas } from 'framer-motion-3d';
+import { motion } from 'framer-motion-3d';
 import { Suspense, useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { NearestFilter } from 'three';

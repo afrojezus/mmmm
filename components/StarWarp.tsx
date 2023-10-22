@@ -1,4 +1,5 @@
-import { useRef, useEffect, useState } from 'react';
+'use client';
+import { useRef, useEffect } from 'react';
 
 // credits due https://codepen.io/nodws/pen/pejBNb
 const StarWarp = () => {

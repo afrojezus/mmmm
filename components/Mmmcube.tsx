@@ -1,3 +1,4 @@
+'use client';
 import { Canvas, MeshProps, useFrame, useLoader } from '@react-three/fiber';
 import { Bloom, EffectComposer, Noise } from '@react-three/postprocessing';
 import { motion } from 'framer-motion-3d';

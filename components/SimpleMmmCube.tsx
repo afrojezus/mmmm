@@ -1,12 +1,7 @@
-import {
-    Canvas,
-    MeshProps,
-    PerspectiveCameraProps,
-    useFrame,
-    useLoader,
-} from '@react-three/fiber';
+'use client';
+import { Canvas, MeshProps, useFrame, useLoader } from '@react-three/fiber';
 import { Suspense, useEffect, useRef, useState } from 'react';
-import { TextureLoader, Object3D } from 'three';
+import { TextureLoader } from 'three';
 
 type SimpleMmmCubeProps = {
     x?: number;
@@ -21,7 +16,7 @@ export const SimpleMmmCube = ({ x, ...props }: SimpleMmmCubeProps) => {
     });
     return (
         <mesh ref={ref} {...props}>
-            <boxBufferGeometry args={[1, 1, 1]} />
+            <boxGeometry args={[1, 1, 1]} />
             <meshStandardMaterial map={texture} />
         </mesh>
     );
