@@ -2,11 +2,18 @@
 
 import { Suspense, useEffect, useRef, useState } from 'react';
 import StupidMarquees from './StupidMarquees';
-import { Canvas, MeshProps, useLoader, useThree } from '@react-three/fiber';
+import {
+    Canvas,
+    MeshProps,
+    useFrame,
+    useLoader,
+    useThree,
+} from '@react-three/fiber';
 import * as THREE from 'three';
 import { MotionCanvas, motion } from 'framer-motion-3d';
 import {
     Bloom,
+    ColorDepth,
     DepthOfField,
     EffectComposer,
     Noise,
@@ -24,23 +31,33 @@ type UuuCubeProps = Common &
         sphere?: boolean;
         geometryProps?: any;
         shaderProps?: Parameters<typeof motion.meshStandardMaterial>[0];
+    } & {
+        type?: 'uuuu' | 'uuuu2';
     };
 
 type UuuSceneProps = Common & {};
 
+const uuuus = ['uuuu', 'uuuu2'] as const;
+
 const UuuCube = (props: UuuCubeProps) => {
-    const { isHovered, sphere, geometryProps, shaderProps, ...meshProps } =
-        props;
+    const {
+        isHovered,
+        sphere,
+        geometryProps,
+        shaderProps,
+        type = 'uuuu2',
+        ...meshProps
+    } = props;
     const ref = useRef<MeshProps>(null);
     const materialRef = useRef<THREE.MeshStandardMaterial>(null);
-    const texture = useLoader(THREE.TextureLoader, '/uuuu.webp');
+    const texture = useLoader(THREE.TextureLoader, `/${type}.webp`);
 
-    useEffect(() => {
+    useFrame(() => {
         if (texture) {
             texture.minFilter = THREE.NearestFilter;
             texture.magFilter = THREE.NearestFilter;
         }
-    }, [texture]);
+    });
 
     return (
         <>
@@ -120,6 +137,10 @@ const UuuScene = (props: UuuSceneProps) => {
     const [frame, setFrame] = useState(0);
     const intervalRef = useRef<NodeJS.Timeout>();
 
+    const uuuuType = useRef(
+        uuuus[Math.floor(Math.random() * uuuus.length)]
+    ).current;
+
     useEffect(() => {
         const interval = intervalRef.current;
         const cleanup = () => {
@@ -179,6 +200,8 @@ const UuuScene = (props: UuuSceneProps) => {
         frame === 71 ||
         frame === 77;
 
+    if (!uuuuType) return null;
+
     return (
         <>
             <StupidMarquees alternative visible={FULL_FRAME} uuuu />
@@ -223,6 +246,7 @@ const UuuScene = (props: UuuSceneProps) => {
                 />
                 <motion.pointLight intensity={1} position={[0, 1, 1]} />
                 <UuuCube
+                    type={uuuuType}
                     isHovered={isHovered}
                     animate={
                         LOADING_FRAME
@@ -294,6 +318,7 @@ const UuuScene = (props: UuuSceneProps) => {
                         }}
                     >
                         <UuuCube
+                            type={uuuuType}
                             sphere
                             isHovered={isHovered}
                             animate={{
@@ -320,6 +345,7 @@ const UuuScene = (props: UuuSceneProps) => {
                             }}
                         />
                         <UuuCube
+                            type={uuuuType}
                             sphere
                             isHovered={isHovered}
                             animate={{
@@ -346,6 +372,7 @@ const UuuScene = (props: UuuSceneProps) => {
                             }}
                         />
                         <UuuCube
+                            type={uuuuType}
                             sphere
                             isHovered={isHovered}
                             position={[0, -3, -40]}
@@ -360,6 +387,7 @@ const UuuScene = (props: UuuSceneProps) => {
                             }}
                         />
                         <UuuCube
+                            type={uuuuType}
                             sphere
                             isHovered={isHovered}
                             position={[90, 90, -180]}
@@ -374,6 +402,7 @@ const UuuScene = (props: UuuSceneProps) => {
                             }}
                         />
                         <UuuCube
+                            type={uuuuType}
                             sphere
                             isHovered={isHovered}
                             position={[-300, 200, -500]}
@@ -417,6 +446,7 @@ const UuuScene = (props: UuuSceneProps) => {
                         }}
                     >
                         <UuuCube
+                            type={uuuuType}
                             isHovered={isHovered}
                             position={[-2, -2, -1]}
                             animate={{
@@ -429,6 +459,7 @@ const UuuScene = (props: UuuSceneProps) => {
                             }}
                         />
                         <UuuCube
+                            type={uuuuType}
                             isHovered={isHovered}
                             position={[2, -2, -1]}
                             animate={{
@@ -441,6 +472,7 @@ const UuuScene = (props: UuuSceneProps) => {
                             }}
                         />
                         <UuuCube
+                            type={uuuuType}
                             isHovered={isHovered}
                             position={[0, -4, -1]}
                             animate={{
@@ -453,6 +485,7 @@ const UuuScene = (props: UuuSceneProps) => {
                             }}
                         />
                         <UuuCube
+                            type={uuuuType}
                             isHovered={isHovered}
                             position={[-2, 2, -1]}
                             animate={{
@@ -465,6 +498,7 @@ const UuuScene = (props: UuuSceneProps) => {
                             }}
                         />
                         <UuuCube
+                            type={uuuuType}
                             isHovered={isHovered}
                             position={[2, 2, -1]}
                             animate={{
@@ -477,6 +511,7 @@ const UuuScene = (props: UuuSceneProps) => {
                             }}
                         />
                         <UuuCube
+                            type={uuuuType}
                             isHovered={isHovered}
                             position={[0, 4, -1]}
                             animate={{
@@ -518,6 +553,7 @@ const UuuScene = (props: UuuSceneProps) => {
                         }}
                     >
                         <UuuCube
+                            type={uuuuType}
                             isHovered={isHovered}
                             position={[-5, 0, -3]}
                             animate={{
@@ -550,6 +586,7 @@ const UuuScene = (props: UuuSceneProps) => {
                         }}
                     >
                         <UuuCube
+                            type={uuuuType}
                             isHovered={isHovered}
                             position={[5, 0, -3]}
                             animate={{
@@ -582,6 +619,7 @@ const UuuScene = (props: UuuSceneProps) => {
                         }}
                     >
                         <UuuCube
+                            type={uuuuType}
                             isHovered={isHovered}
                             position={[0, 3, -3]}
                             animate={{
@@ -599,7 +637,7 @@ const UuuScene = (props: UuuSceneProps) => {
                         />
                     </motion.group>
                 </Suspense>
-                <EffectComposer>
+                <EffectComposer multisampling={0}>
                     {/* <DepthOfField
                         focusDistance={0}
                         focalLength={0.09}
@@ -612,6 +650,7 @@ const UuuScene = (props: UuuSceneProps) => {
                         height={100}
                         opacity={isHovered ? 0.9 : 0}
                     ></Bloom>
+                    <ColorDepth bits={24} />
                 </EffectComposer>
             </Canvas>
         </>

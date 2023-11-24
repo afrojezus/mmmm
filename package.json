@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-three/drei": "^9.88.17",
     "@react-three/fiber": "latest",
     "@react-three/postprocessing": "latest",
     "@types/node": "latest",
@@ -25,6 +26,7 @@
     "react-dom": "latest",
     "react-fast-marquee": "latest",
     "react-use-measure": "latest",
+    "simplex-noise": "^4.0.1",
     "three": "latest",
     "typescript": "latest",
     "use-sound": "latest"

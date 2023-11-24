@@ -8,6 +8,13 @@
     image-rendering: crisp-edges;
 }
 
+.festive {
+    background: linear-gradient(180deg, #01010c 0%, #000000 100%);
+    animation-delay: 2s;
+    animation: fade-in 2s ease-in-out;
+    background-repeat: no-repeat;
+}
+
 @media (max-width: 768px) {
     .canvas {
         margin: auto;
@@ -17,5 +24,14 @@
         image-rendering: -webkit-crisp-edges;
         image-rendering: pixelated;
         image-rendering: crisp-edges;
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        background-size: 6000% 0%;
+    }
+    100% {
+        background-size: 100% 100%;
     }
 }

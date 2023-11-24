@@ -35,7 +35,7 @@ const RootHeader = (props: RootHeaderProps) => {
                             }
                             href="/uuuu"
                         >
-                            uuuu (new!)
+                            uuuu
                         </Link>
                         <Link
                             className={
