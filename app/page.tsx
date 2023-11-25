@@ -5,9 +5,12 @@ import { motion } from 'framer-motion';
 import StupidMarquees from '@/components/StupidMarquees';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import FestiveScene from '@/components/FestiveScene';
 
 const StarWarp = dynamic(() => import('@/components/StarWarp'), {
+    ssr: false,
+});
+
+const FestiveScene = dynamic(() => import('@/components/FestiveScene'), {
     ssr: false,
 });
 
