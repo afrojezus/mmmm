@@ -1,0 +1,24 @@
+.stack {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    z-index: 2;
+
+    &.center {
+        justify-content: center;
+    }
+
+    &.right {
+        justify-content: flex-end;
+    }
+
+    &.left {
+        justify-content: flex-start;
+    }
+
+    &.apart {
+        justify-content: space-between;
+    }
+}

@@ -1,3 +1,9 @@
 {
-    "cSpell.words": ["Skybox"]
+	"cSpell.words": ["Skybox", "uuuus", "webp"],
+	"[typescript]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	}
 }

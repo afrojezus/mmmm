@@ -1,40 +1,38 @@
 {
-  "name": "mmmm",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@react-three/drei": "^9.88.17",
-    "@react-three/fiber": "latest",
-    "@react-three/postprocessing": "latest",
-    "@types/node": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
-    "@types/three": "latest",
-    "clsx": "latest",
-    "eslint": "latest",
-    "eslint-config-next": "latest",
-    "framer-motion": "latest",
-    "framer-motion-3d": "latest",
-    "next": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "react-fast-marquee": "latest",
-    "react-use-measure": "latest",
-    "simplex-noise": "^4.0.1",
-    "three": "latest",
-    "typescript": "latest",
-    "use-sound": "latest"
-  },
-  "devDependencies": {
-    "eslint-config-prettier": "latest",
-    "eslint-plugin-prettier": "latest",
-    "prettier": "latest",
-    "sass": "latest"
-  }
+	"name": "mmmm",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "biome check .",
+		"lint:fix": "biome check --apply ."
+	},
+	"dependencies": {
+		"@react-three/drei": "^9.88.17",
+		"@react-three/fiber": "latest",
+		"@react-three/postprocessing": "latest",
+		"@types/node": "latest",
+		"@types/react": "latest",
+		"@types/react-dom": "latest",
+		"@types/three": "latest",
+		"clsx": "latest",
+		"framer-motion": "latest",
+		"framer-motion-3d": "latest",
+		"next": "latest",
+		"postprocessing": "^6.35.2",
+		"react": "latest",
+		"react-dom": "latest",
+		"react-fast-marquee": "latest",
+		"react-use-measure": "latest",
+		"simplex-noise": "^4.0.1",
+		"three": "latest",
+		"typescript": "latest",
+		"use-sound": "latest"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.6.1",
+		"sass": "latest"
+	}
 }

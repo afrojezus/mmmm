@@ -1,18 +1,29 @@
 "use client";
-import MyonCube from "@/components/myon/Myoncube";
 import classes from "@/styles/3d.module.css";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import useSound from "use-sound";
+import Mmmcube from "./Mmmcube";
 
-const Page = () => {
+const MmmcubeWrapper = () => {
 	const [playbackRate] = useState(1);
 	const [isHovered, setIsHovered] = useState(false);
-	const [play, { stop, sound }] = useSound("/myon2.mp3", {
+	const [play, { stop, sound }] = useSound("/mmmm.mp3", {
 		volume: 0.25,
 		playbackRate,
 		interrupt: true,
 	});
+	const mouse = useRef<[number, number]>([0, 0]);
+	const onMouseMove = useCallback(
+		({ clientX: x, clientY: y }: React.MouseEvent<HTMLElement>) => {
+			mouse.current = [
+				x - window.innerWidth / 2,
+				y - window.innerHeight / 2,
+			];
+		},
+		[],
+	);
+
 	const onHoverStart = () => {
 		setIsHovered(true);
 		play();
@@ -35,13 +46,13 @@ const Page = () => {
 			stop();
 		};
 	}, [stop]);
-
 	return (
 		<motion.main
 			initial={{ opacity: 0 }}
 			animate={{ opacity: sound ? 1 : 0 }}
 		>
 			<motion.div
+				onMouseMove={onMouseMove}
 				onClick={() =>
 					sound
 						? isHovered
@@ -52,9 +63,10 @@ const Page = () => {
 				layout
 				className={classes.canvas}
 			>
-				<MyonCube playbackRate={playbackRate} isHovered={isHovered} />
+				<Mmmcube isHovered={isHovered} mouse={mouse} />
 			</motion.div>
 		</motion.main>
 	);
 };
-export default Page;
+
+export default MmmcubeWrapper;

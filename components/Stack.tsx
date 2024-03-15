@@ -1,19 +1,19 @@
-import styles from "@/styles/group.module.scss";
+import styles from "@/styles/stack.module.scss";
 import clsx from "clsx";
 
-type GroupProps = {
+type StackProps = {
 	position?: "left" | "center" | "right" | "apart";
 	gap?: number;
 } & React.HTMLAttributes<HTMLDivElement>;
-const Group = ({
-	position = "left",
+const Stack = ({
+	position = "center",
 	gap = 10,
 	children,
 	...props
-}: GroupProps) => {
+}: StackProps) => {
 	return (
 		<div
-			className={clsx(styles.group, styles[position])}
+			className={clsx(styles.stack, styles[position])}
 			style={{
 				gap,
 			}}
@@ -24,4 +24,4 @@ const Group = ({
 	);
 };
 
-export default Group;
+export default Stack;

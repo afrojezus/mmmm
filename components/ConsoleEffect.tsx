@@ -1,8 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
-
-type ConsoleEffectProps = {};
+import { useEffect, useRef } from "react";
 
 const mmmm = `XXXXXXXXXXKO0XXXXXXKxOXXXXKKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXOk0XXXXXXX0k0
 XXXXXXXXXX0O0XXXXXXKkOXXXX0OKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXKkkKXXXXXXXOk
@@ -55,16 +53,16 @@ dl:,,lxdlcoxddk0kolollllodxkO0KXNNNNNNNNNNNNWWNNNWWWWWWWWWWWWNX0kdollllc::;,;clc
 l::;,';colccoooxOxlcllllllllllokO000KKXXNNNNWWWWWWWWWWWWWWNKOxollllcc:;;;;;;::;;;;;;;:okOkxdxxdoc;;;
 xl;;;,,,:ccc::lldOo;;cllcccccclkOOOOkkkOOO000KXNNWWWWWWWNKkolllllc:;;;;;;,;;;;;;;,;,;dOOdldxoc;;;;;;`;
 
-const ConsoleEffect = (props: ConsoleEffectProps) => {
-    const ready = useRef(false);
+const ConsoleEffect = () => {
+	const ready = useRef(false);
 
-    useEffect(() => {
-        if (ready.current) return;
-        ready.current = true;
-        console.log(mmmm);
-    }, []);
+	useEffect(() => {
+		if (ready.current) return;
+		ready.current = true;
+		console.log(mmmm);
+	}, []);
 
-    return null;
+	return null;
 };
 
 export default ConsoleEffect;
