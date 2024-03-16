@@ -7,6 +7,7 @@ import {
 } from "@react-three/fiber";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { TextureLoader } from "three";
+import type * as THREE from "three";
 
 type SimpleMmmCubeProps = {
 	x?: number;
