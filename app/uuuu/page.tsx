@@ -1,9 +1,7 @@
-import UuuCube from '@/components/UuuCubeWrapper';
+import UuuCube from "@/components/uuuu/UuuCubeWrapper";
 
-type UuuuProps = {};
-
-const Uuuu = (props: UuuuProps) => {
-    return <UuuCube />;
+const Uuuu = () => {
+	return <UuuCube />;
 };
 
 export default Uuuu;

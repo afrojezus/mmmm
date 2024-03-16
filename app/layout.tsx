@@ -1,39 +1,40 @@
-import '@/styles/globals.css';
-import ConsoleEffect from '@/components/ConsoleEffect';
-import RootHeader from '@/components/RootHeader';
+import ConsoleEffect from "@/components/ConsoleEffect";
+import RootHeader from "@/components/RootHeader";
+import "@/styles/globals.css";
 
 type RootLayoutProps = {
-    children: React.ReactNode;
+	children: React.ReactNode;
 };
 
 const RootLayout = (props: RootLayoutProps) => {
-    const { children } = props;
+	const { children } = props;
 
-    return (
-        <html lang="en">
-            <head>
-                <title>mmmmmmmmmmmmmm</title>
-                <meta name="description" content="mmmmmmmmmm" />
-                <meta
-                    name="viewport"
-                    content="width=device-width, initial-scale=1"
-                />
-                <link rel="icon" href="/favicon.ico" />
-                <meta property="og:title" content="mmmmmmmmmmmmmm" />
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content="mmmm.moe" />
-                <meta property="twitter:card" content="summary_large_image" />
-                <meta property="og:description" content="mmmmmmmmmmm" />
-                <meta property="og:image" content="/mmmmHD.png" />
-                <meta property="og:image:type" content="image/png" />
-                <meta property="og:image:width" content="250" />
-                <meta property="og:image:height" content="250" />
-                <meta name="theme-color" content="#ff7be9" />
-            </head>
-            <body>
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: `<!---
+	return (
+		<html lang="en">
+			<head>
+				<title>mmmmmmmmmmmmmm</title>
+				<meta name="description" content="mmmmmmmmmm" />
+				<meta
+					name="viewport"
+					content="width=device-width, initial-scale=1"
+				/>
+				<link rel="icon" href="/favicon.ico" />
+				<meta property="og:title" content="mmmmmmmmmmmmmm" />
+				<meta property="og:type" content="website" />
+				<meta property="og:url" content="mmmm.moe" />
+				<meta property="twitter:card" content="summary_large_image" />
+				<meta property="og:description" content="mmmmmmmmmmm" />
+				<meta property="og:image" content="/mmmmHD.png" />
+				<meta property="og:image:type" content="image/png" />
+				<meta property="og:image:width" content="250" />
+				<meta property="og:image:height" content="250" />
+				<meta name="theme-color" content="#ff7be9" />
+			</head>
+			<body>
+				<script
+					// biome-ignore lint/security/noDangerouslySetInnerHtml: This is crucial
+					dangerouslySetInnerHTML={{
+						__html: `<!---
 XXXXXXXXXXKO0XXXXXXKxOXXXXKKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXOk0XXXXXXX0k0
 XXXXXXXXXX0O0XXXXXXKkOXXXX0OKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXKkkKXXXXXXXOk
 XXXXXXXXXX0OKXXXXXXKkkXXXX0O0XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX0k0XXXXXXXKk
@@ -84,15 +85,15 @@ l:cokOdclxkddO0Odclloxk0KXNNNNNNNNNNNNNNNNNNNNNNNNNNWNNWWNNWWNWWNXKOxolllllc;;:l
 dl:,,lxdlcoxddk0kolollllodxkO0KXNNNNNNNNNNNNWWNNNWWWWWWWWWWWWNX0kdollllc::;,;clc::;,:::cxO0OxxkOOxoc
 l::;,';colccoooxOxlcllllllllllokO000KKXXNNNNWWWWWWWWWWWWWWNKOxollllcc:;;;;;;::;;;;;;;:okOkxdxxdoc;;;
 xl;;;,,,:ccc::lldOo;;cllcccccclkOOOOkkkOOO000KXNNWWWWWWWNKkolllllc:;;;;;;,;;;;;;;,;,;dOOdldxoc;;;;;; --->`,
-                    }}
-                />
-                <RootHeader />
-                {children}
-                <div className="scanlines" />
-                <ConsoleEffect />
-            </body>
-        </html>
-    );
+					}}
+				/>
+				<RootHeader />
+				{children}
+				<div className="scanlines" />
+				<ConsoleEffect />
+			</body>
+		</html>
+	);
 };
 
 export default RootLayout;
