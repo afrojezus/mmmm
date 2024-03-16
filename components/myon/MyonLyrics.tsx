@@ -1,52 +1,50 @@
 "use client";
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 const a: string[] = [
-	"宵口 鯉口 斬口 飛沫 サラサラ",
-	"閃き 斬裂 溜息 息吹 カラカラ",
-	"無言に 風立ち 逆巻き 独り さよなら",
-	"刃に 何を映しているの？ 浮世か、幽世",
-	"たちまち 苛立ち 俄かに 別離 バラバラ",
-	"無力に 佇み どこかに 独り さよなら",
-	"どちらにも動けないこの世界では独りでいつも",
-	"中途半端だと笑わないで それでもいつの日か",
-	"睨む地獄の果てを",
-	"飛び立つ地獄を越えて",
-	"見上げる天の彼方を",
-	"捉える極楽の日さえも",
-	"見つめる地獄の果てを目指して",
+	"昼下がりゆらゆらの",
+	"こもれび　見上げてぽつり",
+	"雲間からふるふると",
+	"ほら",
+	"虹を誘う砂糖の雨",
+	"てのひらにきらきらの",
+	"ひとつぶ　落としてくるり",
+	"花びらがふるふると",
+	"ほら",
+	"連れて行くの夢の中へ",
 ];
 
+const getIndex = (frame: number) => {
+	if (frame > 570) return 9;
+	if (frame > 560) return 8;
+	if (frame > 530) return 7;
+	if (frame > 490) return 6;
+	if (frame > 455) return 5;
+	if (frame > 420) return 4;
+	if (frame > 410) return 3;
+	if (frame > 380) return 2;
+	if (frame > 340) return 1;
+	if (frame > 300) return 0;
+
+	return 0;
+};
+
 const MyonLyrics = ({
-	visible,
-	opacity,
+	frame,
 }: {
-	visible: boolean;
-	opacity: number;
+	frame: number;
 }) => {
 	const [lyrics] = useState<string[]>(a);
-	const [lyricsIndex, setLyricsIndex] = useState(0);
-	const lyricsIntervalRef = useRef<NodeJS.Timeout>();
+	const lyricsIndex = getIndex(frame);
 
-	useEffect(() => {
-		if (visible) {
-			lyricsIntervalRef.current = setInterval(() => {
-				setLyricsIndex((prev) => prev + 1);
-			}, 4000);
-		} else {
-			clearInterval(lyricsIntervalRef.current);
-			setLyricsIndex(0);
-		}
-		return () => {
-			setLyricsIndex(0);
-			clearInterval(lyricsIntervalRef.current);
-		};
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [visible]);
-	if (!visible) return null;
+	const isVisible = frame > 300 && frame <= 605;
+
 	return (
-		<motion.div initial={{ opacity: 0 }} animate={{ opacity }}>
+		<motion.div
+			initial={{ opacity: 0 }}
+			animate={{ opacity: isVisible ? 1 : 0 }}
+		>
 			<motion.h1
 				style={{
 					position: "absolute",

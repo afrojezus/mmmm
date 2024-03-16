@@ -611,7 +611,7 @@ const UuuScene = (props: UuuSceneProps) => {
 				<EffectComposer>
 					<DepthOfField
 						focusDistance={0.01}
-						focalLength={0.02}
+						focalLength={0.04}
 						bokehScale={10}
 						height={1000}
 					/>

@@ -89,6 +89,7 @@ xl;;;,,,:ccc::lldOo;;cllcccccclkOOOOkkkOOO000KXNNWWWWWWWNKkolllllc:;;;;;;,;;;;;;
 				/>
 				<RootHeader />
 				{children}
+				<div className="scanlines" />
 				<ConsoleEffect />
 			</body>
 		</html>

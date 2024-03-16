@@ -6,7 +6,10 @@ import Link from "next/link";
 import Group from "./Group";
 import Header from "./Header";
 
+const winterTimes = [10, 11, 0, 1];
+
 const RootHeader = () => {
+	const isWinterTime = winterTimes.includes(new Date().getMonth());
 	return (
 		<Header>
 			{(activeRoute) => (
@@ -72,8 +75,26 @@ const RootHeader = () => {
 								width={28}
 								height={28}
 							/>
-							<span>3D</span>
+							<span>ms</span>
 						</Link>
+						{!isWinterTime && (
+							<Link
+								className={
+									activeRoute === "/winter"
+										? styles.active
+										: undefined
+								}
+								href="/winter"
+							>
+								<Image
+									src="/uuuu2.webp"
+									alt="mmmm"
+									width={28}
+									height={28}
+								/>
+								<span>winter</span>
+							</Link>
+						)}
 					</Group>
 				</>
 			)}

@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Marquee from "react-fast-marquee";
 import TripleText from "./TripleText";
 
@@ -162,6 +163,79 @@ const StupidMarquees = (props: StupidMarqueesProps) => {
 					initial={{ opacity: 0 }}
 					animate={visible ? { opacity } : { opacity: 0 }}
 				>
+					{!myon && !uuuu && (
+						<div
+							style={{
+								position: "absolute",
+								zIndex: 2,
+								top: "50%",
+								left: "50%",
+								pointerEvents: "none",
+								userSelect: "none",
+								transform: "translate(-50%, -50%)",
+								display: "flex",
+								flexDirection: "column",
+								alignItems: "center",
+								justifyContent: "center",
+								textAlign: "center",
+								gap: "1em",
+							}}
+						>
+							<div
+								style={{
+									display: "flex",
+									gap: "1em",
+									justifyContent: "center",
+								}}
+							>
+								<span
+									style={{
+										fontSize: "3em",
+									}}
+								>
+									Please insert a
+								</span>
+								<Image
+									src="/mmmm.webp"
+									width={36}
+									height={36}
+									alt="mmmm"
+									style={{
+										margin: "0 1em",
+									}}
+								/>
+								<span
+									style={{
+										fontSize: "3em",
+									}}
+								>
+									format disc
+								</span>
+							</div>
+							<div
+								style={{
+									display: "flex",
+									gap: "1em",
+								}}
+							>
+								<span
+									style={{
+										fontSize: "3em",
+									}}
+								>
+									into your
+								</span>
+								<span
+									style={{
+										fontSize: "5em",
+										fontWeight: "bold",
+									}}
+								>
+									MmmmStation 2
+								</span>
+							</div>
+						</div>
+					)}
 					<Marquee
 						direction={direction}
 						speed={myon || uuuu ? 800 : 50}
@@ -209,11 +283,7 @@ const StupidMarquees = (props: StupidMarqueesProps) => {
 							<h1 style={{ fontSize: "9em" }}>
 								uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
 							</h1>
-						) : (
-							<h1 style={{ fontSize: "9em" }}>
-								mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-							</h1>
-						)}
+						) : null}
 					</Marquee>
 				</motion.div>
 			)}
