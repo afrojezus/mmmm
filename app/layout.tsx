@@ -1,5 +1,6 @@
 import ConsoleEffect from "@/components/ConsoleEffect";
 import RootHeader from "@/components/RootHeader";
+import { Analytics } from "@vercel/analytics/react";
 import "@/styles/globals.css";
 
 type RootLayoutProps = {
@@ -91,6 +92,7 @@ xl;;;,,,:ccc::lldOo;;cllcccccclkOOOOkkkOOO000KXNNWWWWWWWNKkolllllc:;;;;;;,;;;;;;
 				{children}
 				<div className="scanlines" />
 				<ConsoleEffect />
+				<Analytics />
 			</body>
 		</html>
 	);
