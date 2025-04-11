@@ -119,7 +119,7 @@ const Scene = (
 						width={300}
 					/>
 					<ChromaticAberration
-						offset={new THREE.Vector2(0.002, 0.002)}
+						offset={new THREE.Vector2(0.0001, 0.0001)}
 						radialModulation={false}
 						modulationOffset={0.1}
 					/>
