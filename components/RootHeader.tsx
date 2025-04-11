@@ -1,15 +1,14 @@
 "use client";
 
 import styles from "@/styles/header.module.scss";
+import { getSeason } from "@/utils/season";
 import Image from "next/image";
 import Link from "next/link";
 import Group from "./Group";
 import Header from "./Header";
 
-const winterTimes = [10, 11, 0, 1];
-
 const RootHeader = () => {
-	const isWinterTime = winterTimes.includes(new Date().getMonth());
+	const season = getSeason();
 	return (
 		<Header>
 			{(activeRoute) => (
@@ -77,7 +76,7 @@ const RootHeader = () => {
 							/>
 							<span>ms</span>
 						</Link>
-						{!isWinterTime && (
+						{season !== "winter" && (
 							<Link
 								className={
 									activeRoute === "/winter"
@@ -95,6 +94,76 @@ const RootHeader = () => {
 								<span>winter</span>
 							</Link>
 						)}
+						{season !== "dayWinter" && (
+							<Link
+								className={
+									activeRoute === "/daywinter"
+										? styles.active
+										: undefined
+								}
+								href="/daywinter"
+							>
+								<Image
+									src="/uuuu2.webp"
+									alt="mmmm"
+									width={28}
+									height={28}
+								/>
+								<span>daywinter</span>
+							</Link>
+						)}
+						{/* {season !== "autumn" && (
+							<Link
+								className={
+									activeRoute === "/winter"
+										? styles.active
+										: undefined
+								}
+								href="/autumn"
+							>
+								<Image
+									src="/uuuu2.webp"
+									alt="mmmm"
+									width={28}
+									height={28}
+								/>
+								<span>autumn</span>
+							</Link>
+						)}
+						{season !== "spring" && (
+							<Link
+								className={
+									activeRoute === "/winter"
+										? styles.active
+										: undefined
+								}
+								href="/spring"
+							>
+								<Image
+									src="/uuuu2.webp"
+									alt="mmmm"
+									width={28}
+									height={28}
+								/>
+								<span>spring</span>
+							</Link>
+						)} */}
+						<Link
+							className={
+								activeRoute === "/miku"
+									? styles.active
+									: undefined
+							}
+							href="/miku"
+						>
+							<Image
+								src="/miku.png"
+								alt="miku"
+								width={28}
+								height={28}
+							/>
+							<span>miku</span>
+						</Link>
 					</Group>
 				</>
 			)}

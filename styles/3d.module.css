@@ -8,6 +8,13 @@
   image-rendering: crisp-edges;
 }
 
+.daywinter {
+  background: linear-gradient(180deg, #4fc2ff 0%, #ffffff 100%);
+  animation-delay: 2s;
+  animation: fade-in 2s ease-in-out;
+  background-repeat: no-repeat;
+}
+
 .festive {
   background: linear-gradient(180deg, #01010c 0%, #000000 100%);
   animation-delay: 2s;

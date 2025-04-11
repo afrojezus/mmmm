@@ -1,6 +1,7 @@
 "use client";
 
 import classes from "@/styles/3d.module.css";
+import txtStyles from "@/styles/text.module.scss";
 import { useGLTF } from "@react-three/drei";
 import {
 	Canvas,
@@ -9,15 +10,14 @@ import {
 	useLoader,
 	useThree,
 } from "@react-three/fiber";
-import { ColorDepth, EffectComposer } from "@react-three/postprocessing";
+import { ColorDepth, EffectComposer, N8AO } from "@react-three/postprocessing";
 import { motion } from "framer-motion-3d";
 import type React from "react";
 import { Suspense, useCallback, useEffect, useMemo, useRef } from "react";
 import {
+	ACESFilmicToneMapping,
 	type InstancedMesh,
-	Material,
 	type Mesh,
-	MeshPhongMaterial,
 	NearestFilter,
 	Object3D,
 	TextureLoader,
@@ -251,14 +251,16 @@ const FestiveScene = () => {
 						antialias: false,
 						alpha: true,
 						logarithmicDepthBuffer: true,
+						toneMapping: ACESFilmicToneMapping,
+						toneMappingExposure: 1,
 					}}
+					dpr={window.devicePixelRatio}
 					camera={{
-						fov: 45,
+						fov: 60,
 						near: 0.1,
 						far: 2000,
 						position: [0, -100, 400],
 					}}
-					dpr={1}
 				>
 					<CameraController mouse={mouse} />
 					<motion.directionalLight
@@ -301,6 +303,18 @@ const FestiveScene = () => {
 						}}
 						animate={{
 							color: "#ff0000",
+						}}
+						transition={{
+							duration: 2,
+							delay: 2,
+						}}
+					/>
+					<motion.ambientLight
+						initial={{
+							color: "#000000",
+						}}
+						animate={{
+							color: "#8e8e8e",
 						}}
 						transition={{
 							duration: 2,
@@ -350,9 +364,24 @@ const FestiveScene = () => {
 						/>
 					</group>
 					<EffectComposer multisampling={0}>
-						<ColorDepth bits={24} />
+						<ColorDepth bits={12} />
 					</EffectComposer>
 				</Canvas>
+
+				<motion.h1
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					exit={{
+						opacity: 0,
+					}}
+					transition={{
+						duration: 2,
+						delay: 2,
+					}}
+					className={txtStyles.title}
+				>
+					{"この季節、たくさんの贈り物が届く"}
+				</motion.h1>
 			</div>
 		</Suspense>
 	);

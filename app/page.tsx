@@ -1,5 +1,7 @@
 "use client";
 
+import { WebGLWrapper } from "@/components/WebGLWrapper";
+import { getSeason } from "@/utils/season";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 
@@ -11,10 +13,12 @@ const FestiveScene = dynamic(() => import("@/components/FestiveScene"), {
 	ssr: false,
 });
 
-const winterTimes = [10, 11, 0, 1];
+const DayWinterScene = dynamic(() => import("@/components/DayWinterScene"), {
+	ssr: false,
+});
 
 const IndexPage = () => {
-	const isWinterTime = winterTimes.includes(new Date().getMonth());
+	const season = getSeason();
 
 	return (
 		<motion.main
@@ -28,8 +32,13 @@ const IndexPage = () => {
 				height: "100%",
 			}}
 		>
-			{!isWinterTime && <HomeScene />}
-			{isWinterTime && <FestiveScene />}
+			<WebGLWrapper>
+				{["autumn", "spring", "default", "summer"].includes(season) && (
+					<HomeScene />
+				)}
+				{season === "winter" && <FestiveScene />}
+				{season === "dayWinter" && <DayWinterScene />}
+			</WebGLWrapper>
 		</motion.main>
 	);
 };

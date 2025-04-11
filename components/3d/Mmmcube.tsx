@@ -29,6 +29,9 @@ export const MmmCube = (props: MmmCubeProps) => {
 	const materialRef = useRef(null);
 	const texture = useLoader(THREE.TextureLoader, "/mmmm.webp");
 
+	texture.minFilter = THREE.LinearFilter;
+	texture.magFilter = THREE.NearestFilter;
+
 	return (
 		<>
 			<motion.mesh ref={ref} castShadow receiveShadow {...rest}>
@@ -81,9 +84,15 @@ const Scene = (
 		<>
 			<StupidMarquees visible={FRAME_TWO} />
 			<Canvas
-				linear
 				shadows
-				dpr={1}
+				gl={{
+					antialias: false,
+					alpha: true,
+					logarithmicDepthBuffer: true,
+					toneMapping: THREE.ACESFilmicToneMapping,
+					toneMappingExposure: 1,
+				}}
+				dpr={0.5}
 				camera={{
 					fov: 60,
 					near: 0.1,

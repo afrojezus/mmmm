@@ -1,7 +1,10 @@
+import { AnalyticsConsent } from "@/components/AnalyticsConsent";
+import { ClientAnalytics } from "@/components/ClientAnalytics";
 import ConsoleEffect from "@/components/ConsoleEffect";
 import RootHeader from "@/components/RootHeader";
-import { Analytics } from "@vercel/analytics/react";
+import { ThreejsDefaults } from "@/components/ThreejsDefaults";
 import "@/styles/globals.css";
+import { Suspense } from "react";
 
 type RootLayoutProps = {
 	children: React.ReactNode;
@@ -11,7 +14,7 @@ const RootLayout = (props: RootLayoutProps) => {
 	const { children } = props;
 
 	return (
-		<html lang="en">
+		<html lang="en" suppressHydrationWarning>
 			<head>
 				<title>mmmmmmmmmmmmmm</title>
 				<meta name="description" content="mmmmmmmmmm" />
@@ -90,9 +93,13 @@ xl;;;,,,:ccc::lldOo;;cllcccccclkOOOOkkkOOO000KXNNWWWWWWWNKkolllllc:;;;;;;,;;;;;;
 				/>
 				<RootHeader />
 				{children}
-				<div className="scanlines" />
 				<ConsoleEffect />
-				<Analytics />
+				<ClientAnalytics />
+				<ThreejsDefaults />
+				<Suspense fallback={null}>
+					<AnalyticsConsent />
+				</Suspense>
+				<div className="scanlines" />
 			</body>
 		</html>
 	);

@@ -81,9 +81,9 @@ a {
   pointer-events: none;
   -webkit-user-select: none;
   user-select: none;
-  background-size: 2px 3px;
-  background-image: radial-gradient(transparent 50%, black 50%);
-  z-index: 5;
+  background-size: 1px 3px !important;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  z-index: 1000;
 }
 
 h1,

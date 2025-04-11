@@ -12,6 +12,7 @@ type StupidMarqueesProps = {
 	uuuu?: boolean;
 	direction?: "left" | "right";
 	opacity?: number;
+	miku?: boolean;
 };
 
 const StupidMarquees = (props: StupidMarqueesProps) => {
@@ -20,6 +21,7 @@ const StupidMarquees = (props: StupidMarqueesProps) => {
 		alternative,
 		myon,
 		uuuu,
+		miku,
 		direction = "left",
 		opacity = 1,
 	} = props;
@@ -30,7 +32,7 @@ const StupidMarquees = (props: StupidMarqueesProps) => {
 				animate={visible ? { opacity } : { opacity: 0 }}
 			>
 				<Marquee
-					speed={myon || uuuu ? 900 : 50}
+					speed={miku || myon || uuuu ? 900 : 50}
 					gradient={false}
 					direction={direction}
 					style={{
@@ -43,7 +45,12 @@ const StupidMarquees = (props: StupidMarqueesProps) => {
 						height: 40,
 					}}
 				>
-					{myon ? (
+					{miku ? (
+						<h1>
+							miku miku miku miku miku miku miku miku miku miku
+							miku
+						</h1>
+					) : myon ? (
 						<h1>
 							myon myon myon myon myon myon myon myon myon myon
 						</h1>
@@ -63,7 +70,7 @@ const StupidMarquees = (props: StupidMarqueesProps) => {
 				animate={visible ? { opacity } : { opacity: 0 }}
 			>
 				<Marquee
-					speed={myon || uuuu ? 300 : 50}
+					speed={miku || myon || uuuu ? 300 : 50}
 					gradient={false}
 					direction={direction}
 					style={{
@@ -76,7 +83,12 @@ const StupidMarquees = (props: StupidMarqueesProps) => {
 						height: 20,
 					}}
 				>
-					{myon ? (
+					{miku ? (
+						<h3>
+							miku miku miku miku miku miku miku miku miku miku
+							miku miku miku miku miku miku miku miku miku miku
+						</h3>
+					) : myon ? (
 						<h3>
 							myon myon myon myon myon myon myon myon myon myon
 							myon myon myon myon myon myon myon myon myon myon
@@ -97,7 +109,7 @@ const StupidMarquees = (props: StupidMarqueesProps) => {
 				animate={visible ? { opacity } : { opacity: 0 }}
 			>
 				<Marquee
-					speed={myon || uuuu ? 100 : 50}
+					speed={miku || myon || uuuu ? 100 : 50}
 					gradient={false}
 					direction={direction}
 					style={{
@@ -110,7 +122,12 @@ const StupidMarquees = (props: StupidMarqueesProps) => {
 						userSelect: "none",
 					}}
 				>
-					{myon ? (
+					{miku ? (
+						<h1>
+							miku miku miku miku miku miku miku miku miku miku
+							miku miku miku miku miku miku miku miku miku miku
+						</h1>
+					) : myon ? (
 						<h1>
 							myon myon myon myon myon myon myon myon myon myon
 						</h1>
@@ -130,7 +147,7 @@ const StupidMarquees = (props: StupidMarqueesProps) => {
 				animate={visible ? { opacity } : { opacity: 0 }}
 			>
 				<Marquee
-					speed={myon || uuuu ? 600 : 50}
+					speed={miku || myon || uuuu ? 600 : 50}
 					gradient={false}
 					direction={direction}
 					style={{
@@ -143,7 +160,12 @@ const StupidMarquees = (props: StupidMarqueesProps) => {
 						userSelect: "none",
 					}}
 				>
-					{myon ? (
+					{miku ? (
+						<h1>
+							miku miku miku miku miku miku miku miku miku miku
+							miku miku miku miku miku miku miku miku miku miku
+						</h1>
+					) : myon ? (
 						<h1>
 							myon myon myon myon myon myon myon myon myon myon
 						</h1>
@@ -163,7 +185,7 @@ const StupidMarquees = (props: StupidMarqueesProps) => {
 					initial={{ opacity: 0 }}
 					animate={visible ? { opacity } : { opacity: 0 }}
 				>
-					{!myon && !uuuu && (
+					{!miku && !myon && !uuuu && (
 						<div
 							style={{
 								position: "absolute",
@@ -335,7 +357,19 @@ const StupidMarquees = (props: StupidMarqueesProps) => {
 							height: 300,
 						}}
 					>
-						{uuuu ? (
+						{miku ? (
+							<h1 style={{ fontSize: "9em" }}>
+								miku miku miku miku miku miku miku miku miku
+								miku miku miku miku miku miku miku miku miku
+								miku miku
+							</h1>
+						) : myon ? (
+							<h1 style={{ fontSize: "9em" }}>
+								myon myon myon myon myon myon myon myon myon
+								myon myon myon myon myon myon myon myon myon
+								myon
+							</h1>
+						) : uuuu ? (
 							<h1 style={{ fontSize: "9em" }}>
 								uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
 							</h1>

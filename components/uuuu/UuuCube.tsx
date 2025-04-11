@@ -44,6 +44,9 @@ const UuuCube = (props: UuuCubeProps) => {
 	const materialRef = useRef<THREE.MeshStandardMaterial>(null);
 	const texture = useLoader(THREE.TextureLoader, `/${type}.webp`);
 
+	texture.minFilter = THREE.LinearFilter;
+	texture.magFilter = THREE.NearestFilter;
+
 	return (
 		<>
 			<motion.mesh ref={ref} receiveShadow castShadow {...meshProps}>
@@ -73,6 +76,9 @@ const UuuPlane = (props: UuuCubeProps) => {
 	const ref = useRef<MeshProps>(null);
 	const materialRef = useRef<THREE.MeshStandardMaterial>(null);
 	const texture = useLoader(THREE.TextureLoader, "/uuuu.webp");
+
+	texture.minFilter = THREE.LinearFilter;
+	texture.magFilter = THREE.NearestFilter;
 
 	return (
 		<>
@@ -185,7 +191,17 @@ const UuuScene = (props: UuuSceneProps) => {
 		<>
 			<StupidMarquees alternative visible={FULL_FRAME} uuuu />
 			<UTitle frame={frame} />
-			<Canvas shadows linear dpr={1}>
+			<Canvas
+				shadows
+				gl={{
+					antialias: false,
+					alpha: true,
+					logarithmicDepthBuffer: true,
+					toneMapping: THREE.ACESFilmicToneMapping,
+					toneMappingExposure: 1,
+				}}
+				dpr={0.5}
+			>
 				<motion.ambientLight
 					initial={{ color: "black" }}
 					animate={{

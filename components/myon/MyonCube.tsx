@@ -36,6 +36,9 @@ export const MyonCube = ({
 	const materialRef = useRef(null);
 	const texture = useLoader(THREE.TextureLoader, "/myon.png");
 
+	texture.minFilter = THREE.LinearFilter;
+	texture.magFilter = THREE.NearestFilter;
+
 	return (
 		<>
 			<motion.mesh ref={ref} {...meshProps}>
@@ -60,6 +63,9 @@ export const MyonPlane = ({
 	const ref = useRef<MeshProps>(null);
 	const materialRef = useRef(null);
 	const texture = useLoader(THREE.TextureLoader, "/myon.png");
+
+	texture.minFilter = THREE.LinearFilter;
+	texture.magFilter = THREE.NearestFilter;
 
 	return (
 		<>
@@ -120,7 +126,17 @@ const Scene = (props: MyonSceneProps) => {
 				myon
 				visible={FINAL_FRAME}
 			/>
-			<Canvas linear shadows dpr={1}>
+			<Canvas
+				shadows
+				gl={{
+					antialias: false,
+					alpha: true,
+					logarithmicDepthBuffer: true,
+					toneMapping: THREE.ACESFilmicToneMapping,
+					toneMappingExposure: 1,
+				}}
+				dpr={0.5}
+			>
 				<motion.ambientLight
 					initial={{ color: "black" }}
 					animate={{
