@@ -2,12 +2,12 @@
 
 import dynamic from "next/dynamic";
 
-const SummerScene = dynamic(() => import("@/components/SummerScene"), {
+const DayWinterScene = dynamic(() => import("@/components/DayWinterScene"), {
 	ssr: false,
 });
 
 const Page = () => {
-	return <SummerScene />;
+	return <DayWinterScene />;
 };
 
 export default Page;
