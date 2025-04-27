@@ -3,13 +3,15 @@ import classes from "@/styles/3d.module.css"
 import { motion } from "framer-motion"
 import { useCallback, useEffect, useRef, useState } from "react"
 import useSound from "use-sound"
+import { Slider } from "../Slider"
 import { Scene as Miku } from "./Miku"
 
 export const MikuWrapper = () => {
   const [playbackRate] = useState(1)
+  const [volume, setVolume] = useState(0.25)
   const [isHovered, setIsHovered] = useState(false)
   const [play, { stop, sound }] = useSound("/miku.mp3", {
-    volume: 1,
+    volume,
     playbackRate,
     interrupt: true,
   })
@@ -45,6 +47,17 @@ export const MikuWrapper = () => {
   }, [stop])
   return (
     <motion.main initial={{ opacity: 0 }} animate={{ opacity: sound ? 1 : 0 }}>
+      <Slider
+        min={0}
+        max={1}
+        step={0.01}
+        value={volume}
+        onChange={(value) => {
+          setVolume(value)
+          if (sound) sound.volume(value)
+        }}
+        className={classes.slider}
+      />
       <motion.div
         onMouseMove={onMouseMove}
         onClick={() =>
