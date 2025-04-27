@@ -1,12 +1,15 @@
-import { WebGLWrapper } from "@/components/WebGLWrapper";
-import UuuCube from "@/components/uuuu/UuuCubeWrapper";
+import { WebGlWrapper } from "@/components/WebGlWrapper"
+import dynamic from "next/dynamic"
+const UuuCube = dynamic(() => import("@/components/uuuu/UuuCubeWrapper"), {
+  ssr: false,
+})
 
 const Uuuu = () => {
-	return (
-		<WebGLWrapper>
-			<UuuCube />
-		</WebGLWrapper>
-	);
-};
+  return (
+    <WebGlWrapper>
+      <UuuCube />
+    </WebGlWrapper>
+  )
+}
 
-export default Uuuu;
+export default Uuuu

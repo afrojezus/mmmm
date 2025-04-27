@@ -1,18 +1,21 @@
-"use client";
+"use client"
 
-import { WebGLWrapper } from "@/components/WebGLWrapper";
-import dynamic from "next/dynamic";
+import { WebGlWrapper } from "@/components/WebGlWrapper"
+import dynamic from "next/dynamic"
 
-const MikuScene = dynamic(() => import("@/components/miku/MikuWrapper"), {
-	ssr: false,
-});
+const MikuScene = dynamic(
+  () => import("@/components/miku/MikuWrapper").then((mod) => mod.MikuWrapper),
+  {
+    ssr: false,
+  },
+)
 
 const Page = () => {
-	return (
-		<WebGLWrapper>
-			<MikuScene />
-		</WebGLWrapper>
-	);
-};
+  return (
+    <WebGlWrapper>
+      <MikuScene />
+    </WebGlWrapper>
+  )
+}
 
-export default Page;
+export default Page

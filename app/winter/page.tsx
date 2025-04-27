@@ -1,13 +1,22 @@
-"use client";
+"use client"
 
-import dynamic from "next/dynamic";
+import { WebGlWrapper } from "@/components/WebGlWrapper"
+import dynamic from "next/dynamic"
 
-const FestiveScene = dynamic(() => import("@/components/FestiveScene"), {
-	ssr: false,
-});
+const FestiveScene = dynamic(
+  () =>
+    import("@/components/winter/FestiveScene").then((mod) => mod.FestiveScene),
+  {
+    ssr: false,
+  },
+)
 
 const Page = () => {
-	return <FestiveScene />;
-};
+  return (
+    <WebGlWrapper>
+      <FestiveScene />
+    </WebGlWrapper>
+  )
+}
 
-export default Page;
+export default Page

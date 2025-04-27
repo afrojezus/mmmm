@@ -1,12 +1,12 @@
 {
-	"extends": ["development"],
-	"hints": {
-		"compat-api/css": [
-			"default",
-			{
-				"ignore": ["font-smooth"]
-			}
-		],
-		"no-inline-styles": "off"
-	}
+  "extends": ["development"],
+  "hints": {
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": ["font-smooth"]
+      }
+    ],
+    "no-inline-styles": "off"
+  }
 }

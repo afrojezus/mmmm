@@ -1,19 +1,18 @@
-"use client";
-import styles from "@/styles/header.module.scss";
-import { usePathname } from "next/navigation";
+"use client"
+import styles from "@/styles/header.module.scss"
+import { usePathname } from "next/navigation"
 
 type HeaderProps = {
-	children: (activeRoute: string) => JSX.Element;
-} & Omit<React.HTMLAttributes<HTMLDivElement>, "children">;
-const Header = ({ children, ...props }: HeaderProps) => {
-	const pathname = usePathname();
-	return (
-		<>
-			<header className={styles.header} {...props}>
-				{children(pathname)}
-			</header>
-		</>
-	);
-};
+  children: (activeRoute: string) => JSX.Element
+} & Omit<React.HTMLAttributes<HTMLDivElement>, "children">
 
-export default Header;
+export const Header = ({ children, ...props }: HeaderProps) => {
+  const pathname = usePathname()
+  return (
+    <>
+      <header className={styles.header} {...props}>
+        {children(pathname)}
+      </header>
+    </>
+  )
+}
