@@ -35,6 +35,20 @@
   font-weight: bold;
 }
 
+.slider {
+  position: absolute;
+  z-index: 2;
+  bottom: 1em;
+  left: 1em;
+  font-size: 1.5em;
+  color: #fff;
+  gap: 0.5em;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: flex-start;
+}
+
 @media (max-width: 768px) {
   .canvas {
     margin: auto;
@@ -44,6 +58,10 @@
     image-rendering: -webkit-crisp-edges;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
+  }
+  .slider {
+    bottom: unset;
+    top: 1em;
   }
 }
 
