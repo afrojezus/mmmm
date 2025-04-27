@@ -1,46 +1,56 @@
-"use client";
+"use client"
 
-import { WebGLWrapper } from "@/components/WebGLWrapper";
-import { getSeason } from "@/utils/season";
-import { motion } from "framer-motion";
-import dynamic from "next/dynamic";
+import { WebGlWrapper } from "@/components/WebGlWrapper"
+import { getSeason } from "@/utils/season"
+import { motion } from "framer-motion"
+import dynamic from "next/dynamic"
 
 const HomeScene = dynamic(() => import("@/components/mmmm/HomeScene"), {
-	ssr: false,
-});
+  ssr: false,
+})
 
-const FestiveScene = dynamic(() => import("@/components/FestiveScene"), {
-	ssr: false,
-});
+const FestiveScene = dynamic(
+  () =>
+    import("@/components/winter/FestiveScene").then((mod) => mod.FestiveScene),
+  {
+    ssr: false,
+  },
+)
 
-const DayWinterScene = dynamic(() => import("@/components/DayWinterScene"), {
-	ssr: false,
-});
+const DayWinterScene = dynamic(
+  () =>
+    import("@/components/daywinter/DayWinterScene").then(
+      (mod) => mod.DayWinterScene,
+    ),
+  {
+    ssr: false,
+  },
+)
 
 const IndexPage = () => {
-	const season = getSeason();
+  const season = getSeason()
 
-	return (
-		<motion.main
-			style={{
-				flex: 1,
-				display: "flex",
-				flexDirection: "column",
-				justifyContent: "center",
-				alignItems: "center",
-				width: "100%",
-				height: "100%",
-			}}
-		>
-			<WebGLWrapper>
-				{["autumn", "spring", "default", "summer"].includes(season) && (
-					<HomeScene />
-				)}
-				{season === "winter" && <FestiveScene />}
-				{season === "dayWinter" && <DayWinterScene />}
-			</WebGLWrapper>
-		</motion.main>
-	);
-};
+  return (
+    <motion.main
+      style={{
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "100%",
+        height: "100%",
+      }}
+    >
+      <WebGlWrapper>
+        {["autumn", "spring", "default", "summer"].includes(season) && (
+          <HomeScene />
+        )}
+        {season === "winter" && <FestiveScene />}
+        {season === "dayWinter" && <DayWinterScene />}
+      </WebGlWrapper>
+    </motion.main>
+  )
+}
 
-export default IndexPage;
+export default IndexPage

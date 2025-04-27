@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react"
 
 const mmmm = `XXXXXXXXXXKO0XXXXXXKxOXXXXKKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXOk0XXXXXXX0k0
 XXXXXXXXXX0O0XXXXXXKkOXXXX0OKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXKkkKXXXXXXXOk
@@ -51,18 +51,18 @@ ldk0kocokkdxO00xook0KXNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNXNNNWNNNNNWWNWNX0kdollllcc
 l:cokOdclxkddO0Odclloxk0KXNNNNNNNNNNNNNNNNNNNNNNNNNNWNNWWNNWWNWWNXKOxolllllc;;:lllc:;;cccok00OxxkO0O
 dl:,,lxdlcoxddk0kolollllodxkO0KXNNNNNNNNNNNNWWNNNWWWWWWWWWWWWNX0kdollllc::;,;clc::;,:::cxO0OxxkOOxoc
 l::;,';colccoooxOxlcllllllllllokO000KKXXNNNNWWWWWWWWWWWWWWNKOxollllcc:;;;;;;::;;;;;;;:okOkxdxxdoc;;;
-xl;;;,,,:ccc::lldOo;;cllcccccclkOOOOkkkOOO000KXNNWWWWWWWNKkolllllc:;;;;;;,;;;;;;;,;,;dOOdldxoc;;;;;;`;
+xl;;;,,,:ccc::lldOo;;cllcccccclkOOOOkkkOOO000KXNNWWWWWWWNKkolllllc:;;;;;;,;;;;;;;,;,;dOOdldxoc;;;;;;`
 
-const ConsoleEffect = () => {
-	const ready = useRef(false);
+export const ConsoleEffect = () => {
+  const ready = useRef(false)
 
-	useEffect(() => {
-		if (ready.current) return;
-		ready.current = true;
-		console.log(mmmm);
-	}, []);
+  useEffect(() => {
+    if (ready.current) {
+      return
+    }
+    ready.current = true
+    console.info(mmmm)
+  }, [])
 
-	return null;
-};
-
-export default ConsoleEffect;
+  return null
+}

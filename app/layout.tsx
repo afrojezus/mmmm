@@ -1,44 +1,41 @@
-import { AnalyticsConsent } from "@/components/AnalyticsConsent";
-import { ClientAnalytics } from "@/components/ClientAnalytics";
-import ConsoleEffect from "@/components/ConsoleEffect";
-import RootHeader from "@/components/RootHeader";
-import { ThreejsDefaults } from "@/components/ThreejsDefaults";
-import "@/styles/globals.css";
-import { Suspense } from "react";
+import { ClientAnalytics } from "@/components/ClientAnalytics"
+import { ConsoleEffect } from "@/components/ConsoleEffect"
+import { RootHeader } from "@/components/RootHeader"
+import { ThreejsDefaults } from "@/components/ThreejsDefaults"
+import { AnalyticsConsentClientWrapper } from "@/components/analytics-consent/AnalyticsConsentEntry"
+import "@/styles/globals.css"
+import { Suspense } from "react"
 
 type RootLayoutProps = {
-	children: React.ReactNode;
-};
+  children: React.ReactNode
+}
 
 const RootLayout = (props: RootLayoutProps) => {
-	const { children } = props;
+  const { children } = props
 
-	return (
-		<html lang="en" suppressHydrationWarning>
-			<head>
-				<title>mmmmmmmmmmmmmm</title>
-				<meta name="description" content="mmmmmmmmmm" />
-				<meta
-					name="viewport"
-					content="width=device-width, initial-scale=1"
-				/>
-				<link rel="icon" href="/favicon.ico" />
-				<meta property="og:title" content="mmmmmmmmmmmmmm" />
-				<meta property="og:type" content="website" />
-				<meta property="og:url" content="mmmm.moe" />
-				<meta property="twitter:card" content="summary_large_image" />
-				<meta property="og:description" content="mmmmmmmmmmm" />
-				<meta property="og:image" content="/mmmmHD.png" />
-				<meta property="og:image:type" content="image/png" />
-				<meta property="og:image:width" content="250" />
-				<meta property="og:image:height" content="250" />
-				<meta name="theme-color" content="#ff7be9" />
-			</head>
-			<body>
-				<script
-					// biome-ignore lint/security/noDangerouslySetInnerHtml: This is crucial
-					dangerouslySetInnerHTML={{
-						__html: `<!---
+  return (
+    <html lang="en" suppressHydrationWarning={true}>
+      <head>
+        <title>mmmmmmmmmmmmmm</title>
+        <meta name="description" content="mmmmmmmmmm" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta property="og:title" content="mmmmmmmmmmmmmm" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="mmmm.moe" />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="og:description" content="mmmmmmmmmmm" />
+        <meta property="og:image" content="/mmmmHD.png" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="250" />
+        <meta property="og:image:height" content="250" />
+        <meta name="theme-color" content="#ff7be9" />
+      </head>
+      <body>
+        <script
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: This is crucial
+          dangerouslySetInnerHTML={{
+            __html: `<!---
 XXXXXXXXXXKO0XXXXXXKxOXXXXKKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXOk0XXXXXXX0k0
 XXXXXXXXXX0O0XXXXXXKkOXXXX0OKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXKkkKXXXXXXXOk
 XXXXXXXXXX0OKXXXXXXKkkXXXX0O0XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX0k0XXXXXXXKk
@@ -89,20 +86,20 @@ l:cokOdclxkddO0Odclloxk0KXNNNNNNNNNNNNNNNNNNNNNNNNNNWNNWWNNWWNWWNXKOxolllllc;;:l
 dl:,,lxdlcoxddk0kolollllodxkO0KXNNNNNNNNNNNNWWNNNWWWWWWWWWWWWNX0kdollllc::;,;clc::;,:::cxO0OxxkOOxoc
 l::;,';colccoooxOxlcllllllllllokO000KKXXNNNNWWWWWWWWWWWWWWNKOxollllcc:;;;;;;::;;;;;;;:okOkxdxxdoc;;;
 xl;;;,,,:ccc::lldOo;;cllcccccclkOOOOkkkOOO000KXNNWWWWWWWNKkolllllc:;;;;;;,;;;;;;;,;,;dOOdldxoc;;;;;; --->`,
-					}}
-				/>
-				<RootHeader />
-				{children}
-				<ConsoleEffect />
-				<ClientAnalytics />
-				<ThreejsDefaults />
-				<Suspense fallback={null}>
-					<AnalyticsConsent />
-				</Suspense>
-				<div className="scanlines" />
-			</body>
-		</html>
-	);
-};
+          }}
+        />
+        <RootHeader />
+        {children}
+        <ConsoleEffect />
+        <ClientAnalytics />
+        <ThreejsDefaults />
+        <Suspense fallback={null}>
+          <AnalyticsConsentClientWrapper />
+        </Suspense>
+        <div className="scanlines" />
+      </body>
+    </html>
+  )
+}
 
-export default RootLayout;
+export default RootLayout

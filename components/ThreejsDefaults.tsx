@@ -1,7 +1,7 @@
-"use client";
-import * as THREE from "three";
+"use client"
+import * as Three from "three"
 
-const ditherAndPosterize_fs = `
+const DITHER_AND_POSTURIZE_FS = `
 
 vec4 RGBtoYUV(vec4 rgba) {
 	vec4 yuva;
@@ -87,27 +87,27 @@ vec4 ditherAndPosterize(vec2 position, vec4 color, float colorDepth, float dithe
 
 	return YUVtoRGB(yuv);
 }
-`;
+`
 
-THREE.ShaderLib.physical.fragmentShader =
-	THREE.ShaderLib.physical.fragmentShader.replace(
-		"void main()",
-		`
-  ${ditherAndPosterize_fs}
+Three.ShaderLib.physical.fragmentShader =
+  Three.ShaderLib.physical.fragmentShader.replace(
+    "void main()",
+    `
+  ${DITHER_AND_POSTURIZE_FS}
   void main()`,
-	);
+  )
 
-THREE.ShaderLib.physical.fragmentShader =
-	THREE.ShaderLib.physical.fragmentShader.replace(
-		"#include <dithering_fragment>",
-		`
+Three.ShaderLib.physical.fragmentShader =
+  Three.ShaderLib.physical.fragmentShader.replace(
+    "#include <dithering_fragment>",
+    `
   gl_FragColor.rgba = ditherAndPosterize(gl_FragCoord.xy, gl_FragColor.rgba, 50.0, 2.0);
   `,
-	);
+  )
 
-THREE.ShaderChunk.project_vertex = THREE.ShaderChunk.project_vertex.replace(
-	"gl_Position = projectionMatrix * mvPosition;",
-	`
+Three.ShaderChunk.project_vertex = Three.ShaderChunk.project_vertex.replace(
+  "gl_Position = projectionMatrix * mvPosition;",
+  `
 // jitter
 vec2 _resolution = vec2(240, 160);
 vec4 _pos = projectionMatrix * mvPosition;
@@ -118,8 +118,8 @@ _pos.xyz *= _pos.w;
 
 gl_Position = _pos;
 `,
-);
+)
 
 export const ThreejsDefaults = () => {
-	return null;
-};
+  return null
+}

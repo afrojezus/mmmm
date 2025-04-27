@@ -4,7 +4,8 @@
   --header-height: 29px;
   --max-width: 1100px;
   --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+  --font-mono:
+    ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
     "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
@@ -42,7 +43,8 @@ body {
 
 body {
   -webkit-font-smoothing: none;
-  font-smooth: never;
+  text-rendering: optimizeLegibility;
+  image-rendering: pixelated;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -81,8 +83,8 @@ a {
   pointer-events: none;
   -webkit-user-select: none;
   user-select: none;
-  background-size: 1px 3px !important;
   background: radial-gradient(circle, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+  background-size: 1px 3px !important;
   z-index: 1000;
 }
 

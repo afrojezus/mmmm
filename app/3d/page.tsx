@@ -1,12 +1,18 @@
 /** This is the worst page ever made */
-import MmmCube from "@/components/3d/MmmcubeWrapper";
-import { WebGLWrapper } from "@/components/WebGLWrapper";
-const Page = () => {
-	return (
-		<WebGLWrapper>
-			<MmmCube />
-		</WebGLWrapper>
-	);
-};
 
-export default Page;
+import { WebGlWrapper } from "@/components/WebGlWrapper"
+import dynamic from "next/dynamic"
+
+const MmmCube = dynamic(() => import("@/components/3d/MmmcubeWrapper"), {
+  ssr: false,
+})
+
+const Page = () => {
+  return (
+    <WebGlWrapper>
+      <MmmCube />
+    </WebGlWrapper>
+  )
+}
+
+export default Page
