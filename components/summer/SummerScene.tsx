@@ -36,14 +36,14 @@ type MmmCubeProps<T extends "cube" | "sphere"> = {
     shapeProps?: T extends "cube" ? BoxGeometryProps : SphereGeometryProps
   }
 
-const Water = (props: Parameters<typeof motion.group>[0]) => {
+function Water(props: Parameters<typeof motion.group>[0]) {
   const mesh = useRef<Group<Object3DEventMap>>(null)
   const waterTexture = useLoader(
     TextureLoader,
     "/textures/water_tile_by_thecandyface.png",
   )
 
-  useFrame((state, delta) => {
+  useFrame(() => {
     if (mesh.current) {
       mesh.current.rotation.x = -Math.PI / 2
       // mesh.current.rotation.z += delta / 2 * 0.1;
@@ -73,47 +73,43 @@ const Water = (props: Parameters<typeof motion.group>[0]) => {
   )
 }
 
-const Ground = () => {
-  const obj = useGLTF("/3d/island/scene.gltf", false, true)
+function Ground() {
+  const obj = useGLTF("/3d/island/island.glb", false, true)
 
   obj.scene.traverse((child) => {
     if (child instanceof Mesh) {
       child.castShadow = true
       child.receiveShadow = true
-      if (child.material instanceof MeshBasicMaterial) {
-        child.material = new MeshStandardMaterial({
-          map: child.material.map,
-          color: "#ffffff",
-          roughness: 0.8,
-          metalness: 0.1,
-        })
-        if (child.material.map instanceof Texture) {
-          child.material.map.magFilter = NearestFilter
-          child.material.map.minFilter = NearestFilter
-        }
-      }
+      // if (child.material instanceof MeshBasicMaterial) {
+      //   child.material = new MeshStandardMaterial({
+      //     map: child.material.map,
+      //     color: "#ffffff",
+      //     roughness: 0.8,
+      //     metalness: 0.1,
+      //   })
+      //   if (child.material.map instanceof Texture) {
+      //     child.material.map.magFilter = NearestFilter
+      //     child.material.map.minFilter = NearestFilter
+      //   }
+      // }
       child.material.needsUpdate = true
       child.geometry.computeVertexNormals()
     }
   })
 
   return (
-    <group
-      position={[0, 400, 0]}
-      rotation={[0, -2.5, 0]}
-      scale={[0.25, 0.25, 0.25]}
-    >
-      <primitive object={obj.scene} scale={600} />
+    <group position={[0, -60, 0]} rotation={[0, -2.5, 0]}>
+      <primitive object={obj.scene} scale={50} />
     </group>
   )
 }
 
-const MmmCube = <T extends "cube" | "sphere">(props: MmmCubeProps<T>) => {
+function MmmCube<T extends "cube" | "sphere">(props: MmmCubeProps<T>) {
   const { type = "mmmm", spin, shape, shapeProps, ...meshProps } = props
   const mesh = useRef<Mesh>(null)
   const texture = useLoader(TextureLoader, `/${type}.webp`)
 
-  useFrame((state, delta) => {
+  useFrame(() => {
     const m = mesh.current
     if (m) {
       if (spin) {
@@ -167,7 +163,7 @@ const MmmCube = <T extends "cube" | "sphere">(props: MmmCubeProps<T>) => {
   )
 }
 
-export const SummerScene = () => {
+export function SummerScene() {
   const mouse = useRef<[number, number]>([0, 0])
   const mounted = useRef(false)
   const onMouseMove = useCallback(
@@ -180,10 +176,6 @@ export const SummerScene = () => {
     if (mounted.current) {
       return
     }
-    console.info(
-      "Ground mesh credits:",
-      `This work is based on "Georgeville Beach, NS" (https://sketchfab.com/3d-models/georgeville-beach-ns-3478246832884fb291333e39632da025) by geoScotia (https://sketchfab.com/mike.young) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)`,
-    )
     mounted.current = true
   }, [])
   return (
@@ -205,10 +197,10 @@ export const SummerScene = () => {
           }}
           dpr={window.devicePixelRatio}
           camera={{
-            fov: 60,
+            fov: 45,
             near: 0.1,
             far: 1000000,
-            position: [0, 0, 400],
+            position: [0, 0, 600],
           }}
         >
           <motion.directionalLight
@@ -258,29 +250,6 @@ export const SummerScene = () => {
               x: 0,
               y: 0,
               z: 0,
-            }}
-            transition={{
-              duration: 2,
-              delay: 2,
-            }}
-          >
-            <MmmCube
-              position={[0, 0, 0]}
-              rotation={[0.5, 0, 0]}
-              scale={[50, 50, 50]}
-              spin={true}
-            />
-          </motion.group>
-          <motion.group
-            initial={{
-              x: 0,
-              y: 0,
-              z: -40000,
-            }}
-            animate={{
-              x: 0,
-              y: 0,
-              z: 0,
               rotateY: [-360, 0, 360],
             }}
             transition={{
@@ -317,27 +286,16 @@ export const SummerScene = () => {
               spin={true}
             />
             <MmmCube
-              position={[0, -70, 400]}
-              rotation={[0.1, 0, 0]}
-              scale={[100, 100, 100]}
-            />
-            <MmmCube
               type="uuuu"
-              position={[-500, -10, -500]}
+              position={[-30, -40, -100]}
               rotation={[0, 1.3, 0]}
-              scale={[100, 100, 100]}
+              scale={[50, 50, 50]}
             />
             <MmmCube
               type="mmmm"
-              position={[-450, -10, -600]}
+              position={[100, -20, 0]}
               rotation={[0, 1.1, 0]}
-              scale={[100, 100, 100]}
-            />
-            <MmmCube
-              type="uuuu2"
-              position={[-10, -40, -1100]}
-              rotation={[0, 1, 0]}
-              scale={[100, 100, 100]}
+              scale={[50, 50, 50]}
             />
             <MmmCube
               type="uuuu2"
@@ -352,27 +310,6 @@ export const SummerScene = () => {
               rotation={[0, 0.5, 0.1]}
               scale={[100, 100, 100]}
               spin={true}
-            />
-            <MmmCube
-              type="uuuu"
-              position={[-1500, -20, 1000]}
-              rotation={[0, 0.5, 0.1]}
-              scale={[100, 100, 100]}
-            />
-            <MmmCube
-              position={[-3000, 50, 3000]}
-              rotation={[0, 1, -0.6]}
-              scale={[100, 100, 100]}
-            />
-            <MmmCube
-              position={[-900, 1000, -7600]}
-              rotation={[0, 0.5, 0.1]}
-              scale={[2000, 2000, 2000]}
-            />
-            <MmmCube
-              position={[-900, 1000, -7600]}
-              rotation={[0, 0.5, 0.1]}
-              scale={[2000, 2000, 2000]}
             />
             <MmmCube
               type="uuuu2"

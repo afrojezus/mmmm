@@ -27,7 +27,15 @@ const DayWinterScene = dynamic(
   },
 )
 
-const IndexPage = () => {
+const SummerScene = dynamic(
+  () =>
+    import("@/components/summer/SummerScene").then((mod) => mod.SummerScene),
+  {
+    ssr: false,
+  },
+)
+
+export default function IndexPage() {
   const season = getSeason()
 
   return (
@@ -43,14 +51,11 @@ const IndexPage = () => {
       }}
     >
       <WebGlWrapper>
-        {["autumn", "spring", "default", "summer"].includes(season) && (
-          <HomeScene />
-        )}
+        {["autumn", "spring", "default"].includes(season) && <HomeScene />}
         {season === "winter" && <FestiveScene />}
         {season === "dayWinter" && <DayWinterScene />}
+        {season === "summer" && <SummerScene />}
       </WebGlWrapper>
     </motion.main>
   )
 }
-
-export default IndexPage

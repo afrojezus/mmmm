@@ -6,7 +6,7 @@ import useSound from "use-sound"
 import { Slider } from "../Slider"
 import UuuCube from "./UuuCube"
 
-const UuuCubeWrapper = () => {
+function UuuCubeWrapper() {
   const [playbackRate] = useState(1)
   const [volume, setVolume] = useState(0.25)
   const [isHovered, setIsHovered] = useState(false)

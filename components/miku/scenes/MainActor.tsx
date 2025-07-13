@@ -3,7 +3,7 @@
 import { Suspense } from "react"
 import { MikuCube } from "../MikuCube"
 
-export const MainActor = ({ frame }: { frame: number }) => {
+export function MainActor({ frame }: { frame: number }) {
   const boomFrame = frame >= 0 && frame < 1
   const litFrame = frame >= 12
   const spinFrame = frame >= 141 && frame <= 245

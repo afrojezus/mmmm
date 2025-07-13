@@ -19,9 +19,9 @@ export type CommonProps = {
   isHovered: boolean
 }
 
-export const Scene = (
+export function Scene(
   props: CommonProps & { mouse: React.RefObject<[number, number]> },
-) => {
+) {
   const { isHovered } = props
   const frame = useKeyframer(isHovered)
 

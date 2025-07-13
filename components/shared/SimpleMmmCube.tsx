@@ -8,7 +8,7 @@ type SimpleMmmCubeProps = {
   x?: number
 } & MeshProps
 
-export const SimpleMmmCube = ({ x, ...props }: SimpleMmmCubeProps) => {
+export function SimpleMmmCube({ x, ...props }: SimpleMmmCubeProps) {
   const ref = useRef<Three.Mesh>(null)
   const texture = useLoader(TextureLoader, "/mmmm.webp")
   useFrame((state, delta) => {
@@ -24,7 +24,7 @@ export const SimpleMmmCube = ({ x, ...props }: SimpleMmmCubeProps) => {
   )
 }
 
-const SimpleMmmCubeArray = () => {
+function SimpleMmmCubeArray() {
   const [array, setArray] = useState<JSX.Element[]>([])
   useEffect(() => {
     const newArray = []
@@ -40,7 +40,7 @@ const SimpleMmmCubeArray = () => {
   )
 }
 
-export const Scene = () => {
+export function Scene() {
   return (
     <Canvas
       flat={true}
@@ -51,17 +51,6 @@ export const Scene = () => {
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
       <SimpleMmmCubeArray />
-      {/* <group>
-                <Suspense>
-                <SimpleMmmCube position={[-6, 0, -3]} />
-                <SimpleMmmCube position={[-4, 0, -3]} />
-                <SimpleMmmCube position={[-2, 0, -3]} />
-                <SimpleMmmCube position={[0, 0, -3]} />
-                <SimpleMmmCube position={[2, 0, -3]} />
-                <SimpleMmmCube position={[4, 0, -3]} />
-                <SimpleMmmCube position={[6, 0, -3]} />
-                </Suspense>
-            </group> */}
     </Canvas>
   )
 }

@@ -10,12 +10,10 @@ const MikuScene = dynamic(
   },
 )
 
-const Page = () => {
+export default function Page() {
   return (
     <WebGlWrapper>
       <MikuScene />
     </WebGlWrapper>
   )
 }
-
-export default Page

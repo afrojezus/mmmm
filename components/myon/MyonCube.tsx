@@ -2,7 +2,7 @@
 import { useKeyframer } from "@/hooks/use-keyframer"
 import { Canvas, type MeshProps, useLoader } from "@react-three/fiber"
 import { motion } from "framer-motion-3d"
-import { Suspense, useEffect, useRef, useState } from "react"
+import { Suspense, useRef } from "react"
 import {
   ACESFilmicToneMapping,
   LinearFilter,
@@ -27,12 +27,12 @@ type MyonSceneProps = {
   mouse?: React.RefObject<[number, number]>
 } & CommonProps
 
-export const MyonCube = ({
+export function MyonCube({
   isHovered,
   geometryProps,
   shaderProps,
   ...meshProps
-}: MyonCubeProps) => {
+}: MyonCubeProps) {
   const ref = useRef<MeshProps>(null)
   const materialRef = useRef(null)
   const texture = useLoader(TextureLoader, "/myon.png")
@@ -55,12 +55,12 @@ export const MyonCube = ({
   )
 }
 
-export const MyonPlane = ({
+export function MyonPlane({
   isHovered,
   geometryProps,
   shaderProps,
   ...meshProps
-}: MyonCubeProps) => {
+}: MyonCubeProps) {
   const ref = useRef<MeshProps>(null)
   const materialRef = useRef(null)
   const texture = useLoader(TextureLoader, "/myon.png")
@@ -83,7 +83,7 @@ export const MyonPlane = ({
   )
 }
 
-export const Scene = (props: MyonSceneProps) => {
+export function Scene(props: MyonSceneProps) {
   const { isHovered } = props
   const frame = useKeyframer(isHovered)
 

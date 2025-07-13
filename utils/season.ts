@@ -4,7 +4,7 @@ const springTimes = [2, 3, 4]
 const summerTimes = [5, 6, 7]
 const autumnTimes = [8, 9]
 
-export const getSeason = () => {
+export function getSeason() {
   const month = new Date().getMonth()
   if (winterTimes.includes(month)) {
     return "winter"

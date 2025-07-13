@@ -15,7 +15,7 @@ const a: string[] = [
   "連れて行くの夢の中へ",
 ]
 
-const getIndex = (frame: number) => {
+function getIndex(frame: number) {
   if (frame > 570) {
     return 9
   }
@@ -50,11 +50,11 @@ const getIndex = (frame: number) => {
   return 0
 }
 
-const MyonLyrics = ({
+function MyonLyrics({
   frame,
 }: {
   frame: number
-}) => {
+}) {
   const [lyrics] = useState<string[]>(a)
   const lyricsIndex = getIndex(frame)
 

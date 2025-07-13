@@ -6,7 +6,7 @@ import useSound from "use-sound"
 import { Slider } from "../Slider"
 import Mmmcube from "./Mmmcube"
 
-const MmmcubeWrapper = () => {
+function MmmcubeWrapper() {
   const [playbackRate] = useState(1)
   const [volume, setVolume] = useState(0.25)
   const [isHovered, setIsHovered] = useState(false)

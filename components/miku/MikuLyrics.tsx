@@ -12,7 +12,7 @@ const a: string[] = [
   "ToDimension",
 ]
 
-const getIndex = (frame: number) => {
+function getIndex(frame: number) {
   if (frame > 253) {
     return 6
   }
@@ -38,11 +38,11 @@ const getIndex = (frame: number) => {
   return 0
 }
 
-export const MikuLyrics = ({
+export function MikuLyrics({
   frame,
 }: {
   frame: number
-}) => {
+}) {
   const [lyrics] = useState<string[]>(a)
   const lyricsIndex = getIndex(frame)
 

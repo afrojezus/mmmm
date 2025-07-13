@@ -13,12 +13,10 @@ const DayWinterScene = dynamic(
   },
 )
 
-const Page = () => {
+export default function Page() {
   return (
     <WebGlWrapper>
       <DayWinterScene />
     </WebGlWrapper>
   )
 }
-
-export default Page

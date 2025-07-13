@@ -6,12 +6,12 @@ type StackProps = {
   gap?: number
 } & React.HTMLAttributes<HTMLDivElement>
 
-export const Stack = ({
+export function Stack({
   position = "center",
   gap = 10,
   children,
   ...props
-}: StackProps) => {
+}: StackProps) {
   return (
     <div
       className={clsx(styles.stack, styles[position])}

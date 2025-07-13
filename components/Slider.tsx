@@ -9,7 +9,7 @@ type SliderProps = {
   style?: React.CSSProperties
 }
 
-export const Slider = ({
+export function Slider({
   onChange,
   value,
   min,
@@ -18,7 +18,7 @@ export const Slider = ({
   disabled = false,
   className,
   style,
-}: SliderProps) => {
+}: SliderProps) {
   return (
     <div className={`slider ${className}`}>
       <span>volume</span>

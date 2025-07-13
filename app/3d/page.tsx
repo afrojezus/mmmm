@@ -7,12 +7,10 @@ const MmmCube = dynamic(() => import("@/components/3d/MmmcubeWrapper"), {
   ssr: false,
 })
 
-const Page = () => {
+export default function Page() {
   return (
     <WebGlWrapper>
       <MmmCube />
     </WebGlWrapper>
   )
 }
-
-export default Page

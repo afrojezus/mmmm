@@ -6,7 +6,7 @@ import useSound from "use-sound"
 import { Slider } from "../Slider"
 import { Scene as MyonCube } from "./MyonCube"
 
-export const MyonWrapper = () => {
+export function MyonWrapper() {
   const [playbackRate] = useState(1)
   const [volume, setVolume] = useState(0.25)
   const [isHovered, setIsHovered] = useState(false)

@@ -6,7 +6,7 @@ import useSound from "use-sound"
 import { Slider } from "../Slider"
 import { Scene as Miku } from "./Miku"
 
-export const MikuWrapper = () => {
+export function MikuWrapper() {
   const [playbackRate] = useState(1)
   const [volume, setVolume] = useState(0.25)
   const [isHovered, setIsHovered] = useState(false)

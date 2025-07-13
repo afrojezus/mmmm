@@ -13,7 +13,7 @@ type MikuCubeProps = Parameters<typeof motion.mesh>[0] & {
   shaderProps?: Parameters<typeof motion.meshStandardMaterial>[0]
 }
 
-export const MikuCube = (props: MikuCubeProps) => {
+export function MikuCube(props: MikuCubeProps) {
   const { sphere, geometryProps, shaderProps, ...rest } = props
   const ref = useRef<MeshProps>(null)
   const materialRef = useRef(null)

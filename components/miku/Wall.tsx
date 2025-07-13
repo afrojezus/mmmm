@@ -15,7 +15,7 @@ type WallProps = Parameters<typeof motion.mesh>[0] & {
   shaderProps?: Parameters<typeof motion.meshStandardMaterial>[0]
 }
 
-export const Wall = (props: WallProps) => {
+export function Wall(props: WallProps) {
   const { geometryProps, shaderProps, ...rest } = props
   const ref = useRef<MeshProps>(null)
   const materialRef = useRef(null)

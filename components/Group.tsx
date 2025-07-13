@@ -6,12 +6,12 @@ type GroupProps = {
   gap?: number
 } & React.HTMLAttributes<HTMLDivElement>
 
-export const Group = ({
+export function Group({
   position = "left",
   gap = 10,
   children,
   ...props
-}: GroupProps) => {
+}: GroupProps) {
   return (
     <div
       className={clsx(styles.group, styles[position])}

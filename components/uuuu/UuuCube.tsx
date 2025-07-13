@@ -2,11 +2,6 @@
 
 import txtStyles from "@/styles/text.module.scss"
 import { Canvas, type MeshProps, useLoader } from "@react-three/fiber"
-import {
-  Bloom,
-  DepthOfField,
-  EffectComposer,
-} from "@react-three/postprocessing"
 import { motion } from "framer-motion-3d"
 import { Suspense, useEffect, useRef, useState } from "react"
 import {
@@ -37,7 +32,7 @@ type UuuSceneProps = Common & {}
 
 const uuuus = ["uuuu", "uuuu2"] as const
 
-const UuuCube = (props: UuuCubeProps) => {
+function UuuCube(props: UuuCubeProps) {
   const {
     isHovered,
     sphere,
@@ -78,7 +73,7 @@ const UuuCube = (props: UuuCubeProps) => {
   )
 }
 
-const UuuPlane = (props: UuuCubeProps) => {
+function UuuPlane(props: UuuCubeProps) {
   const { isHovered, sphere, geometryProps, shaderProps, ...meshProps } = props
   const ref = useRef<MeshProps>(null)
   const materialRef = useRef<MeshStandardMaterial>(null)
@@ -102,7 +97,7 @@ const UuuPlane = (props: UuuCubeProps) => {
   )
 }
 
-const UTitle = (props: { frame: number }) => {
+function UTitle(props: { frame: number }) {
   const { frame } = props
   if (frame >= 8 && frame <= 13) {
     return (
@@ -122,7 +117,7 @@ const UTitle = (props: { frame: number }) => {
   return null
 }
 
-const UuuScene = (props: UuuSceneProps) => {
+function UuuScene(props: UuuSceneProps) {
   const { isHovered } = props
   const [frame, setFrame] = useState(0)
   const intervalRef = useRef<NodeJS.Timeout>()

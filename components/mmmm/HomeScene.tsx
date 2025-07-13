@@ -15,7 +15,7 @@ type MmmmProps = Parameters<typeof motion.mesh>[0] & {
   src?: string
 }
 
-const Mmmm = (props: MmmmProps) => {
+function Mmmm(props: MmmmProps) {
   const { geometryProps, shaderProps, src, ...rest } = props
   const ref = useRef<MeshProps>(null)
   const materialRef = useRef(null)
@@ -36,9 +36,7 @@ const Mmmm = (props: MmmmProps) => {
   )
 }
 
-const HomeScene = () => {
-  const mouse = useRef<[number, number]>([0, 0])
-  const mounted = useRef(false)
+function HomeScene() {
   const [frame, setFrame] = useState(-1)
   const intervalRef = useRef<NodeJS.Timeout>()
 

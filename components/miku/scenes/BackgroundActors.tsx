@@ -23,7 +23,7 @@ const radialDistances = new Array(100).fill(0).map((_, i) => ({
   top: new Vector3(0, 10, i * 10),
 }))
 
-const InstanciatedRadial = (props: Parameters<typeof motion.group>[0]) => {
+function InstanciatedRadial(props: Parameters<typeof motion.group>[0]) {
   const topLeftMesh = useRef<InstancedMesh>(null)
   const topMesh = useRef<InstancedMesh>(null)
   const topRightMesh = useRef<InstancedMesh>(null)
@@ -190,7 +190,7 @@ const InstanciatedRadial = (props: Parameters<typeof motion.group>[0]) => {
   )
 }
 
-export const BackgroundActors = ({ frame }: { frame: number }) => {
+export function BackgroundActors({ frame }: { frame: number }) {
   const onFrame = frame > 0 && frame < 265
   const onSecondFrame = frame > 265
   return (

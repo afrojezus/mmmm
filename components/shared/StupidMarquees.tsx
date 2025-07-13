@@ -15,7 +15,7 @@ type StupidMarqueesProps = {
   miku?: boolean
 }
 
-const StupidMarquees = (props: StupidMarqueesProps) => {
+function StupidMarquees(props: StupidMarqueesProps) {
   const {
     visible,
     alternative,

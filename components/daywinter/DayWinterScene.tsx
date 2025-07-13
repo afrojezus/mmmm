@@ -32,16 +32,11 @@ type MmmCubeProps = {
   spin?: boolean
 } & Omit<MeshProps, "ref">
 
-type SnowProps = {
-  mouse: React.RefObject<[number, number]>
-}
-
 const SNOW_COUNT = 10000
 const MAX_RANGE = 2000
 const MIN_RANGE = MAX_RANGE / 2
 
-const Snow = (props: SnowProps) => {
-  const { mouse } = props
+function Snow() {
   const mesh = useRef<InstancedMesh>(null)
   const dummy = useMemo(() => new Object3D(), [])
   const particles = useMemo(() => {
@@ -66,7 +61,7 @@ const Snow = (props: SnowProps) => {
     }
     return temp
   }, [])
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     const m = mesh.current
     if (m) {
       particles.forEach((particle, i) => {
@@ -120,7 +115,7 @@ const Snow = (props: SnowProps) => {
   )
 }
 
-const Ground = () => {
+function Ground() {
   const mesh = useRef<Mesh>(null)
   const obj = useGLTF("/3d/ground/scene.gltf", false, true)
 
@@ -150,7 +145,7 @@ const Ground = () => {
   )
 }
 
-const MmmCube = (props: MmmCubeProps) => {
+function MmmCube(props: MmmCubeProps) {
   const { type = "mmmm", spin, ...meshProps } = props
   const mesh = useRef<Mesh>(null)
   const texture = useLoader(TextureLoader, `/${type}.webp`)
@@ -202,13 +197,13 @@ const DEFAULT_CAMERA_POSITION = {
   z: 400,
 }
 
-const CameraController = (props: {
+function CameraController(props: {
   mouse: React.RefObject<[number, number]>
-}) => {
+}) {
   const { mouse } = props
-  const { scene, camera } = useThree()
+  const { camera } = useThree()
 
-  useFrame((state, delta) => {
+  useFrame(() => {
     const c = camera
     if (c) {
       const [x, y] = mouse.current || [0, 0]
@@ -227,7 +222,7 @@ const CameraController = (props: {
   return null
 }
 
-export const DayWinterScene = () => {
+export function DayWinterScene() {
   const mouse = useRef<[number, number]>([0, 0])
   const mounted = useRef(false)
   const onMouseMove = useCallback(
@@ -312,7 +307,7 @@ export const DayWinterScene = () => {
               delay: 2,
             }}
           />
-          <Snow mouse={mouse} />
+          <Snow />
           <group dispose={null}>
             <Ground />
             <MmmCube position={[-40, -90, 300]} rotation={[0, 0.7, 0]} />
