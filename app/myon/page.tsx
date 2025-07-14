@@ -8,11 +8,10 @@ const MyonWrapper = dynamic(
   },
 )
 
-const Page = () => {
+export default function Page() {
   return (
     <WebGlWrapper>
       <MyonWrapper />
     </WebGlWrapper>
   )
 }
-export default Page

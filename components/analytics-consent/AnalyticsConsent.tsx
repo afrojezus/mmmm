@@ -3,7 +3,7 @@
 import styles from "@/styles/analytics.module.scss"
 import { useRef, useState } from "react"
 
-export const AnalyticsConsent = () => {
+export function AnalyticsConsent() {
   const [hasChecked, setHasChecked] = useState<boolean | null>(() => {
     if (typeof window === "undefined") {
       return null

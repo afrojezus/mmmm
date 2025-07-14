@@ -45,10 +45,16 @@ const ROUTES = [
     label: "miku",
     src: "/miku.png",
   },
+  {
+    href: "/summer",
+    label: "summer",
+    src: "/mmmm.webp",
+    season: "summer",
+  },
 ]
 
-const Links = (activeRoute: string, currentSeason: string) =>
-  ROUTES.map(({ href, label, src, season }) =>
+function renderLinks(activeRoute: string, currentSeason: string) {
+  return ROUTES.map(({ href, label, src, season }) =>
     season && season === currentSeason ? null : (
       <Link
         key={href}
@@ -60,14 +66,15 @@ const Links = (activeRoute: string, currentSeason: string) =>
       </Link>
     ),
   ).filter(Boolean)
+}
 
-export const RootHeader = () => {
+export function RootHeader() {
   const season = getSeason()
   return (
     <Header>
       {(activeRoute) => (
         <>
-          <Group>{Links(activeRoute, season)}</Group>
+          <Group>{renderLinks(activeRoute, season)}</Group>
         </>
       )}
     </Header>

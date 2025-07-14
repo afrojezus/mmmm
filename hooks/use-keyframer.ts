@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 
-export const useKeyframer = (active: boolean, microDelay = 95) => {
+export function useKeyframer(active: boolean, microDelay = 95) {
   const [frame, setFrame] = useState(-1)
   const lastUpdateTimeRef = useRef<number | null>(null)
   const animationFrameIdRef = useRef<number | null>(null)

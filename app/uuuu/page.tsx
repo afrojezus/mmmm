@@ -4,12 +4,10 @@ const UuuCube = dynamic(() => import("@/components/uuuu/UuuCubeWrapper"), {
   ssr: false,
 })
 
-const Uuuu = () => {
+export default function Uuuu() {
   return (
     <WebGlWrapper>
       <UuuCube />
     </WebGlWrapper>
   )
 }
-
-export default Uuuu

@@ -120,6 +120,6 @@ gl_Position = _pos;
 `,
 )
 
-export const ThreejsDefaults = () => {
+export function ThreejsDefaults() {
   return null
 }

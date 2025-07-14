@@ -3,7 +3,7 @@ import { useKeyframer } from "@/hooks/use-keyframer"
 import { Canvas, type MeshProps, useLoader } from "@react-three/fiber"
 import { DepthOfField, EffectComposer } from "@react-three/postprocessing"
 import { motion } from "framer-motion-3d"
-import { Suspense, useEffect, useRef, useState } from "react"
+import { Suspense, useRef } from "react"
 import {
   ACESFilmicToneMapping,
   LinearFilter,
@@ -25,7 +25,7 @@ type MmmCubeProps = CommonProps &
     shaderProps?: Parameters<typeof motion.meshStandardMaterial>[0]
   }
 
-export const MmmCube = (props: MmmCubeProps) => {
+export function MmmCube(props: MmmCubeProps) {
   const { isHovered, sphere, geometryProps, shaderProps, ...rest } = props
   const ref = useRef<MeshProps>(null)
   const materialRef = useRef(null)
@@ -50,9 +50,9 @@ export const MmmCube = (props: MmmCubeProps) => {
   )
 }
 
-const Scene = (
+function Scene(
   props: CommonProps & { mouse: React.RefObject<[number, number]> },
-) => {
+) {
   const { isHovered, mouse } = props
   const frame = useKeyframer(isHovered)
 

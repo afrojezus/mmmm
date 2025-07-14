@@ -12,6 +12,6 @@ const AnalyticsConsent = dynamic(
   },
 )
 
-export const AnalyticsConsentClientWrapper = () => {
+export function AnalyticsConsentClientWrapper() {
   return <AnalyticsConsent />
 }

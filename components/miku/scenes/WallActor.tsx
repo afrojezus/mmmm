@@ -5,7 +5,7 @@ import { Suspense } from "react"
 import { Wall } from "../Wall"
 import { BackgroundActors } from "./BackgroundActors"
 
-export const WallActor = ({ frame }: { frame: number }) => {
+export function WallActor({ frame }: { frame: number }) {
   const boomFrame = frame >= 0 && frame < 1
   const litFrame = frame >= 12
   const zoomOutFrame = frame >= 265

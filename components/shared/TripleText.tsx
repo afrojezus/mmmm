@@ -3,14 +3,14 @@ import styles from "@/styles/triple.module.scss"
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
 
-export const TripleText = ({
+export function TripleText({
   string,
   textProps,
   ...props
 }: {
   string: string
   textProps: Parameters<typeof motion.h1>[0]
-} & React.HTMLAttributes<HTMLDivElement>) => {
+} & React.HTMLAttributes<HTMLDivElement>) {
   const [flip, setFlip] = useState(0)
   useEffect(() => {
     const interval = setInterval(() => {

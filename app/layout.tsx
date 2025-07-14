@@ -10,7 +10,7 @@ type RootLayoutProps = {
   children: React.ReactNode
 }
 
-const RootLayout = (props: RootLayoutProps) => {
+export default function RootLayout(props: RootLayoutProps) {
   const { children } = props
 
   return (
@@ -101,5 +101,3 @@ xl;;;,,,:ccc::lldOo;;cllcccccclkOOOOkkkOOO000KXNNWWWWWWWNKkolllllc:;;;;;;,;;;;;;
     </html>
   )
 }
-
-export default RootLayout

@@ -6,7 +6,7 @@ type HeaderProps = {
   children: (activeRoute: string) => JSX.Element
 } & Omit<React.HTMLAttributes<HTMLDivElement>, "children">
 
-export const Header = ({ children, ...props }: HeaderProps) => {
+export function Header({ children, ...props }: HeaderProps) {
   const pathname = usePathname()
   return (
     <>
