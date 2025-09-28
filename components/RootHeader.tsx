@@ -51,6 +51,11 @@ const ROUTES = [
     src: "/mmmm.webp",
     season: "summer",
   },
+  {
+    href: "/mambo",
+    label: "mambo",
+    src: "/mambo.webp",
+  },
 ]
 
 function renderLinks(activeRoute: string, currentSeason: string) {

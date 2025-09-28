@@ -10,10 +10,14 @@
       "recommended": true,
       "correctness": {
         "useExhaustiveDependencies": "error",
-        "useHookAtTopLevel": "error"
+        "useHookAtTopLevel": "error",
+        "noChildrenProp": "off"
       },
       "performance": {
         "all": true
+      },
+      "style": {
+        "useNumberNamespace": "off"
       }
     },
     "ignore": ["node_modules/**/*", ".git/**/*", ".next/**/*", "next.config.js"]
