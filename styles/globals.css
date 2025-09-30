@@ -1,7 +1,7 @@
-@import url("https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css");
-
 :root {
-  --header-height: 29px;
+  font-family: "Archivo", sans-serif;
+  font-optical-sizing: auto;
+  --header-height: 16px;
   --max-width: 1100px;
   --border-radius: 12px;
   --font-mono:
@@ -22,12 +22,35 @@
   );
 
   accent-color: rgba(225, 0, 255, 1);
+
+  --neutral-900: #1a1a1a;
+  --neutral-800: #262626;
+  --neutral-700: #333333;
+  --neutral-600: #404040;
+  --neutral-500: #4d4d4d;
+  --neutral-400: #595959;
+  --neutral-300: #666666;
+  --neutral-200: #737373;
+  --neutral-100: #808080;
+  --neutral-50: #8c8c8c;
+
+  --accent-900: #9e0059;
+  --accent-800: #b3006e;
+  --accent-700: #c60081;
+  --accent-600: #db008f;
+  --accent-500: #ed009e;
+  --accent-400: #ff1ab3;
+  --accent-300: #ff33c6;
+  --accent-200: #ff4dd9;
+  --accent-100: #ff66eb;
+  --accent-50: #ff7bff;
 }
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  min-width: 0;
 }
 
 html {
@@ -36,17 +59,13 @@ html {
 
 html,
 body {
-  font-family: Galmuri9, sans-serif;
   font-size: 10px;
   line-height: 20px;
-  max-width: 100vw;
+  max-width: 100dvw;
   overflow-x: hidden;
 }
 
 body {
-  -webkit-font-smoothing: none;
-  text-rendering: optimizeLegibility;
-  image-rendering: pixelated;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -58,9 +77,9 @@ body {
   display: flex;
   flex-direction: column;
   max-width: inherit;
-  min-height: 100vh;
-  min-width: 100vw;
-  max-height: 100vh;
+  min-height: 100dvh;
+  min-width: 100dvw;
+  max-height: 100dvh;
 }
 
 main {
@@ -70,6 +89,7 @@ main {
   align-items: center;
   justify-content: center;
   flex: 1;
+  overflow: hidden;
 }
 
 a {
@@ -79,15 +99,16 @@ a {
 
 .scanlines {
   position: fixed;
-  width: 100vw;
+  width: 100dvw;
   top: 0;
-  height: 100vh;
+  height: 100dvh;
   pointer-events: none;
   -webkit-user-select: none;
   user-select: none;
   background: radial-gradient(circle, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
   background-size: 1px 3px !important;
   z-index: 1000;
+  mix-blend-mode: overlay;
 }
 
 h1,
@@ -125,4 +146,29 @@ svg {
   border: 0;
   vertical-align: middle;
   line-height: 20px;
+}
+
+.loading-title {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 8em;
+  color: white;
+  font-weight: bold;
+  font-variation-settings: "wdth" 125;
+  font-optical-sizing: auto;
+  letter-spacing: -0.08em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-variation-settings: "wght" 700, "wdth" 125;
+  font-optical-sizing: auto;
+  letter-spacing: -0.08em;
 }

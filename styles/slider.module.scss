@@ -1,0 +1,55 @@
+.slider {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    bottom: 0;
+    left: 0;
+    padding: 0.5em;
+    z-index: 2;
+    position: fixed;
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    font-variation-settings: "wdth" 125;
+    letter-spacing: -0.05em;
+    background: white;
+    color: black;
+    z-index: 999;
+    &::after {
+        content: "";
+        position: absolute;
+        right: -73px;
+        bottom: -30px;
+        width: 100px;
+        height: 100%;
+        background: white;
+        transform: rotate(45deg);
+        z-index: -1;
+    }
+    span {
+        font-size: 1.5em;
+    }
+    input[type="range"] {
+        width: 10em;
+        height: 0.5em;
+        border-radius: 0.25em;
+        outline: none;
+        cursor: pointer;
+        &::-webkit-slider-thumb {
+            width: 1em;
+            height: 1em;
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            &:hover {
+                background: #eee;
+            }
+            &:active {
+                background: #ddd;
+            }
+        }
+    }
+}

@@ -3,7 +3,6 @@
 import { Canvas } from "@react-three/fiber"
 import { Render } from "./scenes/Render"
 import { ACESFilmicToneMapping } from "three"
-import { frame } from "motion"
 
 export type CommonProps = {
   isHovered: boolean
@@ -22,7 +21,7 @@ export function Mambo(
         toneMapping: ACESFilmicToneMapping,
         toneMappingExposure: 1,
       }}
-      dpr={window.devicePixelRatio / 2}
+      dpr={window.devicePixelRatio}
       camera={{
         fov: 75,
         near: 0.1,
