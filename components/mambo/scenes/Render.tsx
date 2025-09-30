@@ -6,12 +6,6 @@ import MainActor from "./MainActor"
 import StarsActor from "./StarsActor"
 import TextActor from "./TextActor"
 import BackgroundActor from "./BackgroundActor"
-import {
-  Bloom,
-  ChromaticAberration,
-  EffectComposer,
-  Vignette,
-} from "@react-three/postprocessing"
 import { Vector2 } from "three"
 
 export type RenderActorProps = {
@@ -97,20 +91,6 @@ export function Render({ isHovered }: CommonProps) {
           color="#ffffff"
         />
       </group>
-      <EffectComposer multisampling={0}>
-        <Bloom
-          luminanceThreshold={0.1}
-          luminanceSmoothing={0.1}
-          opacity={1}
-          width={200}
-        />
-        <ChromaticAberration
-          offset={new Vector2(0.001, 0.0001)}
-          radialModulation={false}
-          modulationOffset={0.1}
-        />
-        <Vignette eskil={false} offset={0.2} darkness={0.8} />
-      </EffectComposer>
     </>
   )
 }

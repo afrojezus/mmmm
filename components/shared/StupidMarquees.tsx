@@ -192,6 +192,8 @@ function StupidMarquees(props: StupidMarqueesProps) {
                 justifyContent: "center",
                 textAlign: "center",
                 gap: "1em",
+                fontVariationSettings: "'wdth' 125",
+                letterSpacing: "-0.05em",
               }}
             >
               <div

@@ -66,7 +66,7 @@ function renderLinks(activeRoute: string, currentSeason: string) {
         className={activeRoute === href ? styles.active : undefined}
         href={href}
       >
-        <Image src={src} alt={label} width={28} height={28} />
+        <Image src={src} alt={label} width={16} height={16} />
         <span>{label}</span>
       </Link>
     ),
@@ -79,6 +79,7 @@ export function RootHeader() {
     <Header>
       {(activeRoute) => (
         <>
+          {activeRoute !== "/" && <h1>mmmm.moe</h1>}
           <Group>{renderLinks(activeRoute, season)}</Group>
         </>
       )}

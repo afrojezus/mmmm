@@ -2,7 +2,7 @@
 
 import { WebGlWrapper } from "@/components/WebGlWrapper"
 import { getSeason } from "@/utils/season"
-import { motion } from "framer-motion"
+import { motion } from "motion/react"
 import dynamic from "next/dynamic"
 
 const HomeScene = dynamic(() => import("@/components/mmmm/HomeScene"), {

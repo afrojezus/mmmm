@@ -1,3 +1,6 @@
+import clsx from "clsx"
+import styles from "@/styles/slider.module.scss"
+
 type SliderProps = {
   onChange: (value: number) => void
   value: number
@@ -20,7 +23,7 @@ export function Slider({
   style,
 }: SliderProps) {
   return (
-    <div className={`slider ${className}`}>
+    <div className={clsx(styles.slider)}>
       <span>volume</span>
       <input
         type="range"

@@ -3,6 +3,7 @@ import { ConsoleEffect } from "@/components/ConsoleEffect"
 import { RootHeader } from "@/components/RootHeader"
 import { ThreejsDefaults } from "@/components/ThreejsDefaults"
 import { AnalyticsConsentClientWrapper } from "@/components/analytics-consent/AnalyticsConsentEntry"
+import { AnalyticsConsentProvider } from "@/components/analytics-consent/AnalyticsConsentProvider"
 import "@/styles/globals.css"
 import { Suspense } from "react"
 
@@ -30,12 +31,23 @@ export default function RootLayout(props: RootLayoutProps) {
         <meta property="og:image:width" content="250" />
         <meta property="og:image:height" content="250" />
         <meta name="theme-color" content="#ff7be9" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap"
+          rel="stylesheet"
+        />
       </head>
       <body>
-        <script
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: This is crucial
-          dangerouslySetInnerHTML={{
-            __html: `<!---
+        <AnalyticsConsentProvider>
+          <script
+            // biome-ignore lint/security/noDangerouslySetInnerHtml: This is crucial
+            dangerouslySetInnerHTML={{
+              __html: `<!---
 XXXXXXXXXXKO0XXXXXXKxOXXXXKKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXOk0XXXXXXX0k0
 XXXXXXXXXX0O0XXXXXXKkOXXXX0OKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXKkkKXXXXXXXOk
 XXXXXXXXXX0OKXXXXXXKkkXXXX0O0XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX0k0XXXXXXXKk
@@ -86,17 +98,18 @@ l:cokOdclxkddO0Odclloxk0KXNNNNNNNNNNNNNNNNNNNNNNNNNNWNNWWNNWWNWWNXKOxolllllc;;:l
 dl:,,lxdlcoxddk0kolollllodxkO0KXNNNNNNNNNNNNWWNNNWWWWWWWWWWWWNX0kdollllc::;,;clc::;,:::cxO0OxxkOOxoc
 l::;,';colccoooxOxlcllllllllllokO000KKXXNNNNWWWWWWWWWWWWWWNKOxollllcc:;;;;;;::;;;;;;;:okOkxdxxdoc;;;
 xl;;;,,,:ccc::lldOo;;cllcccccclkOOOOkkkOOO000KXNNWWWWWWWNKkolllllc:;;;;;;,;;;;;;;,;,;dOOdldxoc;;;;;; --->`,
-          }}
-        />
-        <RootHeader />
-        {children}
-        <ConsoleEffect />
-        <ClientAnalytics />
-        <ThreejsDefaults />
-        <Suspense fallback={null}>
-          <AnalyticsConsentClientWrapper />
-        </Suspense>
-        <div className="scanlines" />
+            }}
+          />
+          <RootHeader />
+          {children}
+          <ConsoleEffect />
+          <ClientAnalytics />
+          <ThreejsDefaults />
+          <Suspense fallback={null}>
+            <AnalyticsConsentClientWrapper />
+          </Suspense>
+          <div className="scanlines" />
+        </AnalyticsConsentProvider>
       </body>
     </html>
   )
