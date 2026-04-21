@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "typecheck": "tsc --noEmit"
@@ -14,7 +14,6 @@
     "@react-three/drei": "10.0.7",
     "@react-three/fiber": "8.15.19",
     "@react-three/postprocessing": "2.16.2",
-    "@vercel/analytics": "1.5.0",
     "clsx": "2.1.0",
     "framer-motion": "11.0.14",
     "framer-motion-3d": "11.0.14",
@@ -23,22 +22,23 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-fast-marquee": "1.6.4",
+    "react-router-dom": "7.14.1",
     "react-use-measure": "2.1.1",
     "simplex-noise": "4.0.3",
     "three": "0.162.0",
     "use-sound": "4.0.1"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@types/node": "20.11.28",
     "@types/react": "18.2.66",
     "@types/react-dom": "18.2.22",
     "@types/three": "0.162.0",
-    "@biomejs/biome": "1.9.4",
-    "sass": "1.72.0",
+    "@vitejs/plugin-react": "6.0.1",
     "caniuse-lite": "1.0.30001715",
-    "next": "14.2.33",
-    "typescript": "5.4.2"
+    "sass": "1.72.0",
+    "typescript": "5.4.2",
+    "vite": "8.0.9"
   },
-  "trustedDependencies": ["@biomejs/biome"],
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+  "trustedDependencies": ["@biomejs/biome"]
 }

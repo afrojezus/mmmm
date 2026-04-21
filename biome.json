@@ -2,7 +2,14 @@
   "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
   "organizeImports": {
     "enabled": true,
-    "ignore": ["node_modules/**/*", ".git/**/*", ".next/**/*", "next.config.js"]
+    "ignore": [
+      "node_modules/**/*",
+      ".git/**/*",
+      ".next/**/*",
+      "next.config.js",
+      "dist/**/*",
+      "public/**/*"
+    ]
   },
   "linter": {
     "enabled": true,
@@ -20,14 +27,27 @@
         "useNumberNamespace": "off"
       }
     },
-    "ignore": ["node_modules/**/*", ".git/**/*", ".next/**/*", "next.config.js"]
+    "ignore": [
+      "node_modules/**/*",
+      ".git/**/*",
+      ".next/**/*",
+      "next.config.js",
+      "dist/**/*",
+      "public/**/*"
+    ]
   },
   "formatter": {
     "enabled": true,
     "indentWidth": 2,
     "indentStyle": "space",
     "lineWidth": 80,
-    "ignore": ["node_modules/**/*", ".git/**/*", ".next/**/*", "next.config.js"]
+    "ignore": [
+      "node_modules/**/*",
+      ".git/**/*",
+      ".next/**/*",
+      "next.config.js",
+      "dist/**/*"
+    ]
   },
   "javascript": {
     "formatter": {
