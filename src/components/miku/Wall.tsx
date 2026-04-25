@@ -1,5 +1,3 @@
-"use client"
-
 import { type MeshProps, useLoader } from "@react-three/fiber"
 import { motion } from "framer-motion-3d"
 import { useRef } from "react"
@@ -31,16 +29,14 @@ export function Wall(props: WallProps) {
   texture.needsUpdate = true
 
   return (
-    <>
-      <motion.mesh ref={ref} receiveShadow={true} {...rest}>
-        <motion.planeGeometry args={[1000, 1000]} {...geometryProps} />
-        <motion.meshStandardMaterial
-          ref={materialRef}
-          map={texture}
-          attach="material"
-          {...shaderProps}
-        />
-      </motion.mesh>
-    </>
+    <motion.mesh ref={ref} receiveShadow={true} {...rest}>
+      <motion.planeGeometry args={[1000, 1000]} {...geometryProps} />
+      <motion.meshStandardMaterial
+        ref={materialRef}
+        map={texture}
+        attach="material"
+        {...shaderProps}
+      />
+    </motion.mesh>
   )
 }

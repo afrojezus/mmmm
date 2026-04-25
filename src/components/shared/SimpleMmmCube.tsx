@@ -1,8 +1,7 @@
-"use client"
 import { Canvas, type MeshProps, useFrame, useLoader } from "@react-three/fiber"
 import { Suspense, useEffect, useRef, useState } from "react"
-import { TextureLoader } from "three"
 import type * as Three from "three"
+import { TextureLoader } from "three"
 
 type SimpleMmmCubeProps = {
   x?: number
@@ -11,7 +10,7 @@ type SimpleMmmCubeProps = {
 export function SimpleMmmCube({ x, ...props }: SimpleMmmCubeProps) {
   const ref = useRef<Three.Mesh>(null)
   const texture = useLoader(TextureLoader, "/mmmm.webp")
-  useFrame((state, delta) => {
+  useFrame((_state, _delta) => {
     if (ref.current) {
       ref.current.rotation.y += 0.01
     }

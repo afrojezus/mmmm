@@ -1,6 +1,6 @@
-import styles from "@/styles/slider.module.scss"
 import clsx from "clsx"
 import type { CSSProperties } from "react"
+import styles from "@/styles/slider.module.scss"
 
 type SliderProps = {
   onChange: (value: number) => void
@@ -24,7 +24,7 @@ export function Slider({
   style,
 }: SliderProps) {
   return (
-    <div className={clsx(styles.slider)}>
+    <div className={clsx(styles.slider, className)}>
       <span>volume</span>
       <input
         type="range"

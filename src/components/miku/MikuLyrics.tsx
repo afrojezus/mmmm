@@ -1,4 +1,3 @@
-"use client"
 import { useState } from "react"
 
 const a: string[] = [
@@ -37,11 +36,7 @@ function getIndex(frame: number) {
   return 0
 }
 
-export function MikuLyrics({
-  frame,
-}: {
-  frame: number
-}) {
+export function MikuLyrics({ frame }: { frame: number }) {
   const [lyrics] = useState<string[]>(a)
   const lyricsIndex = getIndex(frame)
 

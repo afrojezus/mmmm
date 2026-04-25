@@ -1,5 +1,3 @@
-"use client"
-
 import { motion } from "framer-motion-3d"
 import { Suspense } from "react"
 import { Wall } from "../Wall"

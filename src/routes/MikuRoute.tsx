@@ -1,5 +1,5 @@
+import { lazy, Suspense } from "react"
 import { WebGlWrapper } from "@/components/WebGlWrapper"
-import { Suspense, lazy } from "react"
 
 const MikuScene = lazy(() =>
   import("@/components/miku/MikuWrapper").then((mod) => ({

@@ -1,7 +1,7 @@
+import { lazy, Suspense } from "react"
+import { Route, Routes } from "react-router-dom"
 import { ConsoleEffect } from "@/components/ConsoleEffect"
 import { RootHeader } from "@/components/RootHeader"
-import { Suspense, lazy } from "react"
-import { Route, Routes } from "react-router-dom"
 
 const ThreejsDefaults = lazy(() => import("@/components/ThreejsDefaults"))
 const HomeRoute = lazy(() => import("@/routes/HomeRoute"))

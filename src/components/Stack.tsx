@@ -1,6 +1,6 @@
-import styles from "@/styles/stack.module.scss"
 import clsx from "clsx"
 import type { HTMLAttributes } from "react"
+import styles from "@/styles/stack.module.scss"
 
 type StackProps = {
   position?: "left" | "center" | "right" | "apart"

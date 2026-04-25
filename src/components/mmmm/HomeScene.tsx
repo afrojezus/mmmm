@@ -1,16 +1,14 @@
-"use client"
-
-import classes from "@/styles/3d.module.css"
 import { Center, Stage } from "@react-three/drei"
 import { Canvas, useFrame, useLoader } from "@react-three/fiber"
 import clsx from "clsx"
 import { animate } from "motion"
 import { motion } from "motion/react"
-import { Suspense, useRef, useState } from "react"
+import { Suspense, useRef } from "react"
 import { useNavigate } from "react-router-dom"
-import { TextureLoader } from "three"
 import * as THREE from "three"
+import { TextureLoader } from "three"
 import useSound from "use-sound"
+import classes from "@/styles/3d.module.css"
 
 type MmmmProps = {
   src?: string
@@ -32,12 +30,12 @@ function Mmmm(props: MmmmProps) {
   texture.minFilter = THREE.NearestFilter
   texture.generateMipmaps = false
 
-  useFrame((state, delta) => {
+  useFrame((_state, _delta) => {
     if (!ref.current) return
     animate(
       ref.current.rotation,
       {
-        y: ref.current.rotation.y + 1,
+        y: ref.current.rotation.y + 2,
       },
       {
         duration: 1,
@@ -48,58 +46,47 @@ function Mmmm(props: MmmmProps) {
   })
 
   return (
-    <>
-      <mesh
-        ref={ref}
-        castShadow={true}
-        receiveShadow={true}
-        onClick={(e) => {
-          e.stopPropagation()
-          play()
-          animate(
-            e.eventObject.rotation,
-            { y: 0 },
-            { duration: 0.03, ease: "easeInOut" },
-          )
-          animate(
-            e.eventObject.position,
-            { z: 5, y: 0, x: 0 },
-            {
-              duration: 0.03,
-              ease: "easeInOut",
-            },
-          ).finished
-          if (onClick) onClick()
-        }}
-        position={position}
-        onPointerEnter={(e) => {
-          e.stopPropagation()
-          document.body.style.cursor = "pointer"
-          animate(
-            e.eventObject.position,
-            { z: 0.5 },
-            { duration: 0.3, ease: "easeInOut" },
-          )
-        }}
-        onPointerLeave={(e) => {
-          e.stopPropagation()
-          document.body.style.cursor = "default"
-          animate(
-            e.eventObject.position,
-            { z: 0 },
-            { duration: 0.3, ease: "easeInOut" },
-          )
-        }}
-        {...rest}
-      >
-        <boxGeometry args={[1, 1, 1]} />
-        <meshStandardMaterial
-          ref={materialRef}
-          map={texture}
-          attach="material"
-        />
-      </mesh>
-    </>
+    <mesh
+      ref={ref}
+      castShadow={true}
+      receiveShadow={true}
+      onClick={async (e) => {
+        e.stopPropagation()
+        play()
+        await animate(
+          e.eventObject.position,
+          { z: 10, y: 3, x: 1 },
+          {
+            duration: 0.1,
+            ease: "easeInOut",
+          },
+        ).finished
+        if (onClick) onClick()
+      }}
+      position={position}
+      onPointerEnter={(e) => {
+        e.stopPropagation()
+        document.body.style.cursor = "pointer"
+        animate(
+          e.eventObject.position,
+          { z: 0.5 },
+          { duration: 0.3, ease: "easeInOut" },
+        )
+      }}
+      onPointerLeave={(e) => {
+        e.stopPropagation()
+        document.body.style.cursor = "default"
+        animate(
+          e.eventObject.position,
+          { z: 0 },
+          { duration: 0.3, ease: "easeInOut" },
+        )
+      }}
+      {...rest}
+    >
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial ref={materialRef} map={texture} attach="material" />
+    </mesh>
   )
 }
 
@@ -112,7 +99,7 @@ function HomeScene() {
         background: "#000000",
       }}
       animate={{
-        background: ["#ff0000", "#dedede"],
+        background: ["#ff0000", "#171717"],
       }}
       transition={{
         duration: 2,
@@ -122,13 +109,14 @@ function HomeScene() {
       }}
     >
       <motion.h1
-        className={clsx(classes["corner-text"], classes.black)}
+        className={clsx(classes["corner-text"])}
         initial={{
           opacity: 0,
         }}
         animate={{
           opacity: 0.1,
           y: 10,
+          color: "rgba(255,255,255,1)",
         }}
         transition={{
           duration: 1,
@@ -156,7 +144,7 @@ function HomeScene() {
           animate={{
             opacity: 1,
             y: -400,
-            webkitTextStrokeColor: "rgba(0,0,0,.1)",
+            webkitTextStrokeColor: "rgba(255,255,255,.1)",
           }}
           transition={{ duration: 1, ease: "easeInOut", delay: 1.15 }}
         >
@@ -172,7 +160,7 @@ function HomeScene() {
           animate={{
             opacity: 1,
             y: -300,
-            webkitTextStrokeColor: "rgba(0,0,0,.25)",
+            webkitTextStrokeColor: "rgba(255,255,255,.25)",
           }}
           transition={{ duration: 1, ease: "easeInOut", delay: 1.1 }}
         >
@@ -188,7 +176,7 @@ function HomeScene() {
           animate={{
             opacity: 1,
             y: -200,
-            webkitTextStrokeColor: "rgba(0,0,0,.5)",
+            webkitTextStrokeColor: "rgba(255,255,255,.5)",
           }}
           transition={{ duration: 1, ease: "easeInOut", delay: 1.05 }}
         >
@@ -204,7 +192,7 @@ function HomeScene() {
           animate={{
             opacity: 1,
             y: -100,
-            webkitTextStrokeColor: "rgba(0,0,0,1)",
+            webkitTextStrokeColor: "rgba(255,255,255,1)",
           }}
           transition={{ duration: 1, ease: "easeInOut", delay: 1 }}
         >
@@ -213,7 +201,7 @@ function HomeScene() {
         <motion.h1
           className={clsx(classes["extreme-font-title"])}
           initial={{ color: "#fff" }}
-          animate={{ color: ["#fff", "#000"] }}
+          animate={{ color: ["#fff", "#fff"] }}
           transition={{
             duration: 1,
             ease: "easeInOut",
@@ -273,7 +261,7 @@ function HomeScene() {
           animate={{
             opacity: 1,
             y: 100,
-            webkitTextStrokeColor: "rgba(0,0,0,1)",
+            webkitTextStrokeColor: "rgba(255,255,255,1)",
           }}
           transition={{ duration: 1, ease: "easeInOut", delay: 1 }}
         >
@@ -289,7 +277,7 @@ function HomeScene() {
           animate={{
             opacity: 1,
             y: 200,
-            webkitTextStrokeColor: "rgba(0,0,0,.5)",
+            webkitTextStrokeColor: "rgba(255,255,255,.5)",
           }}
           transition={{ duration: 1, ease: "easeInOut", delay: 1.05 }}
         >
@@ -305,7 +293,7 @@ function HomeScene() {
           animate={{
             opacity: 1,
             y: 300,
-            webkitTextStrokeColor: "rgba(0,0,0,.25)",
+            webkitTextStrokeColor: "rgba(255,255,255,.25)",
           }}
           transition={{ duration: 1, ease: "easeInOut", delay: 1.1 }}
         >
@@ -321,7 +309,7 @@ function HomeScene() {
           animate={{
             opacity: 1,
             y: 400,
-            webkitTextStrokeColor: "rgba(0,0,0,.1)",
+            webkitTextStrokeColor: "rgba(255,255,255,.1)",
           }}
           transition={{ duration: 1, ease: "easeInOut", delay: 1.15 }}
         >
@@ -336,7 +324,7 @@ function HomeScene() {
             alpha: true,
             logarithmicDepthBuffer: true,
             toneMapping: THREE.ACESFilmicToneMapping,
-            toneMappingExposure: 1,
+            toneMappingExposure: 2,
           }}
           scene={{
             background: null,
@@ -346,10 +334,10 @@ function HomeScene() {
             near: 0.1,
             far: 1000,
           }}
-          shadows
         >
-          <Stage adjustCamera={0.6}>
-            <Center>
+          <directionalLight position={[5, 10, 0]} intensity={6} />
+          <Stage adjustCamera={1} shadows={false}>
+            <Center rotation={[0.3, 0, 0]}>
               <Mmmm
                 src="/mambo.webp"
                 position={[6, 0, 0]}

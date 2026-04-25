@@ -1,7 +1,5 @@
-"use client"
+import { ColorDepth, EffectComposer } from "@react-three/postprocessing"
 import { useClockKeyframer } from "@/hooks/use-clock-keyframer"
-import { useFrame } from "@react-three/fiber"
-import { Vector2 } from "three"
 import type { CommonProps } from "../Mambo"
 import BackgroundActor from "./BackgroundActor"
 import MainActor from "./MainActor"
@@ -91,6 +89,9 @@ export function Render({ isHovered }: CommonProps) {
           color="#ffffff"
         />
       </group>
+      <EffectComposer multisampling={0}>
+        <ColorDepth bits={16} />
+      </EffectComposer>
     </>
   )
 }

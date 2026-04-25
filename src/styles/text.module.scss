@@ -1,12 +1,12 @@
 @font-face {
-    font-family: 'Tekuplus';
-    src: url('/fonts/TekuplusBit-Bold.ttf') format('truetype');
+    font-family: "Tekuplus";
+    src: url("/fonts/TekuplusBit-Bold.ttf") format("truetype");
     font-weight: bold;
 }
 
 @font-face {
-    font-family: 'Tekuplus';
-    src: url('/fonts/TekuplusBit-Regular.ttf') format('truetype');
+    font-family: "Tekuplus";
+    src: url("/fonts/TekuplusBit-Regular.ttf") format("truetype");
     font-weight: 400;
 }
 
@@ -18,7 +18,7 @@
     transform: translateX(-50%);
     font-size: 7em;
     color: #fff;
-    font-weight: bold;
+    font-family: var(--font-retro);
 }
 
 .title {
@@ -29,7 +29,6 @@
     transform: translateX(-50%);
     font-size: 4em;
     color: #fff;
-    font-weight: 500;
-    font-family: Tekuplus, sans-serif;
+    font-family: var(--font-retro);
     line-height: normal;
 }

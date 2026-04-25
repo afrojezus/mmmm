@@ -1,7 +1,6 @@
-"use client"
-import classes from "@/styles/3d.module.css"
 import { useCallback, useEffect, useRef, useState } from "react"
 import useSound from "use-sound"
+import classes from "@/styles/3d.module.css"
 import { Slider } from "../Slider"
 import { Mambo } from "./Mambo"
 

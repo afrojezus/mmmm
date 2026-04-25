@@ -1,7 +1,3 @@
-"use client"
-
-import classes from "@/styles/3d.module.css"
-import txtStyles from "@/styles/text.module.scss"
 import { useGLTF } from "@react-three/drei"
 import {
   Canvas,
@@ -26,6 +22,8 @@ import {
   TextureLoader,
   Vector3,
 } from "three"
+import classes from "@/styles/3d.module.css"
+import txtStyles from "@/styles/text.module.scss"
 
 type MmmCubeProps = {
   type?: "mmmm" | "uuuu" | "uuuu2"
@@ -150,7 +148,7 @@ function MmmCube(props: MmmCubeProps) {
   const mesh = useRef<Mesh>(null)
   const texture = useLoader(TextureLoader, `/${type}.webp`)
 
-  useFrame((state, delta) => {
+  useFrame((_state, _delta) => {
     const m = mesh.current
     if (m) {
       if (spin) {
@@ -197,9 +195,7 @@ const DEFAULT_CAMERA_POSITION = {
   z: 400,
 }
 
-function CameraController(props: {
-  mouse: React.RefObject<[number, number]>
-}) {
+function CameraController(props: { mouse: React.RefObject<[number, number]> }) {
   const { mouse } = props
   const { camera } = useThree()
 
@@ -360,7 +356,7 @@ export function DayWinterScene() {
             />
           </group>
           <EffectComposer multisampling={0}>
-            <ColorDepth bits={12} />
+            <ColorDepth bits={16} />
           </EffectComposer>
         </Canvas>
         <motion.h1

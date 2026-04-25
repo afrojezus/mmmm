@@ -1,5 +1,5 @@
+import { lazy, Suspense } from "react"
 import { WebGlWrapper } from "@/components/WebGlWrapper"
-import { Suspense, lazy } from "react"
 
 const FestiveScene = lazy(() =>
   import("@/components/winter/FestiveScene").then((mod) => ({

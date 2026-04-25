@@ -1,5 +1,3 @@
-"use client"
-
 import { useFrame, useLoader } from "@react-three/fiber"
 import { motion } from "framer-motion-3d"
 import { useMemo, useRef } from "react"

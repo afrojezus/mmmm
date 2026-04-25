@@ -1,4 +1,3 @@
-"use client"
 import { useState } from "react"
 
 const a: string[] = [
@@ -49,11 +48,7 @@ function getIndex(frame: number) {
   return 0
 }
 
-function MyonLyrics({
-  frame,
-}: {
-  frame: number
-}) {
+function MyonLyrics({ frame }: { frame: number }) {
   const [lyrics] = useState<string[]>(a)
   const lyricsIndex = getIndex(frame)
 

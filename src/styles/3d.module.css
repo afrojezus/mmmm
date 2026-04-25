@@ -2,10 +2,8 @@
   margin: auto;
   height: 100vh;
   width: 100vw;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: -webkit-crisp-edges;
   image-rendering: pixelated;
-  image-rendering: crisp-edges;
+  filter: saturate(2);
 }
 
 .daywinter {
@@ -26,7 +24,6 @@
 
 .title-container {
   position: absolute;
-  z-index: 2;
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
@@ -43,7 +40,6 @@
 
 .corner-text {
   position: absolute;
-  z-index: 2;
   top: 1em;
   left: 1em;
   font-size: 1.5em;
@@ -104,16 +100,16 @@
 @media (max-width: 768px) {
   .canvas {
     margin: auto;
-    height: 50vh;
+    height: 100dvh;
     width: 100%;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: -webkit-crisp-edges;
     image-rendering: pixelated;
-    image-rendering: crisp-edges;
   }
-  .slider {
-    bottom: unset;
-    top: 1em;
+  .title-container {
+    top: 50%;
+    left: 0dvw;
+    transform: translateY(-50%) scale(0.35) translateX(0dvw);
+    width: 100%;
+    text-align: center;
   }
 }
 

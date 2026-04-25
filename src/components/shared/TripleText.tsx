@@ -1,6 +1,5 @@
-"use client"
-import styles from "@/styles/triple.module.scss"
 import { type HTMLAttributes, type HTMLProps, useEffect, useState } from "react"
+import styles from "@/styles/triple.module.scss"
 
 export function TripleText({
   string,
