@@ -3,37 +3,31 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    bottom: 0;
-    left: 0;
+    bottom: 1em;
+    left: 1em;
     padding: 0.5em;
     z-index: 2;
     position: fixed;
-    color: #fff;
     font-weight: 500;
     text-align: center;
     font-variation-settings: "wdth" 125;
     letter-spacing: -0.05em;
-    background: white;
-    color: black;
+    background: var(--neutral-700);
+    border: 2px solid var(--neutral-600);
+    border-radius: 5px;
+    box-shadow:
+        0 6px 0px var(--neutral-800),
+        0 8px 12px rgba(0, 0, 0, 0.3);
     z-index: 999;
-    &::after {
-        content: "";
-        position: absolute;
-        right: -73px;
-        bottom: -30px;
-        width: 100px;
-        height: 100%;
-        background: white;
-        transform: rotate(45deg);
-        z-index: -1;
-    }
     span {
+        font-family: var(--font-retro);
         font-size: 1.5em;
+        letter-spacing: 0em;
     }
     input[type="range"] {
-        width: 10em;
-        height: 0.5em;
-        border-radius: 0.25em;
+        width: 12.5em;
+        height: 1.5em;
+        border-radius: 1em;
         outline: none;
         cursor: pointer;
         &::-webkit-slider-thumb {

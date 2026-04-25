@@ -1,7 +1,3 @@
-"use client"
-
-import { getMaterial } from "@/utils/three"
-import { Sparkles } from "@react-three/drei"
 import {
   type MeshProps,
   useFrame,
@@ -11,6 +7,7 @@ import {
 import { animate } from "motion"
 import { useRef } from "react"
 import { type Mesh, NearestFilter, TextureLoader } from "three"
+import { getMaterial } from "@/utils/three"
 import type { RenderActorProps } from "./Render"
 
 type MainActorProps = RenderActorProps & Omit<MeshProps, "ref">

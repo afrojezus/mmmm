@@ -1,8 +1,6 @@
-"use client"
-import classes from "@/styles/3d.module.css"
-
 import { useCallback, useEffect, useRef, useState } from "react"
 import useSound from "use-sound"
+import classes from "@/styles/3d.module.css"
 import { Slider } from "../Slider"
 import Mmmcube from "./Mmmcube"
 
@@ -63,6 +61,7 @@ function MmmcubeWrapper() {
         onClick={() =>
           sound ? (isHovered ? onHoverEnd() : onHoverStart()) : undefined
         }
+        onKeyDown={(e) => e.preventDefault()}
         className={classes.canvas}
       >
         <Mmmcube isHovered={isHovered} mouse={mouse} />

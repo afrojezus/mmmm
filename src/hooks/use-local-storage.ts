@@ -1,5 +1,4 @@
-"use client"
-import { useCallback, useEffect, useState, useSyncExternalStore } from "react"
+import { useCallback, useState, useSyncExternalStore } from "react"
 
 function getSnapshot<T>(key: string) {
   return () => {

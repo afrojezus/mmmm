@@ -1,7 +1,7 @@
+import { motion } from "motion/react"
+import { lazy, Suspense } from "react"
 import { WebGlWrapper } from "@/components/WebGlWrapper"
 import { getSeason } from "@/utils/season"
-import { motion } from "motion/react"
-import { Suspense, lazy } from "react"
 
 const HomeScene = lazy(() => import("@/components/mmmm/HomeScene"))
 const FestiveScene = lazy(() =>

@@ -1,7 +1,3 @@
-"use client"
-
-import classes from "@/styles/3d.module.css"
-import txtStyles from "@/styles/text.module.scss"
 import { useGLTF } from "@react-three/drei"
 import {
   type BoxGeometryProps,
@@ -18,14 +14,13 @@ import {
   ACESFilmicToneMapping,
   type Group,
   Mesh,
-  MeshBasicMaterial,
-  MeshStandardMaterial,
   NearestFilter,
   type Object3DEventMap,
   RepeatWrapping,
-  Texture,
   TextureLoader,
 } from "three"
+import classes from "@/styles/3d.module.css"
+import txtStyles from "@/styles/text.module.scss"
 
 type MmmCubeProps<T extends "cube" | "sphere"> = {
   type?: "mmmm" | "uuuu" | "uuuu2"
@@ -195,7 +190,7 @@ export function SummerScene() {
             toneMapping: ACESFilmicToneMapping,
             toneMappingExposure: 1,
           }}
-          dpr={window.devicePixelRatio}
+          dpr={window.devicePixelRatio / 2}
           camera={{
             fov: 45,
             near: 0.1,
@@ -228,7 +223,7 @@ export function SummerScene() {
             animate={{
               color: "#dff4ff",
               // @ts-expect-error
-              density: 0.00004,
+              density: 0.0002,
             }}
             transition={{
               duration: 2,

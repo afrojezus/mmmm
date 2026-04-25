@@ -1,14 +1,14 @@
-"use client"
-import { useKeyframer } from "@/hooks/use-keyframer"
 import { Canvas } from "@react-three/fiber"
 import {
   Bloom,
   ChromaticAberration,
+  ColorDepth,
   EffectComposer,
   Vignette,
 } from "@react-three/postprocessing"
 import { motion } from "framer-motion-3d"
 import { ACESFilmicToneMapping, Vector2 } from "three"
+import { useKeyframer } from "@/hooks/use-keyframer"
 import StupidMarquees from "../shared/StupidMarquees"
 import { MikuLyrics } from "./MikuLyrics"
 import { GroupActor } from "./scenes/GroupActor"
@@ -40,7 +40,7 @@ export function Scene(
           toneMapping: ACESFilmicToneMapping,
           toneMappingExposure: 1,
         }}
-        dpr={window.devicePixelRatio}
+        dpr={window.devicePixelRatio / 2}
         camera={{
           fov: 60,
           near: 0.1,
@@ -83,6 +83,7 @@ export function Scene(
           <MainActor frame={frame} />
         </GroupActor>
         <EffectComposer multisampling={0}>
+          <ColorDepth bits={16} />
           <Bloom
             luminanceThreshold={0.2}
             luminanceSmoothing={0.9}

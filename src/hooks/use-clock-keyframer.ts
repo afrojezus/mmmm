@@ -1,7 +1,5 @@
-"use client"
-
 import { useFrame } from "@react-three/fiber"
-import { useRef, useState } from "react"
+import { useRef } from "react"
 
 export function useClockKeyframer(active: boolean, fps = 60) {
   const frameRef = useRef(-1)

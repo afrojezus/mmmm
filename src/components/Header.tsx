@@ -1,6 +1,6 @@
-import styles from "@/styles/header.module.scss"
 import type { HTMLAttributes, ReactElement } from "react"
 import { useLocation } from "react-router-dom"
+import styles from "@/styles/header.module.scss"
 
 type HeaderProps = {
   children: (activeRoute: string) => ReactElement
@@ -9,10 +9,8 @@ type HeaderProps = {
 export function Header({ children, ...props }: HeaderProps) {
   const { pathname } = useLocation()
   return (
-    <>
-      <header className={styles.header} {...props}>
-        {children(pathname)}
-      </header>
-    </>
+    <header className={styles.header} {...props}>
+      <div className={styles.inner}>{children(pathname)}</div>
+    </header>
   )
 }

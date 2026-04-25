@@ -1,4 +1,3 @@
-"use client"
 import { motion } from "framer-motion"
 
 import Marquee from "react-fast-marquee"
@@ -43,6 +42,7 @@ function StupidMarquees(props: StupidMarqueesProps) {
             pointerEvents: "none",
             userSelect: "none",
             height: 40,
+            fontFamily: "var(--font-retro)",
           }}
         >
           {miku ? (
@@ -76,6 +76,7 @@ function StupidMarquees(props: StupidMarqueesProps) {
             pointerEvents: "none",
             userSelect: "none",
             height: 20,
+            fontFamily: "var(--font-retro)",
           }}
         >
           {miku ? (
@@ -115,6 +116,7 @@ function StupidMarquees(props: StupidMarqueesProps) {
             height: 100,
             pointerEvents: "none",
             userSelect: "none",
+            fontFamily: "var(--font-retro)",
           }}
         >
           {miku ? (
@@ -151,6 +153,7 @@ function StupidMarquees(props: StupidMarqueesProps) {
             height: 200,
             pointerEvents: "none",
             userSelect: "none",
+            fontFamily: "var(--font-retro)",
           }}
         >
           {miku ? (
@@ -194,6 +197,7 @@ function StupidMarquees(props: StupidMarqueesProps) {
                 gap: "1em",
                 fontVariationSettings: "'wdth' 125",
                 letterSpacing: "-0.05em",
+                fontFamily: "var(--font-retro)",
               }}
             >
               <div
@@ -264,6 +268,7 @@ function StupidMarquees(props: StupidMarqueesProps) {
               bottom: "2em",
               pointerEvents: "none",
               userSelect: "none",
+              fontFamily: "var(--font-retro)",
             }}
           >
             {myon ? (
@@ -319,6 +324,7 @@ function StupidMarquees(props: StupidMarqueesProps) {
               pointerEvents: "none",
               userSelect: "none",
               height: 300,
+              fontFamily: "var(--font-retro)",
             }}
           >
             {uuuu ? (
@@ -349,6 +355,7 @@ function StupidMarquees(props: StupidMarqueesProps) {
               pointerEvents: "none",
               userSelect: "none",
               height: 300,
+              fontFamily: "var(--font-retro)",
             }}
           >
             {miku ? (

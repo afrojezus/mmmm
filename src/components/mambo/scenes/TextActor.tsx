@@ -1,4 +1,3 @@
-"use client"
 import { Center, Text3D } from "@react-three/drei"
 import { useFrame } from "@react-three/fiber"
 import { animate } from "motion"
@@ -21,7 +20,7 @@ export default function TextActor({ frame, keyframes }: TextActorProps) {
     if (!mamboTextRef2.current) return
     if (!mamboTextGroupRef1.current) return
     if (!mamboTextGroupRef2.current) return
-    const group = ref.current
+    const _group = ref.current
     const mamboText1 = mamboTextGroupRef1.current
     const mamboText1Material = mamboTextRef1.current
       .material as THREE.MeshStandardMaterial

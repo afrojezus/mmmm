@@ -1,7 +1,9 @@
-"use client"
-import { useKeyframer } from "@/hooks/use-keyframer"
 import { Canvas, type MeshProps, useLoader } from "@react-three/fiber"
-import { DepthOfField, EffectComposer } from "@react-three/postprocessing"
+import {
+  ColorDepth,
+  DepthOfField,
+  EffectComposer,
+} from "@react-three/postprocessing"
 import { motion } from "framer-motion-3d"
 import { Suspense, useRef } from "react"
 import {
@@ -10,6 +12,7 @@ import {
   NearestFilter,
   TextureLoader,
 } from "three"
+import { useKeyframer } from "@/hooks/use-keyframer"
 import StupidMarquees from "../shared/StupidMarquees"
 
 type CommonProps = {
@@ -35,25 +38,23 @@ export function MmmCube(props: MmmCubeProps) {
   texture.magFilter = NearestFilter
 
   return (
-    <>
-      <motion.mesh ref={ref} castShadow={true} receiveShadow={true} {...rest}>
-        <motion.boxGeometry args={[1, 1, 1]} {...geometryProps} />
-        <motion.meshStandardMaterial
-          ref={materialRef}
-          map={texture}
-          attach="material"
-          {...shaderProps}
-        />
-        <motion.pointLight intensity={3} position={[1, 1, 1]} color="#ff7be9" />
-      </motion.mesh>
-    </>
+    <motion.mesh ref={ref} castShadow={true} receiveShadow={true} {...rest}>
+      <motion.boxGeometry args={[1, 1, 1]} {...geometryProps} />
+      <motion.meshStandardMaterial
+        ref={materialRef}
+        map={texture}
+        attach="material"
+        {...shaderProps}
+      />
+      <motion.pointLight intensity={3} position={[1, 1, 1]} color="#ff7be9" />
+    </motion.mesh>
   )
 }
 
 function Scene(
   props: CommonProps & { mouse: React.RefObject<[number, number]> },
 ) {
-  const { isHovered, mouse } = props
+  const { isHovered } = props
   const frame = useKeyframer(isHovered)
 
   const loadingFrame = frame < 0 && isHovered
@@ -549,6 +550,7 @@ function Scene(
             bokehScale={frameTwo ? 100 : 0}
             height={frameTwo ? 3 : 0}
           />
+          <ColorDepth bits={16} />
         </EffectComposer>
       </Canvas>
     </>

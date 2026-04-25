@@ -1,5 +1,3 @@
-"use client"
-
 import { type MeshProps, useLoader } from "@react-three/fiber"
 import { motion } from "framer-motion-3d"
 import { useRef } from "react"
@@ -23,17 +21,15 @@ export function MikuCube(props: MikuCubeProps) {
   texture.magFilter = NearestFilter
 
   return (
-    <>
-      <motion.mesh ref={ref} castShadow={true} receiveShadow={true} {...rest}>
-        <motion.boxGeometry args={[1, 1, 1]} {...geometryProps} />
-        <motion.meshStandardMaterial
-          ref={materialRef}
-          map={texture}
-          attach="material"
-          {...shaderProps}
-        />
-        <motion.pointLight intensity={3} position={[1, 1, 1]} color="#7bfdff" />
-      </motion.mesh>
-    </>
+    <motion.mesh ref={ref} castShadow={true} receiveShadow={true} {...rest}>
+      <motion.boxGeometry args={[1, 1, 1]} {...geometryProps} />
+      <motion.meshStandardMaterial
+        ref={materialRef}
+        map={texture}
+        attach="material"
+        {...shaderProps}
+      />
+      <motion.pointLight intensity={3} position={[1, 1, 1]} color="#7bfdff" />
+    </motion.mesh>
   )
 }

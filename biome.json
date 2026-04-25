@@ -1,14 +1,15 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "organizeImports": {
-    "enabled": true,
-    "ignore": [
-      "node_modules/**/*",
-      ".git/**/*",
-      ".next/**/*",
-      "next.config.js",
-      "dist/**/*",
-      "public/**/*"
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "files": {
+    "ignoreUnknown": true,
+    "includes": [
+      "**",
+      "!**/node_modules/**/*",
+      "!**/.git/**/*",
+      "!**/.next/**/*",
+      "!**/next.config.js",
+      "!**/dist/**/*",
+      "!**/public/**/*"
     ]
   },
   "linter": {
@@ -20,34 +21,21 @@
         "useHookAtTopLevel": "error",
         "noChildrenProp": "off"
       },
-      "performance": {
-        "all": true
-      },
+      "performance": {},
       "style": {
         "useNumberNamespace": "off"
+      },
+      "a11y": {
+        "noStaticElementInteractions": "off",
+        "useKeyWithClickEvents": "off"
       }
-    },
-    "ignore": [
-      "node_modules/**/*",
-      ".git/**/*",
-      ".next/**/*",
-      "next.config.js",
-      "dist/**/*",
-      "public/**/*"
-    ]
+    }
   },
   "formatter": {
     "enabled": true,
     "indentWidth": 2,
     "indentStyle": "space",
-    "lineWidth": 80,
-    "ignore": [
-      "node_modules/**/*",
-      ".git/**/*",
-      ".next/**/*",
-      "next.config.js",
-      "dist/**/*"
-    ]
+    "lineWidth": 80
   },
   "javascript": {
     "formatter": {

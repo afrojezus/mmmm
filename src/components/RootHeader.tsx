@@ -1,16 +1,14 @@
-"use client"
-
+import type { ReactElement } from "react"
+import { Link, useLocation } from "react-router-dom"
 import styles from "@/styles/header.module.scss"
 import { getSeason } from "@/utils/season"
-import type { ReactElement } from "react"
-import { Link } from "react-router-dom"
 import { Group } from "./Group"
 import { Header } from "./Header"
 
 const ROUTES = [
   {
     href: "/",
-    label: "mmmm",
+    label: "home",
     src: "/mmmm.webp",
   },
   {
@@ -25,7 +23,7 @@ const ROUTES = [
   },
   {
     href: "/3d",
-    label: "ms",
+    label: "mmmm station",
     src: "/mmmm.webp",
   },
   {
@@ -71,8 +69,8 @@ function renderLinks(activeRoute: string, currentSeason: string) {
         <img
           src={src}
           alt={label}
-          width={16}
-          height={16}
+          width={32}
+          height={32}
           loading="lazy"
           decoding="async"
         />
@@ -84,14 +82,11 @@ function renderLinks(activeRoute: string, currentSeason: string) {
 
 export function RootHeader() {
   const season = getSeason()
+  const { pathname } = useLocation()
+  if (pathname === "/") return null
   return (
     <Header>
-      {(activeRoute) => (
-        <>
-          {activeRoute !== "/" && <h1>mmmm.moe</h1>}
-          <Group>{renderLinks(activeRoute, season)}</Group>
-        </>
-      )}
+      {(activeRoute) => <Group>{renderLinks(activeRoute, season)}</Group>}
     </Header>
   )
 }

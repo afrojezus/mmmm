@@ -1,4 +1,3 @@
-"use client"
 import { useFrame, useLoader } from "@react-three/fiber"
 import { animate } from "motion"
 import { useRef } from "react"
@@ -85,34 +84,6 @@ export default function BackgroundActor({
           ref={matRef}
         />
       </mesh>
-      <pointLight
-        castShadow
-        intensity={1}
-        decay={0.01}
-        position={[0, 10000, 10000]}
-        color="#ffffff"
-      />
-      <pointLight
-        castShadow
-        intensity={1}
-        decay={0.01}
-        position={[0, -10000, -10000]}
-        color="#ffffff"
-      />
-      <pointLight
-        castShadow
-        intensity={1}
-        decay={0.01}
-        position={[10000, 0, 10000]}
-        color="#ffffff"
-      />
-      <pointLight
-        castShadow
-        intensity={1}
-        decay={0.01}
-        position={[-10000, 0, -10000]}
-        color="#ffffff"
-      />
     </group>
   )
 }

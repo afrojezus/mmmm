@@ -1,12 +1,13 @@
-"use client"
-
 import { motion } from "framer-motion-3d"
 import { Suspense } from "react"
 
 export function GroupActor({
   frame,
   children,
-}: { frame: number; children: React.ReactNode }) {
+}: {
+  frame: number
+  children: React.ReactNode
+}) {
   const chord1Frame = frame >= 16
   const chord2Frame = frame >= 27
   const chord3Frame = frame >= 45

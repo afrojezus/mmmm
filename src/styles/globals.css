@@ -1,9 +1,22 @@
+@font-face {
+  font-family: "Tekuplus";
+  src: url("/fonts/TekuplusBit-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Tekuplus";
+  src: url("/fonts/TekuplusBit-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+
 :root {
   font-family: "Archivo", sans-serif;
   font-optical-sizing: auto;
-  --header-height: 16px;
+  --header-height: 100px;
   --max-width: 1100px;
   --border-radius: 12px;
+  --font-retro: "Tekuplus", sans-serif;
   --font-mono:
     ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
     "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
@@ -82,6 +95,10 @@ body {
   max-height: 100dvh;
 }
 
+#root {
+  all: inherit;
+}
+
 main {
   position: relative;
   display: flex;
@@ -105,10 +122,10 @@ a {
   pointer-events: none;
   -webkit-user-select: none;
   user-select: none;
-  background: radial-gradient(circle, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
-  background-size: 1px 3px !important;
+  background: radial-gradient(circle, rgba(0, 0, 0, 1) 1px, transparent 1px);
+  background-size: 1px 3px;
   z-index: 1000;
-  mix-blend-mode: overlay;
+  mix-blend-mode: multiply;
 }
 
 h1,
@@ -168,7 +185,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-variation-settings: "wght" 700, "wdth" 125;
+  font-variation-settings:
+    "wght" 700,
+    "wdth" 125;
   font-optical-sizing: auto;
   letter-spacing: -0.08em;
 }

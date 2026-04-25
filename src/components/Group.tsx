@@ -1,6 +1,6 @@
-import styles from "@/styles/group.module.scss"
 import clsx from "clsx"
 import type { HTMLAttributes } from "react"
+import styles from "@/styles/group.module.scss"
 
 type GroupProps = {
   position?: "left" | "center" | "right" | "apart"

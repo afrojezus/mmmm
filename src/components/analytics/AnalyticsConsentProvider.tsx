@@ -1,8 +1,6 @@
-"use client"
-
 import {
-  type ReactNode,
   createContext,
+  type ReactNode,
   useContext,
   useEffect,
   useMemo,
@@ -76,6 +74,7 @@ export function AnalyticsConsentProvider({
     setConsentState(value)
   }
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: keep context value stable
   const contextValue = useMemo(
     () => ({
       consent,

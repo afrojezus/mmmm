@@ -1,7 +1,5 @@
-"use client"
-
-import txtStyles from "@/styles/text.module.scss"
 import { Canvas, type MeshProps, useLoader } from "@react-three/fiber"
+import { ColorDepth, EffectComposer } from "@react-three/postprocessing"
 import { motion } from "framer-motion-3d"
 import { Suspense, useEffect, useRef, useState } from "react"
 import {
@@ -11,6 +9,7 @@ import {
   NearestFilter,
   TextureLoader,
 } from "three"
+import txtStyles from "@/styles/text.module.scss"
 import StupidMarquees from "../shared/StupidMarquees"
 
 type Common = {
@@ -49,27 +48,25 @@ function UuuCube(props: UuuCubeProps) {
   texture.magFilter = NearestFilter
 
   return (
-    <>
-      <motion.mesh
-        ref={ref}
-        receiveShadow={true}
-        castShadow={true}
-        {...meshProps}
-      >
-        {sphere ? (
-          <motion.sphereGeometry args={[1, 32, 32]} {...geometryProps} />
-        ) : (
-          <motion.boxGeometry args={[1, 1, 1]} {...geometryProps} />
-        )}
-        <motion.meshStandardMaterial
-          ref={materialRef}
-          map={texture}
-          attach="material"
-          {...shaderProps}
-        />
-        <motion.pointLight intensity={1} position={[0, 0, 0]} />
-      </motion.mesh>
-    </>
+    <motion.mesh
+      ref={ref}
+      receiveShadow={true}
+      castShadow={true}
+      {...meshProps}
+    >
+      {sphere ? (
+        <motion.sphereGeometry args={[1, 32, 32]} {...geometryProps} />
+      ) : (
+        <motion.boxGeometry args={[1, 1, 1]} {...geometryProps} />
+      )}
+      <motion.meshStandardMaterial
+        ref={materialRef}
+        map={texture}
+        attach="material"
+        {...shaderProps}
+      />
+      <motion.pointLight intensity={1} position={[0, 0, 0]} />
+    </motion.mesh>
   )
 }
 
@@ -83,17 +80,15 @@ function UuuPlane(props: UuuCubeProps) {
   texture.magFilter = NearestFilter
 
   return (
-    <>
-      <motion.mesh ref={ref} receiveShadow={true} {...meshProps}>
-        <motion.planeGeometry args={[512, 512, 64, 64]} {...geometryProps} />
-        <motion.meshStandardMaterial
-          ref={materialRef}
-          map={texture}
-          attach="material"
-          {...shaderProps}
-        />
-      </motion.mesh>
-    </>
+    <motion.mesh ref={ref} receiveShadow={true} {...meshProps}>
+      <motion.planeGeometry args={[512, 512, 64, 64]} {...geometryProps} />
+      <motion.meshStandardMaterial
+        ref={materialRef}
+        map={texture}
+        attach="material"
+        {...shaderProps}
+      />
+    </motion.mesh>
   )
 }
 
@@ -204,7 +199,7 @@ function UuuScene(props: UuuSceneProps) {
           toneMapping: ACESFilmicToneMapping,
           toneMappingExposure: 1,
         }}
-        dpr={window.devicePixelRatio}
+        dpr={window.devicePixelRatio / 2}
       >
         <motion.ambientLight
           initial={{ color: "black" }}
@@ -628,6 +623,9 @@ function UuuScene(props: UuuSceneProps) {
             />
           </motion.group>
         </Suspense>
+        <EffectComposer multisampling={0}>
+          <ColorDepth bits={16} />
+        </EffectComposer>
       </Canvas>
     </>
   )

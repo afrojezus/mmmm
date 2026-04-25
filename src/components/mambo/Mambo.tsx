@@ -1,5 +1,3 @@
-"use client"
-
 import { Canvas } from "@react-three/fiber"
 import { ACESFilmicToneMapping } from "three"
 import { Render } from "./scenes/Render"
@@ -21,7 +19,7 @@ export function Mambo(
         toneMapping: ACESFilmicToneMapping,
         toneMappingExposure: 1,
       }}
-      dpr={window.devicePixelRatio}
+      dpr={window.devicePixelRatio / 2}
       camera={{
         fov: 75,
         near: 0.1,

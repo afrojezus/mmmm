@@ -1,6 +1,5 @@
-"use client"
-import { useKeyframer } from "@/hooks/use-keyframer"
 import { Canvas, type MeshProps, useLoader } from "@react-three/fiber"
+import { ColorDepth, EffectComposer } from "@react-three/postprocessing"
 import { motion } from "framer-motion-3d"
 import { Suspense, useRef } from "react"
 import {
@@ -9,6 +8,7 @@ import {
   NearestFilter,
   TextureLoader,
 } from "three"
+import { useKeyframer } from "@/hooks/use-keyframer"
 import StupidMarquees from "../shared/StupidMarquees"
 import MyonLyrics from "./MyonLyrics"
 
@@ -41,17 +41,15 @@ export function MyonCube({
   texture.magFilter = NearestFilter
 
   return (
-    <>
-      <motion.mesh ref={ref} {...meshProps}>
-        <motion.boxGeometry args={[1, 1, 1]} {...geometryProps} />
-        <motion.meshStandardMaterial
-          ref={materialRef}
-          attach="material"
-          map={texture}
-          {...shaderProps}
-        />
-      </motion.mesh>
-    </>
+    <motion.mesh ref={ref} {...meshProps}>
+      <motion.boxGeometry args={[1, 1, 1]} {...geometryProps} />
+      <motion.meshStandardMaterial
+        ref={materialRef}
+        attach="material"
+        map={texture}
+        {...shaderProps}
+      />
+    </motion.mesh>
   )
 }
 
@@ -69,17 +67,15 @@ export function MyonPlane({
   texture.magFilter = NearestFilter
 
   return (
-    <>
-      <motion.mesh ref={ref} {...meshProps}>
-        <motion.planeGeometry args={[100, 100, 1, 1]} {...geometryProps} />
-        <motion.meshStandardMaterial
-          ref={materialRef}
-          attach="material"
-          map={texture}
-          {...shaderProps}
-        />
-      </motion.mesh>
-    </>
+    <motion.mesh ref={ref} {...meshProps}>
+      <motion.planeGeometry args={[100, 100, 1, 1]} {...geometryProps} />
+      <motion.meshStandardMaterial
+        ref={materialRef}
+        attach="material"
+        map={texture}
+        {...shaderProps}
+      />
+    </motion.mesh>
   )
 }
 
@@ -117,7 +113,7 @@ export function Scene(props: MyonSceneProps) {
           toneMapping: ACESFilmicToneMapping,
           toneMappingExposure: 1,
         }}
-        dpr={window.devicePixelRatio}
+        dpr={window.devicePixelRatio / 2}
       >
         <motion.ambientLight
           initial={{ color: "black" }}
@@ -789,6 +785,9 @@ export function Scene(props: MyonSceneProps) {
             />
           </motion.group>
         </Suspense>
+        <EffectComposer multisampling={0}>
+          <ColorDepth bits={16} />
+        </EffectComposer>
       </Canvas>
       <StupidMarquees myon={true} visible={finalFrame} />
       <MyonLyrics frame={frame} />

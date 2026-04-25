@@ -1,7 +1,6 @@
-"use client"
 import * as Three from "three"
 
-const DITHER_AND_POSTURIZE_FS = `
+const DITHER_AND_POSTURIZE_FS = /* glsl */ `
 
 vec4 RGBtoYUV(vec4 rgba) {
 	vec4 yuva;
