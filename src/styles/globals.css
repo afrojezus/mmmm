@@ -122,8 +122,8 @@ a {
   pointer-events: none;
   -webkit-user-select: none;
   user-select: none;
-  background: radial-gradient(circle, rgba(0, 0, 0, 1) 1px, transparent 1px);
-  background-size: 1px 3px;
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.3) 1px, transparent 1px);
+  background-size: 3px 3px;
   z-index: 1000;
   mix-blend-mode: multiply;
 }

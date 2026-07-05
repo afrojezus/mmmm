@@ -1,5 +1,5 @@
 import { Canvas, type MeshProps, useFrame, useLoader } from "@react-three/fiber"
-import { Suspense, useEffect, useRef, useState } from "react"
+import { Suspense, useMemo, useRef } from "react"
 import type * as Three from "three"
 import { TextureLoader } from "three"
 
@@ -23,15 +23,14 @@ export function SimpleMmmCube({ x, ...props }: SimpleMmmCubeProps) {
   )
 }
 
+const cubes = Array.from({ length: 20 }, (_, i) => (-19 + i * 2) as number)
+
 function SimpleMmmCubeArray() {
-  const [array, setArray] = useState<JSX.Element[]>([])
-  useEffect(() => {
-    const newArray = []
-    for (let i = -19; i <= 19; i += 2) {
-      newArray.push(<SimpleMmmCube key={i} position={[i * 2, 0, -90]} />)
-    }
-    setArray(newArray)
-  }, [])
+  const array = useMemo(
+    () =>
+      cubes.map((i) => <SimpleMmmCube key={i} position={[i * 2, 0, -90]} />),
+    [],
+  )
   return (
     <group>
       <Suspense>{array}</Suspense>

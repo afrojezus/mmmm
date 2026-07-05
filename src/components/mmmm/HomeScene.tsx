@@ -1,8 +1,7 @@
 import { Center, Stage } from "@react-three/drei"
 import { Canvas, useFrame, useLoader } from "@react-three/fiber"
 import clsx from "clsx"
-import { animate } from "motion"
-import { motion } from "motion/react"
+import { animate, motion } from "motion/react"
 import { Suspense, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import * as THREE from "three"
@@ -32,17 +31,7 @@ function Mmmm(props: MmmmProps) {
 
   useFrame((_state, _delta) => {
     if (!ref.current) return
-    animate(
-      ref.current.rotation,
-      {
-        y: ref.current.rotation.y + 2,
-      },
-      {
-        duration: 1,
-        ease: "linear",
-        repeat: Infinity,
-      },
-    )
+    ref.current.rotation.y += 0.02
   })
 
   return (

@@ -1,5 +1,3 @@
-import { useState } from "react"
-
 const a: string[] = [
   "ボクとキミのあいだでは",
   "どっかで聴いたあの曲の",
@@ -37,7 +35,6 @@ function getIndex(frame: number) {
 }
 
 export function MikuLyrics({ frame }: { frame: number }) {
-  const [lyrics] = useState<string[]>(a)
   const lyricsIndex = getIndex(frame)
 
   const isVisible = frame > 12 && frame <= 265
@@ -60,7 +57,7 @@ export function MikuLyrics({ frame }: { frame: number }) {
           color: "#ff0",
         }}
       >
-        {lyrics[lyricsIndex]}
+        {a[lyricsIndex]}
       </h1>
     </div>
   )

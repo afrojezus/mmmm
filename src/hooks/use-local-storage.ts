@@ -1,4 +1,4 @@
-import { useCallback, useState, useSyncExternalStore } from "react"
+import { useCallback, useSyncExternalStore } from "react"
 
 function getSnapshot<T>(key: string) {
   return () => {
@@ -14,12 +14,17 @@ function subscribe(callback: () => void) {
 }
 
 export function useLocalStorage<T>(key: string, initialValue: string) {
-  const [, rerender] = useState(0)
   const value = useSyncExternalStore<T | null>(subscribe, getSnapshot(key))
   const setNew = useCallback(
     (value: T) => {
       window.localStorage.setItem(key, value as unknown as string)
-      rerender((c) => c + 1)
+      // Dispatch a storage event to notify the same tab
+      window.dispatchEvent(
+        new StorageEvent("storage", {
+          key,
+          newValue: value as unknown as string,
+        }),
+      )
     },
     [key],
   )

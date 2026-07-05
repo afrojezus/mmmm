@@ -133,6 +133,9 @@ function MmmCube(props: MmmCubeProps) {
   const mesh = useRef<Mesh>(null)
   const texture = useLoader(TextureLoader, `/${type}.webp`)
 
+  texture.magFilter = NearestFilter
+  texture.minFilter = NearestFilter
+
   useFrame((_state, _delta) => {
     const m = mesh.current
     if (m) {
@@ -140,9 +143,6 @@ function MmmCube(props: MmmCubeProps) {
         m.rotation.y += 0.01
       }
     }
-
-    texture.magFilter = NearestFilter
-    texture.minFilter = NearestFilter
   })
 
   return (

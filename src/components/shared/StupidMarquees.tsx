@@ -14,6 +14,115 @@ type StupidMarqueesProps = {
   miku?: boolean
 }
 
+type MarqueeEntry = {
+  speed: number
+  direction?: "left" | "right"
+  top?: number | string
+  bottom?: number | string
+  left?: number
+  height?: number | string
+  fontSize?: string
+  text: string
+  isTriple?: boolean
+}
+
+const MIKU_TEXT = "miku miku miku miku miku miku miku miku miku miku miku"
+const MIKU_TEXT_SHORT =
+  "miku miku miku miku miku miku miku miku miku miku miku miku miku miku miku miku miku miku miku miku"
+const MYON_TEXT = "myon myon myon myon myon myon myon myon myon myon"
+const MYON_TEXT_SHORT =
+  "myon myon myon myon myon myon myon myon myon myon myon myon myon myon myon myon myon myon myon myon"
+const UUUU_TEXT =
+  "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"
+const UUUU_TEXT_LONG =
+  "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"
+const MMMM_TEXT =
+  "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm"
+
+function getText(
+  miku?: boolean,
+  myon?: boolean,
+  uuuu?: boolean,
+  short?: boolean,
+) {
+  if (miku) return short ? MIKU_TEXT_SHORT : MIKU_TEXT
+  if (myon) return short ? MYON_TEXT_SHORT : MYON_TEXT
+  if (uuuu) return short ? UUUU_TEXT_LONG : UUUU_TEXT
+  return MMMM_TEXT
+}
+
+function getMarqueeEntries(props: StupidMarqueesProps): MarqueeEntry[] {
+  const { miku, myon, uuuu, alternative, direction = "left" } = props
+  const text = getText(miku, myon, uuuu)
+  const entries: MarqueeEntry[] = [
+    {
+      speed: miku || myon || uuuu ? 900 : 50,
+      direction,
+      top: 56,
+      left: 0,
+      height: 40,
+      text,
+    },
+    {
+      speed: miku || myon || uuuu ? 300 : 50,
+      direction,
+      bottom: 0,
+      left: 0,
+      height: 20,
+      text: getText(miku, myon, uuuu, true),
+      fontSize: "0.3em",
+    },
+    {
+      speed: miku || myon || uuuu ? 100 : 50,
+      direction,
+      bottom: "2em",
+      left: 0,
+      height: 100,
+      text,
+    },
+    {
+      speed: miku || myon || uuuu ? 600 : 50,
+      direction,
+      top: 0,
+      left: 0,
+      height: 200,
+      text,
+    },
+  ]
+  if (!alternative) {
+    entries.push({
+      speed: myon || uuuu ? 800 : 50,
+      direction,
+      top: "2em",
+      left: 0,
+      bottom: "2em",
+      text: "",
+      isTriple: true,
+    })
+  }
+  if (alternative) {
+    entries.push({
+      speed: myon ? 100 : 50,
+      direction,
+      top: 44,
+      left: 0,
+      height: 300,
+      text: getText(false, false, uuuu),
+      fontSize: "9em",
+    })
+    entries.push({
+      speed: 50,
+      direction: "right",
+      bottom: 44,
+      left: 0,
+      height: 300,
+      text: getText(miku, myon, uuuu),
+      fontSize: "9em",
+    })
+  }
+  return entries
+}
+
 function StupidMarquees(props: StupidMarqueesProps) {
   const {
     visible,
@@ -24,156 +133,68 @@ function StupidMarquees(props: StupidMarqueesProps) {
     direction = "left",
     opacity = 1,
   } = props
+  const entries = getMarqueeEntries(props)
+
   return (
     <>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={visible ? { opacity } : { opacity: 0 }}
-      >
-        <Marquee
-          speed={miku || myon || uuuu ? 900 : 50}
-          gradient={false}
-          direction={direction}
-          style={{
-            position: "fixed",
-            zIndex: 2,
-            top: 56,
-            left: 0,
-            pointerEvents: "none",
-            userSelect: "none",
-            height: 40,
-            fontFamily: "var(--font-retro)",
-          }}
+      {entries.map((entry, i) => (
+        <motion.div
+          // biome-ignore lint/suspicious/noArrayIndexKey: index is unique and stable
+          key={`${entry.text}-${i}`}
+          initial={{ opacity: 0 }}
+          animate={visible ? { opacity } : { opacity: 0 }}
         >
-          {miku ? (
-            <h1>miku miku miku miku miku miku miku miku miku miku miku</h1>
-          ) : myon ? (
-            <h1>myon myon myon myon myon myon myon myon myon myon</h1>
-          ) : uuuu ? (
-            <h1>
-              uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
-            </h1>
-          ) : (
-            <h1>
-              mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-            </h1>
-          )}
-        </Marquee>
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={visible ? { opacity } : { opacity: 0 }}
-      >
-        <Marquee
-          speed={miku || myon || uuuu ? 300 : 50}
-          gradient={false}
-          direction={direction}
-          style={{
-            position: "absolute",
-            zIndex: 2,
-            bottom: 0,
-            left: 0,
-            pointerEvents: "none",
-            userSelect: "none",
-            height: 20,
-            fontFamily: "var(--font-retro)",
-          }}
-        >
-          {miku ? (
-            <h3>
-              miku miku miku miku miku miku miku miku miku miku miku miku miku
-              miku miku miku miku miku miku miku
-            </h3>
-          ) : myon ? (
-            <h3>
-              myon myon myon myon myon myon myon myon myon myon myon myon myon
-              myon myon myon myon myon myon myon
-            </h3>
-          ) : uuuu ? (
-            <h3>
-              uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
-            </h3>
-          ) : (
-            <h3>
-              mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-            </h3>
-          )}
-        </Marquee>
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={visible ? { opacity } : { opacity: 0 }}
-      >
-        <Marquee
-          speed={miku || myon || uuuu ? 100 : 50}
-          gradient={false}
-          direction={direction}
-          style={{
-            position: "absolute",
-            zIndex: 2,
-            bottom: "2em",
-            left: 0,
-            height: 100,
-            pointerEvents: "none",
-            userSelect: "none",
-            fontFamily: "var(--font-retro)",
-          }}
-        >
-          {miku ? (
-            <h1>
-              miku miku miku miku miku miku miku miku miku miku miku miku miku
-              miku miku miku miku miku miku miku
-            </h1>
-          ) : myon ? (
-            <h1>myon myon myon myon myon myon myon myon myon myon</h1>
-          ) : uuuu ? (
-            <h1>
-              uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
-            </h1>
-          ) : (
-            <h1>
-              mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-            </h1>
-          )}
-        </Marquee>
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={visible ? { opacity } : { opacity: 0 }}
-      >
-        <Marquee
-          speed={miku || myon || uuuu ? 600 : 50}
-          gradient={false}
-          direction={direction}
-          style={{
-            position: "absolute",
-            zIndex: 2,
-            top: 0,
-            left: 0,
-            height: 200,
-            pointerEvents: "none",
-            userSelect: "none",
-            fontFamily: "var(--font-retro)",
-          }}
-        >
-          {miku ? (
-            <h1>
-              miku miku miku miku miku miku miku miku miku miku miku miku miku
-              miku miku miku miku miku miku miku
-            </h1>
-          ) : myon ? (
-            <h1>myon myon myon myon myon myon myon myon myon myon</h1>
-          ) : uuuu ? (
-            <h1>
-              uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
-            </h1>
-          ) : (
-            <h1>
-              mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-            </h1>
-          )}
-        </Marquee>
-      </motion.div>
+          <Marquee
+            speed={entry.speed}
+            gradient={false}
+            direction={entry.direction ?? direction}
+            style={{
+              position: "fixed",
+              zIndex: 2,
+              ...(entry.top !== undefined ? { top: entry.top } : {}),
+              ...(entry.bottom !== undefined ? { bottom: entry.bottom } : {}),
+              ...(entry.left !== undefined ? { left: entry.left } : {}),
+              ...(entry.height !== undefined ? { height: entry.height } : {}),
+              pointerEvents: "none",
+              userSelect: "none",
+              fontFamily: "var(--font-retro)",
+            }}
+          >
+            {entry.isTriple ? (
+              <div>
+                {myon ? (
+                  <>
+                    <TripleText
+                      textProps={{ style: { fontSize: "9em" } }}
+                      string="myon"
+                    />
+                    <TripleText
+                      style={{ margin: "9em" }}
+                      textProps={{ style: { fontSize: "9em" } }}
+                      string="myon"
+                    />
+                    <TripleText
+                      string="myon"
+                      style={{ marginLeft: "2em" }}
+                      textProps={{ style: { fontSize: "9em" } }}
+                    />
+                  </>
+                ) : uuuu ? (
+                  <h1 style={{ fontSize: "9em" }}>{UUUU_TEXT_LONG}</h1>
+                ) : null}
+              </div>
+            ) : (
+              <h1
+                style={
+                  entry.fontSize ? { fontSize: entry.fontSize } : undefined
+                }
+              >
+                {entry.text}
+              </h1>
+            )}
+          </Marquee>
+        </motion.div>
+      ))}
       {!alternative && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -182,7 +203,7 @@ function StupidMarquees(props: StupidMarqueesProps) {
           {!(miku || myon || uuuu) && (
             <div
               style={{
-                position: "absolute",
+                position: "fixed",
                 zIndex: 2,
                 top: "50%",
                 left: "50%",
@@ -207,177 +228,25 @@ function StupidMarquees(props: StupidMarqueesProps) {
                   justifyContent: "center",
                 }}
               >
-                <span
-                  style={{
-                    fontSize: "3em",
-                  }}
-                >
-                  Please insert a
-                </span>
+                <span style={{ fontSize: "3em" }}>Please insert a</span>
                 <img
                   src="/mmmm.webp"
                   width={36}
                   height={36}
                   alt="mmmm"
                   loading="lazy"
-                  style={{
-                    margin: "0 1em",
-                  }}
+                  style={{ margin: "0 1em" }}
                 />
-                <span
-                  style={{
-                    fontSize: "3em",
-                  }}
-                >
-                  format disc
-                </span>
+                <span style={{ fontSize: "3em" }}>format disc</span>
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  gap: "1em",
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: "3em",
-                  }}
-                >
-                  into your
-                </span>
-                <span
-                  style={{
-                    fontSize: "5em",
-                    fontWeight: "bold",
-                  }}
-                >
+              <div style={{ display: "flex", gap: "1em" }}>
+                <span style={{ fontSize: "3em" }}>into your</span>
+                <span style={{ fontSize: "5em", fontWeight: "bold" }}>
                   MmmmStation 2
                 </span>
               </div>
             </div>
           )}
-          <Marquee
-            direction={direction}
-            speed={myon || uuuu ? 800 : 50}
-            gradient={false}
-            style={{
-              position: "absolute",
-              zIndex: 2,
-              top: "2em",
-              left: 0,
-              bottom: "2em",
-              pointerEvents: "none",
-              userSelect: "none",
-              fontFamily: "var(--font-retro)",
-            }}
-          >
-            {myon ? (
-              <div>
-                <TripleText
-                  textProps={{ style: { fontSize: "9em" } }}
-                  string="myon"
-                />
-                <TripleText
-                  style={{
-                    margin: "9em",
-                  }}
-                  textProps={{
-                    style: {
-                      fontSize: "9em",
-                    },
-                  }}
-                  string="myon"
-                />
-                <TripleText
-                  string="myon"
-                  style={{
-                    marginLeft: "2em",
-                  }}
-                  textProps={{
-                    style: {
-                      fontSize: "9em",
-                    },
-                  }}
-                />
-              </div>
-            ) : uuuu ? (
-              <h1 style={{ fontSize: "9em" }}>
-                uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
-              </h1>
-            ) : null}
-          </Marquee>
-        </motion.div>
-      )}
-      {alternative && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={visible ? { opacity: 1 } : { opacity: 0 }}
-        >
-          <Marquee
-            speed={myon ? 100 : 50}
-            gradient={false}
-            style={{
-              position: "absolute",
-              zIndex: 2,
-              top: 44,
-              left: 0,
-              pointerEvents: "none",
-              userSelect: "none",
-              height: 300,
-              fontFamily: "var(--font-retro)",
-            }}
-          >
-            {uuuu ? (
-              <h1 style={{ fontSize: "9em" }}>
-                uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
-              </h1>
-            ) : (
-              <h1 style={{ fontSize: "9em" }}>
-                mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-              </h1>
-            )}
-          </Marquee>
-        </motion.div>
-      )}
-      {alternative && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={visible ? { opacity: 1 } : { opacity: 0 }}
-        >
-          <Marquee
-            direction="right"
-            gradient={false}
-            style={{
-              position: "absolute",
-              zIndex: 2,
-              bottom: 44,
-              left: 0,
-              pointerEvents: "none",
-              userSelect: "none",
-              height: 300,
-              fontFamily: "var(--font-retro)",
-            }}
-          >
-            {miku ? (
-              <h1 style={{ fontSize: "9em" }}>
-                miku miku miku miku miku miku miku miku miku miku miku miku miku
-                miku miku miku miku miku miku miku
-              </h1>
-            ) : myon ? (
-              <h1 style={{ fontSize: "9em" }}>
-                myon myon myon myon myon myon myon myon myon myon myon myon myon
-                myon myon myon myon myon myon
-              </h1>
-            ) : uuuu ? (
-              <h1 style={{ fontSize: "9em" }}>
-                uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
-              </h1>
-            ) : (
-              <h1 style={{ fontSize: "9em" }}>
-                mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-              </h1>
-            )}
-          </Marquee>
         </motion.div>
       )}
     </>

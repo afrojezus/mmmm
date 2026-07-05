@@ -1,48 +1,19 @@
-import { useCallback, useEffect, useRef, useState } from "react"
-import useSound from "use-sound"
+import { useAudioScene } from "@/hooks/use-audio-scene"
 import classes from "@/styles/3d.module.css"
 import { Slider } from "../Slider"
 import { Scene as Miku } from "./Miku"
 
 export function MikuWrapper() {
-  const [playbackRate] = useState(1)
-  const [volume, setVolume] = useState(0.25)
-  const [isHovered, setIsHovered] = useState(false)
-  const [play, { stop, sound }] = useSound("/miku.mp3", {
+  const {
     volume,
-    playbackRate,
-    interrupt: true,
-  })
-  const mouse = useRef<[number, number]>([0, 0])
-  const onMouseMove = useCallback(
-    ({ clientX: x, clientY: y }: React.MouseEvent<HTMLElement>) => {
-      mouse.current = [x - window.innerWidth / 2, y - window.innerHeight / 2]
-    },
-    [],
-  )
+    isHovered,
+    sound,
+    mouse,
+    onMouseMove,
+    onClick,
+    handleVolumeChange,
+  } = useAudioScene({ src: "/miku.mp3" })
 
-  const onHoverStart = () => {
-    setIsHovered(true)
-    play()
-  }
-  const onHoverEnd = () => {
-    setIsHovered(false)
-    stop()
-  }
-
-  useEffect(() => {
-    if (isHovered && sound) {
-      sound.on("end", () => {
-        setIsHovered(false)
-      })
-    }
-  }, [isHovered, sound])
-
-  useEffect(() => {
-    return () => {
-      stop()
-    }
-  }, [stop])
   return (
     <main style={{ opacity: sound ? 1 : 0 }}>
       <Slider
@@ -50,18 +21,13 @@ export function MikuWrapper() {
         max={1}
         step={0.01}
         value={volume}
-        onChange={(value) => {
-          setVolume(value)
-          if (sound) sound.volume(value)
-        }}
+        onChange={handleVolumeChange}
         className={classes.slider}
       />
       <div
         onMouseMove={onMouseMove}
-        onClick={() =>
-          sound ? (isHovered ? onHoverEnd() : onHoverStart()) : undefined
-        }
-        className={[classes.canvas].filter(Boolean).join(" ")}
+        onClick={onClick}
+        className={classes.canvas}
       >
         <Miku isHovered={isHovered} mouse={mouse} />
       </div>
