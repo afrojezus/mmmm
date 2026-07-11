@@ -1,5 +1,3 @@
-import { useState } from "react"
-
 const a: string[] = [
   "昼下がりゆらゆらの",
   "こもれび　見上げてぽつり",
@@ -49,7 +47,6 @@ function getIndex(frame: number) {
 }
 
 function MyonLyrics({ frame }: { frame: number }) {
-  const [lyrics] = useState<string[]>(a)
   const lyricsIndex = getIndex(frame)
 
   const isVisible = frame > 300 && frame <= 605
@@ -72,7 +69,7 @@ function MyonLyrics({ frame }: { frame: number }) {
           color: "#ff0",
         }}
       >
-        {lyrics[lyricsIndex]}
+        {a[lyricsIndex]}
       </h1>
     </div>
   )

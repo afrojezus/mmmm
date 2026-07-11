@@ -1,42 +1,28 @@
-import React from "react"
-
-type WebGlWrapperState = {
-  isWebGlAvailable: boolean
-}
+import { useEffect, useState } from "react"
 
 type WebGlWrapperProps = {
   children: React.ReactNode
 }
 
-export class WebGlWrapper extends React.Component<
-  WebGlWrapperProps,
-  WebGlWrapperState
-> {
-  constructor(props: { children: React.ReactNode }) {
-    super(props)
-    this.state = {
-      isWebGlAvailable: true,
+function checkIfWebGLAvailable() {
+  return (
+    !!window.WebGLRenderingContext &&
+    !!document.createElement("canvas").getContext("webgl")
+  )
+}
+
+export function WebGlWrapper({ children }: WebGlWrapperProps) {
+  const [isWebGlAvailable, setIsWebGlAvailable] = useState(true)
+
+  useEffect(() => {
+    if (!checkIfWebGLAvailable()) {
+      setIsWebGlAvailable(false)
     }
+  }, [])
+
+  if (!isWebGlAvailable) {
+    return <p>WebGL is not supported by your browser.</p>
   }
 
-  componentDidMount() {
-    if (!this.isWebGlAvailable()) {
-      this.setState({ isWebGlAvailable: false })
-    }
-  }
-
-  isWebGlAvailable() {
-    return (
-      !!window.WebGLRenderingContext &&
-      !!document.createElement("canvas").getContext("webgl")
-    )
-  }
-
-  render() {
-    const { isWebGlAvailable } = this.state
-    if (!isWebGlAvailable) {
-      return <p>WebGL is not supported by your browser.</p>
-    }
-    return <>{this.props.children}</>
-  }
+  return <>{children}</>
 }

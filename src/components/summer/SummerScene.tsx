@@ -38,17 +38,17 @@ function Water(props: Parameters<typeof motion.group>[0]) {
     "/textures/water_tile_by_thecandyface.png",
   )
 
+  waterTexture.magFilter = NearestFilter
+  waterTexture.minFilter = NearestFilter
+  waterTexture.wrapS = RepeatWrapping
+  waterTexture.wrapT = RepeatWrapping
+  waterTexture.offset.set(100, 100)
+  waterTexture.repeat.set(100, 100)
+
   useFrame(() => {
     if (mesh.current) {
       mesh.current.rotation.x = -Math.PI / 2
-      // mesh.current.rotation.z += delta / 2 * 0.1;
     }
-    waterTexture.magFilter = NearestFilter
-    waterTexture.minFilter = NearestFilter
-    waterTexture.wrapS = RepeatWrapping
-    waterTexture.wrapT = RepeatWrapping
-    waterTexture.offset.set(100, 100)
-    waterTexture.repeat.set(100, 100)
   })
 
   return (
@@ -104,16 +104,16 @@ function MmmCube<T extends "cube" | "sphere">(props: MmmCubeProps<T>) {
   const mesh = useRef<Mesh>(null)
   const texture = useLoader(TextureLoader, `/${type}.webp`)
 
-  useFrame(() => {
+  texture.magFilter = NearestFilter
+  texture.minFilter = NearestFilter
+
+  useFrame((_state, _delta) => {
     const m = mesh.current
     if (m) {
       if (spin) {
         m.rotation.y += 0.01
       }
     }
-
-    texture.magFilter = NearestFilter
-    texture.minFilter = NearestFilter
   })
 
   const Shape = useMemo(() => {

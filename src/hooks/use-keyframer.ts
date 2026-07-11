@@ -6,9 +6,6 @@ export function useKeyframer(active: boolean, microDelay = 95) {
   const animationFrameIdRef = useRef<number | null>(null)
 
   useEffect(() => {
-    if (typeof window === "undefined") {
-      return
-    }
     const cleanup = () => {
       if (lastUpdateTimeRef.current !== null) {
         lastUpdateTimeRef.current = null

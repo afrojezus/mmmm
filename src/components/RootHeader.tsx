@@ -83,7 +83,7 @@ function renderLinks(activeRoute: string, currentSeason: string) {
 export function RootHeader() {
   const season = getSeason()
   const { pathname } = useLocation()
-  if (pathname === "/") return null
+  if (pathname === "/" && season === "default") return null
   return (
     <Header>
       {(activeRoute) => <Group>{renderLinks(activeRoute, season)}</Group>}
