@@ -23,11 +23,15 @@
       },
       "performance": {},
       "style": {
-        "useNumberNamespace": "off"
+        "useNumberNamespace": "off",
+        "noDescendingSpecificity": "off"
       },
       "a11y": {
         "noStaticElementInteractions": "off",
         "useKeyWithClickEvents": "off"
+      },
+      "suspicious": {
+        "noAsyncPromiseExecutor": "off"
       }
     }
   },

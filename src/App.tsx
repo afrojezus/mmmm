@@ -13,6 +13,7 @@ const MyonRoute = lazy(() => import("@/routes/MyonRoute"))
 const SummerRoute = lazy(() => import("@/routes/SummerRoute"))
 const UuuuRoute = lazy(() => import("@/routes/UuuuRoute"))
 const WinterRoute = lazy(() => import("@/routes/WinterRoute"))
+const CreatorRoute = lazy(() => import("@/routes/CreatorRoute"))
 
 function RouteFallback() {
   return null
@@ -34,6 +35,7 @@ export default function App() {
           <Route path="/summer" element={<SummerRoute />} />
           <Route path="/uuuu" element={<UuuuRoute />} />
           <Route path="/winter" element={<WinterRoute />} />
+          <Route path="/creator" element={<CreatorRoute />} />
         </Routes>
       </Suspense>
       <Suspense fallback={null}>
