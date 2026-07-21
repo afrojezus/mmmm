@@ -1,4 +1,4 @@
-import { useTexture } from "@react-three/drei"
+import { Sparkles, Stars, useTexture } from "@react-three/drei"
 import { Canvas, useFrame } from "@react-three/fiber"
 import { ColorDepth, EffectComposer } from "@react-three/postprocessing"
 import { animate } from "motion"
@@ -6,165 +6,22 @@ import { useEffect, useRef, useState } from "react"
 import {
   ACESFilmicToneMapping,
   BoxGeometry,
+  Color,
   Mesh,
   MeshStandardMaterial,
   NearestFilter,
+  type Points,
+  type RectAreaLight,
   TextureLoader,
 } from "three"
+import { useDebounce } from "@/hooks/use-debounce"
+import { BASIC_COLOURS, SKIN_COLOURS } from "./colours"
 import classes from "./creator.module.css"
+import { SwatchInput } from "./SwatchInput"
 
-const COMMON_COLOUR_SWATCHES = [
-  "#000000",
-  "#111111",
-  "#222222",
-  "#333333",
-  "#444444",
-  "#555555",
-  "#FF0000",
-  "#FF3300",
-  "#FF6600",
-  "#FF9900",
-  "#FFCC00",
-  "#FFFF00",
-  "#CCFF00",
-  "#99FF00",
-  "#66FF00",
-  "#33FF00",
-  "#00FF00",
-  "#00FF99",
-  "#00FFCC",
-  "#00FFFF",
-  "#00CCFF",
-  "#0099FF",
-  "#0066FF",
-  "#0033FF",
-  "#0000FF",
-  "#3300FF",
-  "#6600FF",
-  "#9900FF",
-  "#CC00FF",
-  "#FF00FF",
-  "#FF33FF",
-  "#FF66FF",
-  "#FF99FF",
-  "#FFCCFF",
-  "#EEEEEE",
-  "#F5F5F5",
-  "#FAFAFA",
-  "#FFFFFF",
-]
-
-const HAIR_COLOUR_SWATCHES = [...COMMON_COLOUR_SWATCHES]
-const EYE_COLOUR_SWATCHES = [...COMMON_COLOUR_SWATCHES]
-const SKIN_COLOUR_SWATCHES = [
-  "#ffffff",
-  "#fdddd2",
-  "#F5D0C7",
-  "#F8C5B8",
-  "#FCC6B2",
-  "#F4C2A6",
-  "#E9B38E",
-  "#E0A37A",
-  "#D9A07E",
-  "#C98E6F",
-  "#C47A5E",
-  "#B56F4F",
-  "#A86A4E",
-  "#9B5E45",
-  "#8D4C3E",
-  "#7C3F35",
-  "#6B3A2F",
-  "#5C2F28",
-]
-
-const hexToRgb = (hex: string) => {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-  return result
-    ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-      }
-    : { r: 0, g: 0, b: 0 }
-}
-
-type GenerateTextureParams = {
-  hairColour: string
-  eyeColour: string
-  skinColour: string
-}
-const generateTexture = ({
-  hairColour,
-  eyeColour,
-  skinColour,
-}: GenerateTextureParams): Promise<Blob | null> => {
-  return new Promise(async (resolve) => {
-    const canvas = document.createElement("canvas")
-    const ctx = canvas.getContext("2d", { willReadFrequently: true })
-    if (!ctx) return resolve(null)
-
-    canvas.width = 2000
-    canvas.height = 2000
-
-    const colorMap = new Image()
-    colorMap.src = new URL("/creator-color-map.png", import.meta.url).href
-
-    await Promise.all(
-      [colorMap].map(
-        (img) =>
-          new Promise((res) => {
-            img.onload = () => res(null)
-          }),
-      ),
-    )
-
-    // Draw base color map
-    ctx.drawImage(colorMap, 0, 0)
-
-    ctx.globalCompositeOperation = "source-in"
-
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-    const data = imageData.data
-
-    const hair = hexToRgb(hairColour)
-    const skin = hexToRgb(skinColour)
-    const eye = hexToRgb(eyeColour)
-
-    for (let i = 0; i < data.length; i += 4) {
-      const r = data[i]
-      const g = data[i + 1]
-      const b = data[i + 2]
-      const max = Math.max(r, g, b)
-
-      // Determine region by dominant channel
-      if (r > 0 && r > g + 50 && r > b + 50) {
-        // **Hair** (red dominant)
-        const brightness = max / 255
-        data[i] = Math.floor(hair.r * brightness)
-        data[i + 1] = Math.floor(hair.g * brightness)
-        data[i + 2] = Math.floor(hair.b * brightness)
-      } else if (g > 0 && g > r + 50 && g > b + 50) {
-        // **Skin** (green dominant)
-        const brightness = max / 255
-        data[i] = Math.floor(skin.r * brightness)
-        data[i + 1] = Math.floor(skin.g * brightness)
-        data[i + 2] = Math.floor(skin.b * brightness)
-      } else if (b > 0 && b > r + 50 && b > g + 50) {
-        // **Eyes** (blue dominant)
-        const brightness = max / 255
-        data[i] = Math.floor(eye.r * brightness)
-        data[i + 1] = Math.floor(eye.g * brightness)
-        data[i + 2] = Math.floor(eye.b * brightness)
-      }
-    }
-
-    ctx.putImageData(imageData, 0, 0)
-
-    ctx.globalCompositeOperation = "source-over"
-
-    canvas.toBlob((blob) => resolve(blob), "image/png", 1.0)
-  })
-}
+const HAIR_COLOUR_SWATCHES = BASIC_COLOURS
+const EYE_COLOUR_SWATCHES = BASIC_COLOURS
+const SKIN_COLOUR_SWATCHES = SKIN_COLOURS
 
 const downloadGLTF = async (textureBlob: Blob, filename: string) => {
   const { GLTFExporter } = await import(
@@ -201,6 +58,11 @@ const downloadGLTF = async (textureBlob: Blob, filename: string) => {
 
 export default function Creator() {
   const [autoRotate, setAutoRotate] = useState(true)
+  const [worker, setWorker] = useState<Worker | null>(null)
+  const [baseColorMapData, setBaseColorMapData] = useState<ArrayBuffer | null>(
+    null,
+  )
+  const [mapDimensions, setMapDimensions] = useState({ width: 0, height: 0 })
   const [generatedTexture, setGeneratedTexture] = useState<Blob | null>(null)
   const [hairColour, setHairColour] = useState(HAIR_COLOUR_SWATCHES[0])
   const [eyeColour, setEyeColour] = useState(EYE_COLOUR_SWATCHES[0])
@@ -208,17 +70,80 @@ export default function Creator() {
   const customNameRef = useRef<HTMLInputElement>(null)
   const [showControls, setShowControls] = useState(false)
 
+  const debouncedHairColour = useDebounce(hairColour, 250)
+  const debouncedEyeColour = useDebounce(eyeColour, 250)
+  const debouncedSkinColour = useDebounce(skinColour, 250)
+
   useEffect(() => {
-    ;(async () => {
-      const texture = await generateTexture({
-        hairColour,
-        eyeColour,
-        skinColour,
+    const loadBaseMap = async () => {
+      const colorMap = new Image()
+      colorMap.src = new URL("/creator-color-map.png", import.meta.url).href
+
+      await new Promise<void>((resolve) => {
+        colorMap.onload = () => {
+          const tempCanvas = document.createElement("canvas")
+          tempCanvas.width = 2000
+          tempCanvas.height = 2000
+          const ctx = tempCanvas.getContext("2d")
+
+          if (!ctx) return
+
+          ctx.drawImage(colorMap, 0, 0)
+
+          const imageData = ctx.getImageData(0, 0, 2000, 2000)
+
+          setBaseColorMapData(imageData.data.buffer)
+          setMapDimensions({ width: 2000, height: 2000 })
+          resolve()
+        }
       })
-      setGeneratedTexture(texture)
-    })()
-    return () => {}
-  }, [hairColour, eyeColour, skinColour])
+    }
+
+    loadBaseMap()
+  }, [])
+
+  useEffect(() => {
+    const newWorker = new Worker(
+      new URL("./generateTexture.worker", import.meta.url),
+      { type: "module" },
+    )
+    setWorker(newWorker)
+    newWorker.onmessage = (e) => {
+      const blob = e.data
+      if (blob) {
+        setGeneratedTexture(blob)
+      } else {
+        console.error("Failed to generate texture in worker.")
+        setGeneratedTexture(null)
+      }
+    }
+
+    return () => {
+      newWorker.terminate()
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!worker || !baseColorMapData) return
+
+    const colorsToSend = {
+      hairColour: debouncedHairColour,
+      eyeColour: debouncedEyeColour,
+      skinColour: debouncedSkinColour,
+      baseColorMapData: baseColorMapData,
+      width: mapDimensions.width,
+      height: mapDimensions.height,
+    }
+
+    worker.postMessage(colorsToSend)
+  }, [
+    debouncedHairColour,
+    debouncedEyeColour,
+    debouncedSkinColour,
+    baseColorMapData,
+    mapDimensions,
+    worker,
+  ])
 
   const handleDownloadPng = () => {
     if (generatedTexture) {
@@ -228,7 +153,6 @@ export default function Creator() {
       link.download = `${name}.png`
       link.click()
       URL.revokeObjectURL(link.href)
-      document.body.removeChild(link)
     }
   }
 
@@ -246,10 +170,18 @@ export default function Creator() {
           className={classes.headerInput}
           type="text"
           ref={customNameRef}
-          defaultValue="Creator"
+          defaultValue="my mmmm"
         />
       </section>
-      <Renderer autoRotate={autoRotate} generatedTexture={generatedTexture} />
+      <Renderer
+        autoRotate={autoRotate}
+        generatedTexture={generatedTexture}
+        colours={{
+          hairColour: debouncedHairColour,
+          eyeColour: debouncedEyeColour,
+          skinColour: debouncedSkinColour,
+        }}
+      />
       <section
         className={[classes.controls, showControls ? classes.open : ""].join(
           " ",
@@ -266,66 +198,30 @@ export default function Creator() {
         </button>
         <div className={classes.panes}>
           <section>
-            <div className={classes.swatch}>
-              <p>Hair colour</p>
-              <div className={classes.swatches}>
-                {HAIR_COLOUR_SWATCHES.map((colour) => (
-                  <div key={colour}>
-                    <label htmlFor={`hairColour-${colour}`}>
-                      <input
-                        type="radio"
-                        name="hairColour"
-                        value={colour}
-                        id={`hairColour-${colour}`}
-                        checked={hairColour === colour}
-                        onChange={() => setHairColour(colour)}
-                      />
-                      <span style={{ backgroundColor: colour }}></span>
-                    </label>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className={classes.swatch}>
-              <p>Eye colour</p>
-              <div className={classes.swatches}>
-                {EYE_COLOUR_SWATCHES.map((colour) => (
-                  <div key={colour}>
-                    <label htmlFor={`eyeColour-${colour}`}>
-                      <input
-                        type="radio"
-                        name="eyeColour"
-                        value={colour}
-                        id={`eyeColour-${colour}`}
-                        checked={eyeColour === colour}
-                        onChange={() => setEyeColour(colour)}
-                      />
-                      <span style={{ backgroundColor: colour }}></span>
-                    </label>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className={classes.swatch}>
-              <p>Skin colour</p>
-              <div className={classes.swatches}>
-                {SKIN_COLOUR_SWATCHES.map((colour) => (
-                  <div key={colour}>
-                    <label htmlFor={`skinColour-${colour}`}>
-                      <input
-                        type="radio"
-                        name="skinColour"
-                        value={colour}
-                        id={`skinColour-${colour}`}
-                        checked={skinColour === colour}
-                        onChange={() => setSkinColour(colour)}
-                      />
-                      <span style={{ backgroundColor: colour }}></span>
-                    </label>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <SwatchInput
+              id="hairColour"
+              name="hairColour"
+              label="Hair colour"
+              value={hairColour}
+              colours={HAIR_COLOUR_SWATCHES}
+              onChange={(colour) => setHairColour(colour)}
+            />
+            <SwatchInput
+              id="eyeColour"
+              name="eyeColour"
+              label="Eye colour"
+              value={eyeColour}
+              colours={EYE_COLOUR_SWATCHES}
+              onChange={(colour) => setEyeColour(colour)}
+            />
+            <SwatchInput
+              id="skinColour"
+              name="skinColour"
+              label="Skin colour"
+              value={skinColour}
+              colours={SKIN_COLOUR_SWATCHES}
+              onChange={(colour) => setSkinColour(colour)}
+            />
           </section>
           <div className={classes.divider} />
           <section>
@@ -363,9 +259,10 @@ export default function Creator() {
 type RendererProps = {
   generatedTexture: Blob | null
   autoRotate?: boolean
+  colours: LightsProps
 }
 
-const Renderer = ({ generatedTexture, autoRotate }: RendererProps) => {
+const Renderer = ({ generatedTexture, autoRotate, colours }: RendererProps) => {
   return (
     <div className={classes.canvas}>
       <Canvas
@@ -386,11 +283,12 @@ const Renderer = ({ generatedTexture, autoRotate }: RendererProps) => {
       >
         <directionalLight
           castShadow={true}
-          position={[5, 5, 5]}
+          position={[0, 5, 5]}
           color="#ffffff"
-          intensity={5}
+          intensity={2}
         />
-        <ambientLight color="#ffffff" intensity={0.5} />
+        <LightsComponent {...colours} autoRotate={autoRotate} />
+        <SkyComponent hairColour={colours.hairColour} autoRotate={autoRotate} />
         <group>
           <Cube autoRotate={autoRotate} generatedTexture={generatedTexture} />
         </group>
@@ -399,6 +297,140 @@ const Renderer = ({ generatedTexture, autoRotate }: RendererProps) => {
         </EffectComposer>
       </Canvas>
     </div>
+  )
+}
+
+type LightsProps = {
+  hairColour: string
+  eyeColour: string
+  skinColour: string
+  autoRotate?: boolean
+}
+
+const toThreeColor = (color: string) => {
+  return new Color(color)
+}
+
+const LightsComponent = ({
+  hairColour,
+  eyeColour,
+  skinColour,
+  autoRotate,
+}: LightsProps) => {
+  const hairLightRef = useRef<RectAreaLight | null>(null)
+  const eyeLightRef = useRef<RectAreaLight | null>(null)
+  const skinLightRef = useRef<RectAreaLight | null>(null)
+
+  useFrame(() => {
+    if (hairLightRef.current) {
+      animate(hairLightRef.current.color, toThreeColor(hairColour), {
+        duration: 0.1,
+      })
+      if (autoRotate) {
+        animate(hairLightRef.current.intensity, 1, { duration: 0.1 })
+      } else {
+        animate(hairLightRef.current.intensity, 0, { duration: 0.1 })
+      }
+    }
+    if (eyeLightRef.current) {
+      animate(eyeLightRef.current.color, toThreeColor(eyeColour), {
+        duration: 0.1,
+      })
+      if (autoRotate) {
+        animate(eyeLightRef.current.intensity, 1, { duration: 0.1 })
+      } else {
+        animate(eyeLightRef.current.intensity, 0, { duration: 0.1 })
+      }
+    }
+    if (skinLightRef.current) {
+      animate(skinLightRef.current.color, toThreeColor(skinColour), {
+        duration: 0.1,
+      })
+      if (autoRotate) {
+        animate(skinLightRef.current.intensity, 1, { duration: 0.1 })
+      } else {
+        animate(skinLightRef.current.intensity, 0, { duration: 0.1 })
+      }
+    }
+  })
+
+  return (
+    <group>
+      <rectAreaLight ref={hairLightRef} position={[0, 5, 5]} />
+      <rectAreaLight ref={eyeLightRef} position={[0, -5, 5]} />
+      <rectAreaLight ref={skinLightRef} position={[0, 0, 5]} />
+    </group>
+  )
+}
+
+type SkyProps = Pick<LightsProps, "hairColour" | "autoRotate">
+
+const SkyComponent = ({ autoRotate = true, hairColour }: SkyProps) => {
+  const sparklesRef = useRef<Points | null>(null)
+  const starsRef = useRef<Points | null>(null)
+
+  useFrame(() => {
+    if (sparklesRef.current) {
+      if (autoRotate) {
+        animate(
+          sparklesRef.current?.scale,
+          {
+            x: 1,
+            y: 1,
+            z: 1,
+          },
+          { duration: 0.1 },
+        )
+        if (starsRef.current) {
+          animate(
+            starsRef.current.scale,
+            {
+              x: 0.2,
+              y: 0.2,
+              z: 10,
+            },
+            { duration: 0.1 },
+          )
+        }
+      } else {
+        animate(
+          sparklesRef.current?.scale,
+          {
+            x: 5,
+            y: 5,
+            z: 5,
+          },
+          { duration: 0.1 },
+        )
+        if (starsRef.current) {
+          animate(
+            starsRef.current.scale,
+            {
+              x: 10,
+              y: 10,
+              z: 10,
+            },
+            { duration: 0.1 },
+          )
+        }
+      }
+    }
+  })
+
+  return (
+    <>
+      <Sparkles ref={sparklesRef} noise={2} count={1000} color={hairColour} />
+      <Stars
+        ref={starsRef}
+        fade
+        speed={1}
+        depth={50}
+        count={10000}
+        factor={2}
+        saturation={10}
+      />
+      <pointLight position={[0, 0, 1]} intensity={0.2} />
+    </>
   )
 }
 

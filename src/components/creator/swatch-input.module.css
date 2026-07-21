@@ -1,0 +1,106 @@
+.swatchInput {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  min-width: 80px;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+    align-items: center;
+  }
+
+  .customColourInput {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    input[type="color"] {
+      display: inline-block;
+      cursor: pointer;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border: none;
+      padding: 0;
+      margin: 0;
+      font-size: 0;
+      line-height: 0;
+      border-radius: 50%;
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      &:hover {
+        outline-color: var(--neutral-50);
+      }
+      &[data-active="true"] {
+        outline: 2px solid white;
+        outline-offset: 2px;
+      }
+      &::-webkit-color-swatch {
+        border: none;
+      }
+      &::-moz-color-swatch {
+        border: none;
+      }
+    }
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 16px;
+      height: 16px;
+      fill: white;
+      pointer-events: none;
+      user-select: none;
+    }
+  }
+
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    align-items: center;
+    max-width: 60ch;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-block: 0.5em;
+    padding-inline: 0.5em;
+    scrollbar-width: thin;
+    justify-content: flex-start;
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    label {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      cursor: pointer;
+      outline: 2px solid transparent;
+      transition: outline-color 0.3s ease;
+      outline-offset: 2px;
+    }
+
+    label:hover {
+      outline-color: var(--neutral-50);
+    }
+
+    label span {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: white;
+      transition: background 0.3s ease;
+    }
+
+    input[type="radio"]:checked + span {
+      outline: 2px solid white;
+      outline-offset: 2px;
+    }
+  }
+}
